@@ -236,6 +236,9 @@
         },
         {
           "path": "code/index"
+        },
+        {
+          "path": "upload/index"
         }
       ]
     }
