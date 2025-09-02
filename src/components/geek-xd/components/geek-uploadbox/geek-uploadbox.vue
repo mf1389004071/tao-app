@@ -151,8 +151,7 @@ const buildVideoData = (res) => {
     // #ifdef MP-WEIXIN
     videoData = {
         path: res.tempFilePath,
-        value: res.tempFilePath,
-        ...res,
+        size:res.size
     }
     // #endif
 

@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import modal from '@/plugins/modal'
 import { wxChunkUploader } from '@/utils/ChunkUploaderWx'
 import appChunkUploader from '@/utils/ChunkUploaderApp'
@@ -53,20 +53,16 @@ const validateParams = () => {
  * @returns {Promise<boolean>} 上传结果
  */
 const handleWxChunkUpload = async () => {
-    try {
-        const result = await wxChunkUploader.upload({
-            file: videoFile.value,
-            onSuccess: (result) => {
-                modal.msgSuccess('上传成功')
-            },
-            onError: (error) => {
-                modal.msgError('上传失败')
-            }
-        });
-    } catch (error) {
-        console.error('APP上传失败:', error)
-        throw error
-    }
+    const result = await wxChunkUploader.upload({
+        file: videoFile.value,
+        onSuccess: () => {
+            modal.msgSuccess('上传成功')
+        },
+        onError: (error) => {
+            modal.msg(error)
+        }
+    });
+    return result
 }
 
 /**
@@ -79,9 +75,6 @@ const handleAppChunkUpload = async () => {
 
         const result = await appChunkUploader.upload({
             file: file,
-            onProgress: (progress) => {
-                console.log('上传进度:', progress)
-            },
             onSuccess: (result) => {
                 console.log('上传成功:', result)
             },
