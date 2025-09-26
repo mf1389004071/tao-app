@@ -16,8 +16,7 @@
 <script setup>
 import { ref } from 'vue'
 import modal from '@/plugins/modal'
-import { wxChunkUploader } from '@/utils/ChunkUploaderWx'
-import appChunkUploader from '@/utils/ChunkUploaderApp'
+import { chunkUpload } from '@/utils/ChunkUpload'
 
 const videoFile = ref(null)
 
@@ -27,7 +26,6 @@ const videoFile = ref(null)
  */
 const handleUpload = (data) => {
     videoFile.value = data
-    console.log('上传的视频文件:', data)
 }
 
 /**
@@ -35,7 +33,6 @@ const handleUpload = (data) => {
  */
 const handleDelete = () => {
     videoFile.value = null
-    console.log('视频文件已删除')
 }
 
 /**
@@ -48,12 +45,14 @@ const validateParams = () => {
     return false
 }
 
+
+
 /**
- * 微信小程序分片上传
- * @returns {Promise<boolean>} 上传结果
+ * 开始上传
  */
-const handleWxChunkUpload = async () => {
-    const result = await wxChunkUploader.upload({
+const start = async () => {
+    if (!validateParams()) return
+    const result = await chunkUpload.upload({
         file: videoFile.value,
         onSuccess: () => {
             modal.msgSuccess('上传成功')
@@ -63,50 +62,6 @@ const handleWxChunkUpload = async () => {
         }
     });
     return result
-}
-
-/**
- * APP端分片上传
- * @returns {Promise<boolean>} 上传结果
- */
-const handleAppChunkUpload = async () => {
-    try {
-        const file = videoFile.value
-
-        const result = await appChunkUploader.upload({
-            file: file,
-            onSuccess: (result) => {
-                console.log('上传成功:', result)
-            },
-            onError: (error) => {
-                console.error('上传失败:', error)
-            }
-        })
-
-        return result
-    } catch (error) {
-        console.error('APP上传失败:', error)
-        throw error
-    }
-}
-
-/**
- * 开始上传
- */
-const start = async () => {
-    if (!validateParams()) return
-
-    try {
-        // #ifdef MP-WEIXIN
-        await handleWxChunkUpload()
-        // #endif
-
-        // #ifdef APP-PLUS
-        await handleAppChunkUpload()
-        // #endif
-    } catch (error) {
-        console.error('上传过程出错:', error)
-    }
 }
 </script>
 

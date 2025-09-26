@@ -3,10 +3,6 @@ import config from "@/config";
 import { getToken } from "@/utils/auth";
 
 
-
-
-
-
 /**初始化上传 */
 export function initChunkUpload(fileName, fileSize) {
     return request({
@@ -34,7 +30,7 @@ export function uploadChunk(uploadId, filePath, chunkIndex, formattedPath) {
             formData: {
                 uploadId: uploadId,
                 filePath: filePath,
-                chunkIndex: chunkIndex,
+                partNumber: chunkIndex,
             },
             success: (res) => {
                 try {
