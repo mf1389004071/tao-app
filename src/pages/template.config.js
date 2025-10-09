@@ -14,7 +14,13 @@ export default [
 				icon: 'wxCenter',
 				title: '二维码',
 				title_en: 'index',
-			}
+			},
+			{
+				path: '/pages_geek/pages/upload/index',
+				icon: 'wxCenter',
+				title: '分片上传',
+				title_en: 'index',
+			},
 		]
 	},
 	{
