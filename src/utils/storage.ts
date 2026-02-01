@@ -4,10 +4,7 @@ import constant from './constant'
 let storageKey = 'storage_data'
 
 // 存储节点变量名
-let storageNodeKeys = [constant.avatar, constant.name, constant.roles, constant.permissions]
-
-// 存储的数据
-let storageData = uni.getStorageSync(storageKey) || {}
+let storageNodeKeys = [constant.avatar, constant.id, constant.name, constant.roles, constant.permissions]
 
 const storage = {
   set: function(key:string, value:any) {
@@ -19,9 +16,11 @@ const storage = {
     }
   },
   get: function(key:string) {
+    let storageData = uni.getStorageSync(storageKey) || {}
     return storageData[key] || ""
   },
   remove: function(key:string) {
+    let storageData = uni.getStorageSync(storageKey) || {}
     delete storageData[key]
     uni.setStorageSync(storageKey, storageData)
   },
