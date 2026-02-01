@@ -34,7 +34,7 @@ export interface ResponseData<T> {
     /** 响应码 */
     code: number,
     /** 响应数据 */
-    data: any,
+    data: T,
     /** 响应信息 */
     msg: string
     /** 图片路径 */

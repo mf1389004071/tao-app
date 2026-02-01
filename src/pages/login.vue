@@ -1,16 +1,20 @@
 <script setup>
 import modal from '@/plugins/modal'
 import { getCodeImg } from '@/api/login'
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import config from '@/config.js'
 import useUserStore from '@/store/modules/user'
 import { getWxCode } from '@/utils/geek';
 import { wxLogin } from '@/api/oauth';
 import { setToken } from '@/utils/auth';
+import Verify from "@/components/verify/verify"
+import { postAction } from '@/utils/request';
 const userStore = useUserStore()
 const codeUrl = ref("");
 const captchaEnabled = ref(true); // 是否开启验证码
 const useWxLogin = ref(false); // 是否使用微信登录
+const captchaType = ref('clickWord') // < 'char' | 'math' | 'clickWord' | 'blockPuzzle' >
+const verify = ref(null);
 // #if MP-WEIXIN
 useWxLogin.value = true
 // #endif
@@ -19,7 +23,8 @@ const loginForm = ref({
   username: "admin",
   password: "admin123",
   code: "",
-  uuid: ''
+  uuid: '',
+  captcha: {}
 });
 
 function handleLoginByWx() {
@@ -28,57 +33,58 @@ function handleLoginByWx() {
     wxLogin('miniapp', res).then(res => {
       if (res.token != null) {
         setToken(res.token);
-        loginSuccess()
+        userStore.getInfo().then(res => {
+          uni.switchTab({ url: '/pages/index' });
+        })
       }
     });
   })
 }
 
-
-// 获取图形验证码
-function getCode() {
-  getCodeImg().then(res => {
-    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled
-    if (captchaEnabled.value) {
-      codeUrl.value = 'data:image/gif;base64,' + res.img
-      loginForm.value.uuid = res.uuid
-    }
-  })
-};
+async function handleCheck(data) {
+  loginForm.value.captcha = data
+  try {
+    modal.loading("登录中，请耐心等待...")
+    await userStore.login(loginForm.value)
+    modal.closeLoading()
+    await userStore.getInfo()
+    uni.switchTab({ url: '/pages/index' });
+  } catch {
+    getCode();
+    modal.closeLoading()
+    throw new Error("验证失败");
+  }
+}
 
 async function handleLogin() {
   if (loginForm.value.username === "") {
     modal.msgError("请输入您的账号")
   } else if (loginForm.value.password === "") {
     modal.msgError("请输入您的密码")
-  } else if (loginForm.value.code === "" && captchaEnabled.value) {
+  } else if (loginForm.value.code === "" && captchaEnabled.value && ['char', 'math'].includes(captchaType.value)) {
     modal.msgError("请输入验证码")
   } else {
-    modal.loading("登录中，请耐心等待...")
-    pwdLogin()
+    if (['char', 'math'].includes(captchaType.value)) {
+      handleCheck({
+        ...loginForm.value.captcha,
+        captchaType: captchaType.value,
+        wordList: loginForm.value.code.split('')
+      })
+    } else {
+      verify.value.show();
+    }
   }
 };
-// 密码登录
-async function pwdLogin() {
-  userStore.login(loginForm.value).then(() => {
-    modal.closeLoading()
-    loginSuccess()
-  }).catch(() => {
-    if (captchaEnabled.value) {
-      modal.closeLoading()
-      getCode()
-    }
-  })
-};
 
-function loginSuccess(result) {
-  // 设置用户信息
-  userStore.getInfo().then(res => {
-    uni.switchTab({
-      url: '/pages/index'
-    });
-  })
-}
+// 获取图形验证码
+function getCode() {
+  if (!captchaEnabled.value) return
+  if (!['char', 'math'].includes(captchaType.value)) return
+  postAction('/captcha/get', { captchaType: captchaType.value }).then(res => {
+    codeUrl.value = 'data:image/png;base64,' + res.data.originalImageBase64
+    loginForm.value.captcha = res.data
+  });
+};
 
 // 隐私协议
 function handlePrivacy() {
@@ -95,7 +101,9 @@ function handleUserAgrement() {
   });
 };
 
-getCode();
+onMounted(() => {
+  getCode();
+})
 </script>
 <template>
   <view class="normal-login-container">
@@ -113,13 +121,16 @@ getCode();
         <view class="iconfont icon-password icon"></view>
         <input v-model="loginForm.password" type="password" class="input" placeholder="请输入密码" maxlength="20" />
       </view>
-      <view class="input-item flex align-center" style="width: 60%;margin: 0px;" v-if="captchaEnabled">
+      <view class="input-item flex align-center" style="width: 60%;margin: 0px;"
+        v-if="captchaEnabled && ['char', 'math'].includes(captchaType)">
         <view class="iconfont icon-code icon"></view>
-        <input v-model="loginForm.code" type="number" class="input" placeholder="请输入验证码" maxlength="4" />
+        <input v-model="loginForm.code" class="input" placeholder="请输入验证码" maxlength="4" />
         <view class="login-code">
           <image :src="codeUrl" @click="getCode" class="login-code-img"></image>
         </view>
       </view>
+      <Verify v-else :mode="'pop'" :captchaType="captchaType" ref="verify" :check="handleCheck"
+        :imgSize="{ width: '310px', height: '155px' }" />
       <view class="action-btn">
         <button @click="handleLogin" class="login-btn cu-btn block bg-blue lg round">登录</button>
         <button @click="handleLoginByWx" v-if="useWxLogin"

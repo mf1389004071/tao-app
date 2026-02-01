@@ -80,7 +80,8 @@
     "uview-plus": "^3.3.32",
     "vue": "3.4.21",
     "vue-i18n": "^9.14.2",
-    "vue-router": "4.4.0"
+    "vue-router": "4.4.0",
+    "crypto-js": "^4.0.0"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.14",
