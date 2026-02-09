@@ -58,25 +58,9 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, PropType } from 'vue';
-import provincesSource from "./province.js";
-import citysSource from "./city.js";
-import areasSource from "./area.js";
-
-// 定义接口
-interface Region {
-	label: string;
-	value: string;
-}
-
-interface CitySelectResult {
-	province: Region;
-	city: Region;
-	area: Region;
-}
-
-interface TabItem {
-	name: string;
-}
+import provincesSource from "./province.json";
+import citysSource from "./city.json";
+import areasSource from "./area.json";
 
 // Props 定义
 const props = defineProps({
@@ -108,30 +92,35 @@ const props = defineProps({
 });
 
 // 事件定义
+type Region = { label: string; value: string; }
+interface CitySelectResult {
+	province: Region;
+	city: Region;
+	area: Region;
+}
 const emit = defineEmits<{
 	(e: 'update:modelValue', value: boolean): void;
 	(e: 'close'): void;
 	(e: 'city-change', result: CitySelectResult): void;
 }>();
 
-const cityValue = ref("");
 const isChooseP = ref(false); // 是否已经选择了省
 const province = ref(0); // 省级下标
-const provinces = ref<Region[]>(provincesSource);
+const provinces = ref(provincesSource);
 const isChooseC = ref(false); // 是否已经选择了市
 const city = ref(0); // 市级下标
-const citys = ref<Region[]>(citysSource[0]);
+const citys = ref(citysSource[0]);
 const isChooseA = ref(false); // 是否已经选择了区
 const area = ref(0); // 区级下标
-const areas = ref<Region[]>(areasSource[0][0]);
+const areas = ref(areasSource[0][0]);
 const tabsIndex = ref(0);
-const tabs = ref();
 
 // 计算属性
 const isChange = computed(() => {
 	return tabsIndex.value > 1;
 });
 
+type TabItem = { name: string; }
 const genTabsList = computed((): TabItem[] => {
 	let tabsList: TabItem[] = [{
 		name: "请选择"

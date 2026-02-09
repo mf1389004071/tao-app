@@ -1,6 +1,5 @@
 <script setup>
 import modal from '@/plugins/modal'
-import { getCodeImg } from '@/api/login'
 import { onMounted, ref } from "vue";
 import config from '@/config.js'
 import useUserStore from '@/store/modules/user'
@@ -13,7 +12,7 @@ const userStore = useUserStore()
 const codeUrl = ref("");
 const captchaEnabled = ref(true); // 是否开启验证码
 const useWxLogin = ref(false); // 是否使用微信登录
-const captchaType = ref('clickWord') // < 'char' | 'math' | 'clickWord' | 'blockPuzzle' >
+const captchaType = ref('blockPuzzle') // < 'char' | 'math' | 'clickWord' | 'blockPuzzle' >
 const verify = ref(null);
 // #if MP-WEIXIN
 useWxLogin.value = true
@@ -27,18 +26,14 @@ const loginForm = ref({
   captcha: {}
 });
 
-function handleLoginByWx() {
-  getWxCode().then(res => {
-    console.log(res);
-    wxLogin('miniapp', res).then(res => {
-      if (res.token != null) {
-        setToken(res.token);
-        userStore.getInfo().then(res => {
-          uni.switchTab({ url: '/pages/index' });
-        })
-      }
-    });
-  })
+async function handleLoginByWx() {
+  const code = await getWxCode();
+  console.log("code:", code);
+  const res = await wxLogin('miniapp', code);
+  if (res.token == null || res.token == undefined || res.token == "") return
+  setToken(res.token);
+  await userStore.getInfo();
+  uni.switchTab({ url: '/pages/index' });
 }
 
 async function handleCheck(data) {

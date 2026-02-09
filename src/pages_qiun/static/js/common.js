@@ -2,41 +2,41 @@ let isReadyLogin = 1
 let loginFlag = 1
 export default {
 	//提示窗
-	tipMsg: function (title, icon, time, mask,callback) {
-	    title = title == undefined ? "系统繁忙" : title;
-	    icon = icon == undefined ? "none" : icon;
-	    time = time == undefined ? 1300 : time;
-	    mask = mask == undefined ? true : mask;
-	    uni.showToast({
-	        title: title,
-	        icon: icon,
-	        mask: mask,
-	        duration: time,
+	tipMsg: function (title, icon, time, mask, callback) {
+		title = title == undefined ? "系统繁忙" : title;
+		icon = icon == undefined ? "none" : icon;
+		time = time == undefined ? 1300 : time;
+		mask = mask == undefined ? true : mask;
+		uni.showToast({
+			title: title,
+			icon: icon,
+			mask: mask,
+			duration: time,
 			success() {
-				if(callback){
-					setTimeout(()=>{
+				if (callback) {
+					setTimeout(() => {
 						callback()
-					},time);
-				}	
+					}, time);
+				}
 			}
-	    })
+		})
 	},
-	getTelephoneInfo(){
+	getTelephoneInfo() {
 		return new Promise((resolve, reject) => {
 			var data = uni.getStorageSync("telephoneInfo");
-			if(!data){
+			if (!data) {
 				// 获取右上角胶囊的位置信息
 				//#ifndef H5
 				let btn = wx.getMenuButtonBoundingClientRect();
 				uni.getSystemInfo({
 					success: e => {
 						let info = {
-							screenHeight:e.screenHeight,
-							statusBarHeight:e.statusBarHeight,
-							windowWidth:e.windowWidth,
-							top:btn.top
+							screenHeight: e.screenHeight,
+							statusBarHeight: e.statusBarHeight,
+							windowWidth: e.windowWidth,
+							top: btn.top
 						}
-						uni.setStorageSync("telephoneInfo",info);
+						uni.setStorageSync("telephoneInfo", info);
 						resolve(info);
 					},
 					fail: (err) => {
@@ -44,15 +44,15 @@ export default {
 					}
 				})
 				//#endif
-			}else{
+			} else {
 				resolve(data);
 			}
 		})
 	},
 	// 获取当前年月日
-	getNowDate(){
+	getNowDate() {
 		let date = new Date;
-		let now = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		let now = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 		return now;
 	},
 	// 获取上个月的年月日
@@ -82,7 +82,7 @@ export default {
 		return t2;
 	},
 	//检测小程序更新
-	checkUpdateVersion(){
+	checkUpdateVersion() {
 		//新版本更新
 		if (uni.canIUse('getUpdateManager')) {
 			//判断当前微信版本是否支持版本更新
@@ -94,9 +94,9 @@ export default {
 						uni.showModal({
 							title: '更新提示',
 							content: '已更新版本，是否重启小程序？',
-							showCancel:false,
-							cancelColor:'#eeeeee',
-							confirmColor:'#40A2ED',
+							showCancel: false,
+							cancelColor: '#eeeeee',
+							confirmColor: '#40A2ED',
 							success: function (res) {
 								if (res.confirm) {
 									// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
@@ -133,38 +133,38 @@ export default {
 	 * @param {Object} param 传递给目标页面的参数
 	 * @description 处理目标页面的参数，转成json字符串传递给param字段，在目标页面通过JSON.parse(options.param)接收
 	 */
-	navigateTo(url, param = {},flag) {
-		if(isReadyLogin<=0 && !flag){
+	navigateTo(url, param = {}, flag) {
+		if (isReadyLogin <= 0 && !flag) {
 			this.loginTip();
-		}else{
+		} else {
 			let part = '';
-			for(var item in param){
+			for (var item in param) {
 				part += '&' + item + '=' + param[item];
 			}
-			url = url + part.replace('&','?');
+			url = url + part.replace('&', '?');
 			uni.navigateTo({
 				url: url,
-				fail:err=> {
+				fail: err => {
 					this.tipMsg('页面正在火速开发中，敬请期待！');
 				},
 			})
 		}
 	},
 	navigateBack(url, param = {}) {
-	    if (loginFlag <= 0) {
-	        this.tipMsg("很抱歉,你没有权限！");
-	    } else {
-	        let part = '';
-	        for (var item in param) {
-	            part += '&' + item + '=' + param[item];
-	        }
-	        url = "/pages" + url + part.replace('&', '?');
-	        uni.navigateBack({
-	            url: url,
-	            fail: err => {
-	                this.tipMsg('暂未开放该功能！');
-	            },
-	        })
-	    }
+		if (loginFlag <= 0) {
+			this.tipMsg("很抱歉,你没有权限！");
+		} else {
+			let part = '';
+			for (var item in param) {
+				part += '&' + item + '=' + param[item];
+			}
+			url = "/pages" + url + part.replace('&', '?');
+			uni.navigateBack({
+				url: url,
+				fail: err => {
+					this.tipMsg('暂未开放该功能！');
+				},
+			})
+		}
 	},
 }

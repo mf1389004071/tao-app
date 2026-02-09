@@ -1,7 +1,6 @@
 export default [
 	{
 		groupName: 'geek组件',
-		groupName_en: 'Page',
 		list: [
 			{
 				path: '/pages_geek/pages/index/index',
@@ -25,7 +24,6 @@ export default [
 	},
 	{
 		groupName: '部件',
-		groupName_en: 'Parts',
 		list: [
 			{
 				path: '/pages_template/pages/coupon/index',
@@ -55,7 +53,6 @@ export default [
 	},
 	{
 		groupName: '报表',
-		groupName_en: 'Parts',
 		list: [
 			{
 				path: '/pages_qiun/pages/finance/index',
@@ -85,7 +82,6 @@ export default [
 	},
 	{
 		groupName: '页面',
-		groupName_en: 'Page',
 		list: [
 			{
 				path: '/pages_template/pages/wxCenter/index',

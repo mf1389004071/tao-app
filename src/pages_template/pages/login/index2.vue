@@ -54,10 +54,6 @@
 							<view class="shadow1" :style="'animation-play-state:' + play[1]" />
 							<view class="shadow2" :style="'animation-play-state:' + play[1]" />
 							<view class="shadow3" :style="'animation-play-state:' + play[1]" />
-
-							<image
-								style="width: 100%;height: 1050rpx;opacity: 0.05;border-radius: 0 0 400rpx 400rpx;position: absolute;"
-								src="../../../static/uview/common/gray-logo.png"></image>
 							<text class="text-forth" @click="login()">账号密码登录</text>
 						</uni-row>
 					</view>
@@ -78,7 +74,6 @@ import useUserStore from '@/store/modules/user'
 import tab from '@/plugins/tab'
 import modal from '@/plugins/modal'
 
-const src = ref("staticimagessoutheast.jpg")
 const isActive = ref(false)
 const isFixedViewVisible = ref(true)
 const animationType = ref("up") // 可选值：right 或 up

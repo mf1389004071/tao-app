@@ -39,8 +39,8 @@
 				}
 			},
 			contentTop:{
-				type:String,
-				default:"185"
+				type:Number,
+				default:185
 			},
 			contentLeft:{
 				type:String,

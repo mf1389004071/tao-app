@@ -1,6 +1,6 @@
 <template>
 	<view class="text_block">
-		<template v-for="(item,index) in content">
+		<template v-for="(item,index) in content" :key="index">
 			<view v-if="item.kind == 1" :key="index" :style="{backgroundImage:'linear-gradient(to top right,'+item.background[0]+','+item.background[1]+')'}" :class="[(index+1)%3==0 ? '':'marginRight','kind','kind_one','breathe-blue']">
 				<view class="view_100" :style="{fontSize:item.content[0].size,color:item.content[0].colorvalue}">{{item.content[0].value}}</view>
 				<view class="view_100" :style="{fontSize:item.content[1].size,color:item.content[1].colortext}">{{item.content[1].text}}</view>

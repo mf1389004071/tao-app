@@ -3,6 +3,7 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "importHelpers": true,
+    "resolveJsonModule": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "downlevelIteration": true,

@@ -43,12 +43,6 @@
     <uni-section class="mb-10" title="颜色选择器" sub-title="order" type="line"></uni-section>
     <geek-color-picker ref="gk" @confirm="getcolor"></geek-color-picker>
     <button @click="open()">打开颜色选择器</button>
-
-
-    <uni-section class="mb-10" title="二维码" sub-title="order" type="line"></uni-section>
-    <view style="display: flex;align-items: center;justify-content: center;">
-      <geek-qrcode cid="qrcode2" ref="qrcode2" val="二维码" :loadMake="true" />
-    </view>
   </view>
 </template>
 
@@ -66,12 +60,18 @@ function getcolor(color: { hex: string, rgba: { r: number, g: number, b: number,
   console.log(color)
 }
 
+import rocket from '@/pages_geek/static/icon/rocket.png'
+import phone from '@/pages_geek/static/icon/phone.png'
+import message from '@/pages_geek/static/icon/message.png'
+import dialogue from '@/pages_geek/static/icon/dialogue.png'
+import knowledge from '@/pages_geek/static/icon/knowledge.png'
+
 const menus: Array<Menu> = reactive([
-  { icon: "/static/images/icon/rocket.png", label: '抢单' },
-  { icon: "/static/images/icon/phone.png", label: '回访' },
-  { icon: "/static/images/icon/message.png", label: '消息' },
-  { icon: "/static/images/icon/dialogue.png", label: '公告' },
-  { icon: "/static/images/icon/knowledge.png", label: '知识库' }
+  { icon: rocket, label: '抢单' },
+  { icon: phone, label: '回访' },
+  { icon: message, label: '消息' },
+  { icon: dialogue, label: '公告' },
+  { icon: knowledge, label: '知识库' }
 ]);
 
 const commodityList: Array<Commodity> = reactive([

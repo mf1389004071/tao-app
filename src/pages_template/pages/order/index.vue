@@ -152,9 +152,6 @@ const animationfinish = (e) => {
 	swiperCurrent.value = currentIndex;
 	current.value = currentIndex; // 将current的值正确更新为swiper的current
 };
-
-// 获取tabs组件的ref
-const tabs = ref(null);
 </script>
 
 <template>

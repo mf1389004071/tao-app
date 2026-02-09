@@ -28,7 +28,7 @@
 			@confirm="confirm">
 		</uni-calendar>
 		<!--滑动列表头-->
-		<wuc-tab id="wuctab" :tab-list="tabList" :tabCur.sync="tabCur" tab-class="text-center text-white bg-blue"
+		<wuc-tab id="wuctab" :tab-list="tabList" v-model:tabCur="tabCur" tab-class="text-center text-white bg-blue"
 			select-class="text-white"></wuc-tab>
 		<!--主体内容-->
 		<view class="data_body" :style="{ height: scrollHeight }">

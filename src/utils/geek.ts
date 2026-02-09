@@ -22,7 +22,7 @@ export function generateUUID(): string {
  * 获取code
  * @returns 生成的code字符串
  */
-export async function getWxCode(appid?: string, redirect_uri?: string) {
+export async function getWxCode(appid?: string, redirect_uri?: string): Promise<string> {
   // #ifdef H5
   if (appid == undefined || redirect_uri == undefined) return ""
   let code = "";
@@ -45,20 +45,14 @@ export async function getWxCode(appid?: string, redirect_uri?: string) {
   code = getUrlCode().code; // 截取code
   if (code == undefined || code == "" || code == null) {
     // 如果没有code，则去请求
-    console.log("h5");
-    let href = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
-      tansParams({
-        appid: appid,
-        redirect_uri: redirect_uri,
-        response_type: "code",
-        scope: "snsapi_userinfo",
-        state: "STATE",
-      }) +
-      "#wechat_redirect";
-    console.log(href);
-    setTimeout(() => {
-      window.location.href = href;
-    }, 5000);
+    let href = "https://open.weixin.qq.com/connect/oauth2/authorize?" + tansParams({
+      appid: appid,
+      redirect_uri: redirect_uri,
+      response_type: "code",
+      scope: "snsapi_userinfo",
+      state: "STATE",
+    }) + "#wechat_redirect";
+    setTimeout(() => window.location.href = href, 5000);
   } else {
     return code;
   }

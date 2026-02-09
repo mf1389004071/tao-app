@@ -57,46 +57,46 @@
   ],
   "subPackages": [
     {
-      "root": "pages_mine/pages",
+      "root": "pages_mine",
       "pages": [
         {
-          "path": "avatar/index",
+          "path": "pages/avatar/index",
           "style": {
             "navigationBarTitleText": "修改头像"
           }
         },
         {
-          "path": "info/index",
+          "path": "pages/info/index",
           "style": {
             "navigationBarTitleText": "个人信息"
           }
         },
         {
-          "path": "info/edit",
+          "path": "pages/info/edit",
           "style": {
             "navigationBarTitleText": "编辑资料"
           }
         },
         {
-          "path": "pwd/index",
+          "path": "pages/pwd/index",
           "style": {
             "navigationBarTitleText": "修改密码"
           }
         },
         {
-          "path": "setting/index",
+          "path": "pages/setting/index",
           "style": {
             "navigationBarTitleText": "应用设置"
           }
         },
         {
-          "path": "help/index",
+          "path": "pages/help/index",
           "style": {
             "navigationBarTitleText": "常见问题"
           }
         },
         {
-          "path": "about/index",
+          "path": "pages/about/index",
           "style": {
             "navigationBarTitleText": "关于我们"
           }
@@ -104,95 +104,95 @@
       ]
     },
     {
-      "root": "pages_template/pages",
+      "root": "pages_template",
       "pages": [
         {
-          "path": "wxCenter/index",
+          "path": "pages/wxCenter/index",
           "style": {
             "navigationBarTitleText": "wxCenter 仿微信个人中心",
             "navigationStyle": "custom"
           }
         },
         {
-          "path": "keyboardPay/index",
+          "path": "pages/keyboardPay/index",
           "style": {
             "navigationBarTitleText": "keyboardPay 自定义键盘支付"
           }
         },
         {
-          "path": "mallMenu/index2",
+          "path": "pages/mallMenu/index2",
           "style": {
             "navigationBarTitleText": "mallMenu-商城分类"
           }
         },
         {
-          "path": "mallMenu/index1",
+          "path": "pages/mallMenu/index1",
           "style": {
             "navigationBarTitleText": "mallMenu-商城分类"
           }
         },
         {
-          "path": "coupon/index",
+          "path": "pages/coupon/index",
           "style": {
             "navigationBarTitleText": "coupon-优惠券"
           }
         },
         {
-          "path": "login/index1",
+          "path": "pages/login/index1",
           "style": {
             "navigationBarTitleText": "美团登录"
           }
         },
         {
-          "path": "login/index2",
+          "path": "pages/login/index2",
           "style": {
             "navigationBarTitleText": "水滴登录"
           }
         },
         {
-          "path": "citySelect/index",
+          "path": "pages/citySelect/index",
           "style": {
             "navigationBarTitleText": "城市选择"
           }
         },
         {
-          "path": "submitBar/index",
+          "path": "pages/submitBar/index",
           "style": {
             "navigationBarTitleText": "提交订单栏"
           }
         },
         {
-          "path": "comment/index",
+          "path": "pages/comment/index",
           "style": {
             "navigationBarTitleText": "评论"
           }
         },
         {
-          "path": "comment/reply",
+          "path": "pages/comment/reply",
           "style": {
             "navigationBarTitleText": "评论详情"
           }
         },
         {
-          "path": "order/index",
+          "path": "pages/order/index",
           "style": {
             "navigationBarTitleText": "订单"
           }
         },
         {
-          "path": "login/code",
+          "path": "pages/login/code",
           "style": {
             "navigationBarTitleText": "登录获取验证码"
           }
         },
         {
-          "path": "address/index",
+          "path": "pages/address/index",
           "style": {
             "navigationBarTitleText": "用户地址"
           }
         },
         {
-          "path": "address/addSite",
+          "path": "pages/address/addSite",
           "style": {
             "navigationBarTitleText": "添加用户地址"
           }
@@ -200,28 +200,28 @@
       ]
     },
     {
-      "root": "pages_qiun/pages",
+      "root": "pages_qiun",
       "pages": [
         {
-          "path": "sport/index",
+          "path": "pages/sport/index",
           "style": {
             "pageOrientation": "auto"
           }
         },
         {
-          "path": "school/index",
+          "path": "pages/school/index",
           "style": {
             "pageOrientation": "auto"
           }
         },
         {
-          "path": "finance/index",
+          "path": "pages/finance/index",
           "style": {
             "pageOrientation": "auto"
           }
         },
         {
-          "path": "main/index",
+          "path": "pages/main/index",
           "style": {
             "pageOrientation": "auto"
           }
@@ -229,16 +229,13 @@
       ]
     },
     {
-      "root": "pages_geek/pages",
+      "root": "pages_geek",
       "pages": [
         {
-          "path": "index/index"
+          "path": "pages/index/index"
         },
         {
-          "path": "code/index"
-        },
-        {
-          "path": "upload/index"
+          "path": "pages/upload/index"
         }
       ]
     }
@@ -263,8 +260,8 @@
       },
       {
         "pagePath": "pages/template",
-        "iconPath": "static/images/tabbar/work.png",
-        "selectedIconPath": "static/images/tabbar/work_.png",
+        "iconPath": "static/images/tabbar/template.png",
+        "selectedIconPath": "static/images/tabbar/template_.png",
         "text": "模板"
       },
       {

@@ -96,7 +96,7 @@ const getComment = () => {
 			likeNum: 21,
 			isLike: false,
 			allReply: 2,
-			url: '../../../static/logo.png',
+			url: 'https://uviewui.com/common/logo.png',
 			replyList: [
 				{
 					name: 'uview',

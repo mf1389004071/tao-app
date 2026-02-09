@@ -1,13 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import tab from '@/plugins/tab';
 import { ref } from 'vue';
 
 const pic = ref('https://uviewui.com/common/logo.png');
-const show = ref(true);
-
 const navigateBackHandler = () => { tab.navigateBack(); }
 </script>
-
 <template>
 	<view>
 		<u-navbar :fixed="false" title="　" @leftClick="navigateBackHandler">
@@ -55,8 +52,6 @@ const navigateBackHandler = () => { tab.navigateBack(); }
 		</view>
 	</view>
 </template>
-
-
 <style lang="scss" scoped>
 page {
 	background-color: #ededed;
