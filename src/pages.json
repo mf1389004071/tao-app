@@ -31,12 +31,6 @@
       }
     },
     {
-      "path": "pages/template",
-      "style": {
-        "navigationBarTitleText": "模板"
-      }
-    },
-    {
       "path": "pages/mine",
       "style": {
         "navigationBarTitleText": "我的"
@@ -106,6 +100,12 @@
     {
       "root": "pages_template",
       "pages": [
+        {
+          "path": "pages/template",
+          "style": {
+            "navigationBarTitleText": "模板"
+          }
+        },
         {
           "path": "pages/wxCenter/index",
           "style": {
@@ -257,12 +257,6 @@
         "iconPath": "static/images/tabbar/work.png",
         "selectedIconPath": "static/images/tabbar/work_.png",
         "text": "工作台"
-      },
-      {
-        "pagePath": "pages/template",
-        "iconPath": "static/images/tabbar/template.png",
-        "selectedIconPath": "static/images/tabbar/template_.png",
-        "text": "模板"
       },
       {
         "pagePath": "pages/mine",

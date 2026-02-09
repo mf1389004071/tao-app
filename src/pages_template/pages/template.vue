@@ -14,7 +14,7 @@ interface FieldItem {
 }
 
 const listData = list as ListItem[];
-const getIcon = (path: string) => `../static/uview/demo/${path}.png`;
+const getIcon = (path: string) => `../static/icon/${path}.png`;
 const openPage = (path: string) => tab.navigateTo(path)
 const getGroupTitle = (item: ListItem) => item.groupName;
 const getFieldTitle = (item: FieldItem) => item.title;

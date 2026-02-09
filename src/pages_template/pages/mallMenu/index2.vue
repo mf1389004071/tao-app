@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
-import classifyData from '@/pages_template/common/classify.data.js';
+import classifyData from '@/pages_template/static/js/classify.data.js';
 
 const scrollTop = ref(0); // tab标题的滚动条位置
 const oldScrollTop = ref(0);

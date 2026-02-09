@@ -1,4 +1,5 @@
 <script setup>
+import tab from '@/plugins/tab';
 import { ref, onMounted } from 'vue';
 
 const chartData = ref({});
@@ -36,6 +37,9 @@ function getServerData() {
     </view>
     <view class="charts-box">
       <qiun-data-charts type="column" :chartData="chartData" />
+    </view>
+    <view>
+      <button @click="tab.navigateTo('/pages_template/pages/template')">查看模板</button>
     </view>
   </view>
 </template>

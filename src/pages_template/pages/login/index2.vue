@@ -2,7 +2,7 @@
 	<view>
 		<view class="normal-login-container " v-if="page == 'login'">
 			<view class="left" @click="back">
-				<image src="../../../static/uview/demo/backTop.png" mode="" style="height: 30rpx;"></image>
+				<image src="../../static/icon/backTop.png" mode="" style="height: 30rpx;"></image>
 			</view>
 			<view class="scale-in-center">
 				<view class="logo-content align-center justify-center flex">

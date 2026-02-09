@@ -97,10 +97,9 @@ pnpm install
 # 内置组件(geek-xd)
 
 1. 颜色选择器组件
-2. 二维码组件
-3. 圆形菜单组件
-4. 常用的订单组件
-5. 信息展示组件
+2. 圆形菜单组件
+3. 常用的订单组件
+4. 信息展示组件
 
 # 插件的使用
 
@@ -204,20 +203,18 @@ import { tab, auth, modal } from "@/plugins";
 
 ### 删除 geek 组件
 
+（占用主包30kb左右，可以根据需要删除）
+
 1. 删除 pages_geek 和 components/geek-xd 文件夹
 2. 删除 pages.json 中 subPackages 的 root 值为“pages_geek/pages”的配置
 3. 删除 pages/template.config.js 中 geek 组件
 
-### 去除模板
+### 删除行为验证码
 
-（占用主包 582kb 左右）
+（占用主包170kb左右，可以根据需要删除）
+1. 删除 components/verify 文件夹
+2. 删除 pages/login 中使用 “verify” 的部分
 
-1. 删除 pages_template、pages_qiun 两个文件夹
-2. 删除 pages.json 中 subPackages 的 root 值为“pages_qiun/pages”、“pages_template/pages”的两个配置
-3. 删除 pages/template.config.js 和 pages/template.vue
-4. 删除 pages.json 中 subPackages 的“tabBar”中的模板一项和“pages”中模板的一项
-5. 删除 static 中的 uview，里面都是示例图片。
-6. 删除 plugins 中的 config.js 和 common.js，并在 plugins/index.js 中删除相关配置
 
 ### 删除 uchart
 
@@ -242,6 +239,13 @@ app.use(uviewPlus);
 2. uni.scss 中删除 @import 'uview-plus/theme.scss';
 3. App.vue 中删除 @import '@/static/scss/index.scss';
 4. package.json 中删除 "clipboard": "^2.0.11","dayjs": "^1.11.9","uview-plus": "^3.1.36",
+
+### 删除 u-city-select
+
+（占用主包 130kb 左右，可以根据需要删除）
+
+1. 删除 components/u-city-select 文件夹
+2. 删除 pages.json 中的 easycom 下的 custom 中的 "u-city-select" 的那一行
 
 # 功能演示
 
