@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import citySelect from '@/components/u-city-select/u-city-select.vue';
+import citySelect from '@/pages_template/components/u-city-select/u-city-select.vue';
 const value = ref(false);
 const input = ref('');
 

@@ -1,13 +1,13 @@
 {
   "easycom": {
     "custom": {
-      "u-city-select": "@/components/u-city-select/u-city-select.vue",
+      "u-city-select": "@/pages_template/components/u-city-select/u-city-select.vue",
+      "qiun-(.*)": "@/pages_qiun/components/qiun-data-charts/components/qiun-$1/qiun-$1.vue",
       "geek-(.*)": "@/components/geek-xd/components/geek-$1/geek-$1.vue",
       "gx-(.*)": "@/components/geek-xd/components/geek-$1/geek-$1.vue",
       "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
       "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
-      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
-      "qiun-(.*)": "@/components/qiun-data-charts/components/qiun-$1/qiun-$1.vue"
+      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
     }
   },
   "pages": [
@@ -16,12 +16,6 @@
       "style": {
         "navigationBarTitleText": "若依移动端框架",
         "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/login",
-      "style": {
-        "navigationBarTitleText": "登录"
       }
     },
     {
@@ -53,6 +47,12 @@
     {
       "root": "pages_mine",
       "pages": [
+        {
+          "path": "pages/login/index",
+          "style": {
+            "navigationBarTitleText": "登录"
+          }
+        },
         {
           "path": "pages/avatar/index",
           "style": {

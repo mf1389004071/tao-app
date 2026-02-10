@@ -56,7 +56,6 @@ RuoYi-Vue 与 RuoYi-App 是基于 SpringBoot2+Vue2 打造的企业级开发框�
 4. 修改index.html中的./src/main.js为./main.js
 5. 在HBuilderX中运行时注意观察是否使用的是Vue3的编译器（若不是请自行查找方法解决，本人对HbuilderX使用不多）
 
-
 ## 安装
 
 一下三种方式均可，感觉速度 pnpm > yarn > cnpm > npm
@@ -192,60 +191,6 @@ import modal from "@/plugins/modal"; // 建议使用modal打开弹窗，理由�
 // 也可以使用下面的方式
 import { tab, auth, modal } from "@/plugins";
 ```
-
-### 对于 ucharts
-
-建议即便暂时不使用图表也不要删除它，以后可能会用到。
-
-# 压缩内存
-
-(主包最低 809kb 左右)
-
-### 删除 geek 组件
-
-（占用主包30kb左右，可以根据需要删除）
-
-1. 删除 pages_geek 和 components/geek-xd 文件夹
-2. 删除 pages.json 中 subPackages 的 root 值为“pages_geek/pages”的配置
-3. 删除 pages/template.config.js 中 geek 组件
-
-### 删除行为验证码
-
-（占用主包170kb左右，可以根据需要删除）
-1. 删除 components/verify 文件夹
-2. 删除 pages/login 中使用 “verify” 的部分
-
-
-### 删除 uchart
-
-（占用主包 175kb 左右，不建议删除，以防以后会用）
-
-1. 删除 components/qiun-data-charts 文件夹
-2. 删除 pages.json 中的 easycom 下的 custom 中的"qiun-(.\*)"的那一行
-3. 删除 pages/index 中使用 “qiun-data-charts” 的部分
-
-### 删除 uview
-
-（按需引入，没必要删除）
-
-1. main.js 或者 main.ts 中删除
-
-```js
-import uviewPlus from "uview-plus";
-// ......
-app.use(uviewPlus);
-```
-
-2. uni.scss 中删除 @import 'uview-plus/theme.scss';
-3. App.vue 中删除 @import '@/static/scss/index.scss';
-4. package.json 中删除 "clipboard": "^2.0.11","dayjs": "^1.11.9","uview-plus": "^3.1.36",
-
-### 删除 u-city-select
-
-（占用主包 130kb 左右，可以根据需要删除）
-
-1. 删除 components/u-city-select 文件夹
-2. 删除 pages.json 中的 easycom 下的 custom 中的 "u-city-select" 的那一行
 
 # 功能演示
 

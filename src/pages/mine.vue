@@ -29,7 +29,7 @@ function handleToSetting() {
 };
 function handleToLogin() {
   uni.reLaunch({
-    url: '/pages/login'
+    url: '/pages_mine/pages/login/index'
   });
 };
 function handleToAvatar() {
@@ -45,7 +45,7 @@ function dialogConfirm() {
 
   userStore.logOut().then(() => {
     uni.reLaunch({
-      url: '/pages/login'
+      url: '/pages_mine/pages/login/index'
     });
   })
 };

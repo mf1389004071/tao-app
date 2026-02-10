@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
 import tab from '@/plugins/tab';
-import citySelect from '@/components/u-city-select/u-city-select.vue';
+import citySelect from '@/pages_template/components/u-city-select/u-city-select.vue';
 import { useAddressEditPage } from './index';
 
 // 使用编辑页面Hook

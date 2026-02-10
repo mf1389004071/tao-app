@@ -5,7 +5,7 @@ export default defineConfig(() => {
     return {
         base: './',
         build: {
-            minify: true,
+            minify: 'terser',
             outDir: 'dist',
         },
         server: {
