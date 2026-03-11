@@ -70,9 +70,9 @@ export class TaskQueue {
       this.errorMode = 'abort';
       this.autoStart = true;
     } else {
-      this.concurrency = Math.max(1, options.concurrency ?? 4);
-      this.errorMode = options.errorMode ?? 'abort';
-      this.autoStart = options.autoStart ?? true;
+      this.concurrency = Math.max(1, options.concurrency != null ? options.concurrency : 4);
+      this.errorMode = options.errorMode != null ? options.errorMode : 'abort';
+      this.autoStart = options.autoStart != null ? options.autoStart : true;
     }
   }
 
@@ -95,7 +95,7 @@ export class TaskQueue {
 
       const item: QueueItem<T> = {
         id: opts.id,
-        priority: opts.priority ?? 0,
+        priority: opts.priority != null ? opts.priority : 0,
         fn,
         resolve,
         reject,
@@ -191,7 +191,7 @@ export class TaskQueue {
 
   /** 实际执行（处理 signal、timeout、错误策略） */
   private async execute(item: QueueItem<unknown>): Promise<void> {
-    if (item.signal?.aborted) {
+    if (item.signal && item.signal.aborted) {
       item.reject(new AbortError('Task aborted before start'));
       return;
     }

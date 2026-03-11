@@ -7,6 +7,24 @@
           <view>修改密码</view>
         </view>
       </view>
+      <view class="list-cell list-cell-arrow" @click="handleToOldHome">
+        <view class="menu-item-box">
+          <view class="iconfont icon-home menu-icon"></view>
+          <view>UI模板示例</view>
+        </view>
+      </view>
+      <view class="list-cell list-cell-arrow" @click="handleToHelp">
+        <view class="menu-item-box">
+          <view class="iconfont icon-refresh menu-icon"></view>
+          <view>常见问题</view>
+        </view>
+      </view>
+      <view class="list-cell list-cell-arrow" @click="handleToAbout">
+        <view class="menu-item-box">
+          <view class="iconfont icon-clean menu-icon"></view>
+          <view>关于我们</view>
+        </view>
+      </view>
       <view class="list-cell list-cell-arrow" @click="handleToUpgrade">
         <view class="menu-item-box">
           <view class="iconfont icon-refresh menu-icon"></view>
@@ -47,9 +65,27 @@ const popup = ref(null);
 
 function handleToPwd() {
   uni.navigateTo({
-    url: '/pages/mine/pwd/index'
+    url: '/pages_mine/pages/pwd/index'
   });
 };
+
+function handleToHelp() {
+  uni.navigateTo({
+    url: '/pages_mine/pages/help/index'
+  });
+}
+
+function handleToAbout() {
+  uni.navigateTo({
+    url: '/pages_mine/pages/about/index'
+  });
+}
+
+function handleToOldHome() {
+  uni.navigateTo({
+    url: '/pages_template/pages/template'
+  });
+}
 
 function handleToUpgrade() {
   uni.showToast({
