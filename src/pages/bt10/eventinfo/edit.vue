@@ -4,9 +4,6 @@
         <uni-forms-item label="活动标题" prop="title">
           <uni-easyinput v-model="form.title" placeholder="请输入活动标题" />
         </uni-forms-item>
-        <uni-forms-item label="备注" prop="remark">
-          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
-        </uni-forms-item>
         <uni-forms-item label="活动分类" prop="category">
           <uni-easyinput v-model="form.category" placeholder="请输入活动分类" />
         </uni-forms-item>
@@ -94,14 +91,8 @@
         <uni-forms-item label="负责人ID" prop="pmUserId">
           <uni-easyinput v-model="form.pmUserId" placeholder="请输入负责人ID" />
         </uni-forms-item>
-        <uni-forms-item label="扩展文本1" prop="text1">
-          <uni-easyinput v-model="form.text1" placeholder="请输入扩展文本1" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本2" prop="text2">
-          <uni-easyinput v-model="form.text2" placeholder="请输入扩展文本2" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本3" prop="text3">
-          <uni-easyinput v-model="form.text3" placeholder="请输入扩展文本3" />
+        <uni-forms-item label="备注" prop="remark">
+          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
       </uni-forms>
   </view>
@@ -116,7 +107,6 @@ import { ref } from "vue";
 const eventinfo = ref({
         id: null,
         title: null,
-        remark: null,
         joinType: null,
         category: null,
         startTime: null,
@@ -153,18 +143,21 @@ const eventinfo = ref({
         organizer: null,
         contact: null,
         pmUserId: null,
-        createId: null,
-        updateId: null,
-        deleteId: null,
-        createTime: null,
-        updateTime: null,
-        deleteTime: null,
-        delFlag: null,
         text1: null,
         text2: null,
         text3: null,
         jsonData: null,
-        status: null
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        deleteId: null,
+        deleteTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

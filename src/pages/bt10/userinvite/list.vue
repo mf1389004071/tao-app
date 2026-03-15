@@ -11,7 +11,6 @@
         <uni-th>邀请人是否已领取奖励</uni-th>
         <uni-th>邀请奖励积分</uni-th>
         <uni-th>邀请奖励贡献点</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in userinviteList" :key="index">
@@ -24,7 +23,6 @@
         <uni-td>{{ item.rewardClaimed }}</uni-td>
         <uni-td>{{ item.rewardPoints }}</uni-td>
         <uni-td>{{ item.rewardContrib }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>

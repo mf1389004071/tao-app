@@ -13,14 +13,14 @@
         <uni-forms-item label="变动后贡献点余额" prop="balanceAfter">
           <uni-easyinput v-model="form.balanceAfter" placeholder="请输入变动后贡献点余额" />
         </uni-forms-item>
-        <uni-forms-item label="说明" prop="remark">
-          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
-        </uni-forms-item>
         <uni-forms-item label="关联业务ID" prop="relatedId">
           <uni-easyinput v-model="form.relatedId" placeholder="请输入关联业务ID" />
         </uni-forms-item>
         <uni-forms-item label="支付单号" prop="paymentNo">
           <uni-easyinput v-model="form.paymentNo" placeholder="请输入支付单号" />
+        </uni-forms-item>
+        <uni-forms-item label="备注" prop="remark">
+          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
       </uni-forms>
   </view>
@@ -39,13 +39,18 @@ const usercontriblogs = ref({
         amount: null,
         balanceBefore: null,
         balanceAfter: null,
-        remark: null,
         relatedType: null,
         relatedId: null,
         paymentNo: null,
-        delFlag: null,
+        createId: null,
+        createBy: null,
         createTime: null,
-        status: null
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

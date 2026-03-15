@@ -16,8 +16,6 @@
         <uni-th>发放方式：AUTO/MANUAL/COUPON等</uni-th>
         <uni-th>关联业务类型：EVENT/COURSE/IDENTITY/POINT_PRODUCT等</uni-th>
         <uni-th>关联业务ID</uni-th>
-        <uni-th>扩展JSON，如可转让规则等</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in paymentitemsList" :key="index">
@@ -35,8 +33,6 @@
         <uni-td>{{ item.grantMethod }}</uni-td>
         <uni-td>{{ item.relatedType }}</uni-td>
         <uni-td>{{ item.relatedId }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -71,8 +67,7 @@ const queryParams = ref({
         grantMethod: null,
         relatedType: null,
         relatedId: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

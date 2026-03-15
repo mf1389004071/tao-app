@@ -11,7 +11,6 @@
         <uni-th>AI摘要</uni-th>
         <uni-th>关键点</uni-th>
         <uni-th>行动清单</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in aimeetingtranscriptsList" :key="index">
@@ -24,7 +23,6 @@
         <uni-td>{{ item.summary }}</uni-td>
         <uni-td>{{ item.keyPoints }}</uni-td>
         <uni-td>{{ item.actionItems }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -54,7 +52,7 @@ const queryParams = ref({
         summary: null,
         keyPoints: null,
         actionItems: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

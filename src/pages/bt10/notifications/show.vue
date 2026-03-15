@@ -10,7 +10,6 @@
       <uni-section title="关联业务ID" :sub-title="notifications.relatedId" type="line"></uni-section>
       <uni-section title="是否已读" :sub-title="notifications.isRead" type="line"></uni-section>
       <uni-section title="阅读时间" :sub-title="notifications.readTime" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="notifications.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="notifications.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -33,9 +32,15 @@ const notifications = ref({
   relatedId: null,
   isRead: [],
   readTime: null,
+  createId: null,
+  createBy: null,
   createTime: null,
-  remark: null,
-  status: null
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

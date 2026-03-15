@@ -60,11 +60,15 @@ const identities = ref({
         benefitsText: null,
         upgradeRulesText: null,
         priceAmount: null,
+        createId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
-        remark: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.identityCode){

@@ -15,8 +15,6 @@
       <uni-section title="发放方式：AUTO/MANUAL/COUPON等" :sub-title="paymentitems.grantMethod" type="line"></uni-section>
       <uni-section title="关联业务类型：EVENT/COURSE/IDENTITY/POINT_PRODUCT等" :sub-title="paymentitems.relatedType" type="line"></uni-section>
       <uni-section title="关联业务ID" :sub-title="paymentitems.relatedId" type="line"></uni-section>
-      <uni-section title="扩展JSON，如可转让规则等" :sub-title="paymentitems.jsonData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="paymentitems.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="paymentitems.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -45,10 +43,15 @@ const paymentitems = ref({
   relatedType: null,
   relatedId: null,
   jsonData: null,
+  createId: null,
+  createBy: null,
   createTime: null,
-  remark: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

@@ -30,10 +30,15 @@ const usergrowth = ref({
         stageTo: null,
         triggerType: null,
         triggerData: null,
-        delFlag: null,
+        createId: null,
+        createBy: null,
         createTime: null,
-        remark: null,
-        status: null
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

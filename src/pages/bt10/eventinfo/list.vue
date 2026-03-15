@@ -4,7 +4,6 @@
       <uni-tr>
         <uni-th>主键</uni-th>
         <uni-th>活动标题</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>参与方式：线上/线下/混合</uni-th>
         <uni-th>活动分类</uni-th>
         <uni-th>开始时间</uni-th>
@@ -41,16 +40,11 @@
         <uni-th>主办方</uni-th>
         <uni-th>联系方式</uni-th>
         <uni-th>负责人ID</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展配置</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in eventinfoList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
         <uni-td>{{ item.title }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.joinType }}</uni-td>
         <uni-td>{{ item.category }}</uni-td>
         <uni-td>{{ item.startTime }}</uni-td>
@@ -87,10 +81,6 @@
         <uni-td>{{ item.organizer }}</uni-td>
         <uni-td>{{ item.contact }}</uni-td>
         <uni-td>{{ item.pmUserId }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -149,11 +139,7 @@ const queryParams = ref({
         organizer: null,
         contact: null,
         pmUserId: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

@@ -7,7 +7,6 @@
         <uni-th>标签ID</uni-th>
         <uni-th>权重(0-1或0-100，越大代表相关性越高)</uni-th>
         <uni-th>来源：SYSTEM/SELF/COACH等</uni-th>
-        <uni-th>备注/说明</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in usertagsList" :key="index">
@@ -16,7 +15,6 @@
         <uni-td>{{ item.tagId }}</uni-td>
         <uni-td>{{ item.weight }}</uni-td>
         <uni-td>{{ item.source }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -42,7 +40,7 @@ const queryParams = ref({
         tagId: null,
         weight: null,
         source: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

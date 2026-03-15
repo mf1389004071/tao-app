@@ -22,6 +22,9 @@
         <uni-forms-item label="本场会议链接" prop="meetingUrl">
           <uni-easyinput v-model="form.meetingUrl" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
+        <uni-forms-item label="备注" prop="remark">
+          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
+        </uni-forms-item>
       </uni-forms>
   </view>
 </template>
@@ -43,11 +46,14 @@ const eventsession = ref({
         summaryText: null,
         meetingUrl: null,
         createId: null,
-        updateId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

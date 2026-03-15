@@ -18,11 +18,6 @@
         <uni-th>转化产品ID</uni-th>
         <uni-th>转化金额</uni-th>
         <uni-th>转化备注</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展JSON</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in eventjoinList" :key="index">
@@ -42,11 +37,6 @@
         <uni-td>{{ item.conversionProductId }}</uni-td>
         <uni-td>{{ item.conversionAmount }}</uni-td>
         <uni-td>{{ item.conversionNotes }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -83,11 +73,7 @@ const queryParams = ref({
         conversionProductId: null,
         conversionAmount: null,
         conversionNotes: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

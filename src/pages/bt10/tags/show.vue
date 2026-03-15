@@ -5,7 +5,6 @@
       <uni-section title="标签类型：ABILITY/INTEREST/INDUSTRY/RESOURCE/NEED等" :sub-title="tags.tagType" type="line"></uni-section>
       <uni-section title="标签编码(同类型内唯一)" :sub-title="tags.code" type="line"></uni-section>
       <uni-section title="标签名称" :sub-title="tags.name" type="line"></uni-section>
-      <uni-section title="标签说明" :sub-title="tags.remark" type="line"></uni-section>
       <uni-section title="父标签ID(可选)" :sub-title="tags.parentId" type="line"></uni-section>
       <uni-section title="排序" :sub-title="tags.orderNum" type="line"></uni-section>
       <uni-section title="状态" :sub-title="tags.status" type="line"></uni-section>
@@ -25,14 +24,17 @@ const tags = ref({
   tagType: null,
   code: null,
   name: null,
-  remark: null,
   parentId: null,
   orderNum: null,
   createId: null,
-  updateId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  status: null
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

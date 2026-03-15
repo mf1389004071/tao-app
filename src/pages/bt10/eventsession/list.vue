@@ -52,7 +52,7 @@ const queryParams = ref({
         checkInCount: null,
         summaryText: null,
         meetingUrl: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

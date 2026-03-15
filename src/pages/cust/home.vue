@@ -280,7 +280,7 @@ onMounted(() => {
   transition: all 0.3s;
   background: transparent;
   /* 状态栏 + 小程序标题栏整行 + 约 24rpx 间距，让自定义顶栏整体落在胶囊按钮下方一行 */
-  padding-top: calc(env(safe-area-inset-top) + 92rpx);
+  padding-top: calc(env(safe-area-inset-top) + 72rpx);
 
   &.scrolled {
     background: rgba(255, 255, 255, 0.9);
@@ -352,7 +352,7 @@ onMounted(() => {
 
 .notice-bar {
   margin: 6rpx 32rpx 10rpx;
-  padding: 8rpx 18rpx;
+  padding: 8rpx 10rpx;
   background: #fff7ed;
   border: 1rpx solid #fed7aa;
   border-radius: 24rpx;

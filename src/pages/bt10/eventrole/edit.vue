@@ -57,11 +57,13 @@ const eventrole = ref({
         responsibilities: null,
         requirements: null,
         orderNum: null,
-        status: null,
         createId: null,
-        updateId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
+        status: null,
         delFlag: null,
         remark: null
       })

@@ -8,7 +8,7 @@
         <uni-th>分配时间</uni-th>
         <uni-th>确认时间</uni-th>
         <uni-th>状态：已分配/已确认/已拒绝</uni-th>
-        <uni-th>备注</uni-th>
+        <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in eventjoinerroleList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
@@ -17,7 +17,7 @@
         <uni-td>{{ item.assignedTime }}</uni-td>
         <uni-td>{{ item.confirmedTime }}</uni-td>
         <uni-td>{{ item.bizStatus }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
+        <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
   </view>
@@ -43,6 +43,7 @@ const queryParams = ref({
         assignedTime: null,
         confirmedTime: null,
         bizStatus: null,
+        status: null,
       })
 onLoad(()=>{
 })

@@ -6,7 +6,6 @@
       <uni-section title="标签ID" :sub-title="usertags.tagId" type="line"></uni-section>
       <uni-section title="权重(0-1或0-100，越大代表相关性越高)" :sub-title="usertags.weight" type="line"></uni-section>
       <uni-section title="来源：SYSTEM/SELF/COACH等" :sub-title="usertags.source" type="line"></uni-section>
-      <uni-section title="备注/说明" :sub-title="usertags.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="usertags.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -25,10 +24,15 @@ const usertags = ref({
   tagId: null,
   weight: null,
   source: null,
-  remark: null,
+  createId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

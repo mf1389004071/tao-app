@@ -13,7 +13,7 @@
         <uni-forms-item label="来源：SYSTEM/SELF/COACH等" prop="source">
           <uni-easyinput v-model="form.source" placeholder="请输入来源：SYSTEM/SELF/COACH等" />
         </uni-forms-item>
-        <uni-forms-item label="备注/说明" prop="remark">
+        <uni-forms-item label="备注" prop="remark">
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
       </uni-forms>
@@ -32,10 +32,15 @@ const usertags = ref({
         tagId: null,
         weight: null,
         source: null,
-        remark: null,
+        createId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

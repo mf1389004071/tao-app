@@ -10,7 +10,6 @@
       <uni-section title="到期时间(可为空)" :sub-title="useridentities.expiredTime" type="line"></uni-section>
       <uni-section title="来源类型：PAYMENT/EVENT/MANUAL等" :sub-title="useridentities.sourceType" type="line"></uni-section>
       <uni-section title="来源业务ID(如支付订单ID)" :sub-title="useridentities.sourceId" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="useridentities.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="useridentities.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -33,11 +32,15 @@ const useridentities = ref({
   expiredTime: null,
   sourceType: null,
   sourceId: null,
+  createId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  remark: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

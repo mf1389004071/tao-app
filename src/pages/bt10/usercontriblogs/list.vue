@@ -8,7 +8,6 @@
         <uni-th>本次变动金额</uni-th>
         <uni-th>变动前贡献点余额</uni-th>
         <uni-th>变动后贡献点余额</uni-th>
-        <uni-th>说明</uni-th>
         <uni-th>关联业务类型</uni-th>
         <uni-th>关联业务ID</uni-th>
         <uni-th>支付单号</uni-th>
@@ -21,7 +20,6 @@
         <uni-td>{{ item.amount }}</uni-td>
         <uni-td>{{ item.balanceBefore }}</uni-td>
         <uni-td>{{ item.balanceAfter }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.relatedType }}</uni-td>
         <uni-td>{{ item.relatedId }}</uni-td>
         <uni-td>{{ item.paymentNo }}</uni-td>
@@ -54,7 +52,7 @@ const queryParams = ref({
         relatedType: null,
         relatedId: null,
         paymentNo: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

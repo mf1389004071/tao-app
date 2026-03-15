@@ -16,9 +16,6 @@
         <uni-forms-item label="点赞数" prop="likeCount">
           <uni-easyinput v-model="form.likeCount" placeholder="请输入点赞数" />
         </uni-forms-item>
-        <uni-forms-item label="更新者ID" prop="updateId">
-          <uni-easyinput v-model="form.updateId" placeholder="请输入更新者ID" />
-        </uni-forms-item>
         <uni-forms-item label="备注" prop="remark">
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
@@ -42,14 +39,14 @@ const knowledgecomment = ref({
         isPinned: [],
         bizStatus: null,
         createId: null,
-        updateId: null,
-        deleteId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
-        deleteTime: null,
+        status: null,
         delFlag: null,
-        remark: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

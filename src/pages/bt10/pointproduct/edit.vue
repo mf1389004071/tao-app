@@ -4,9 +4,6 @@
         <uni-forms-item label="商品名称" prop="name">
           <uni-easyinput v-model="form.name" placeholder="请输入商品名称" />
         </uni-forms-item>
-        <uni-forms-item label="描述" prop="remark">
-          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
-        </uni-forms-item>
         <uni-forms-item label="兑换所需积分" prop="pointsRequired">
           <uni-easyinput v-model="form.pointsRequired" placeholder="请输入兑换所需积分" />
         </uni-forms-item>
@@ -28,14 +25,8 @@
         <uni-forms-item label="排序" prop="orderNum">
           <uni-easyinput v-model="form.orderNum" placeholder="请输入排序" />
         </uni-forms-item>
-        <uni-forms-item label="扩展文本1" prop="text1">
-          <uni-easyinput v-model="form.text1" placeholder="请输入扩展文本1" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本2" prop="text2">
-          <uni-easyinput v-model="form.text2" placeholder="请输入扩展文本2" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本3" prop="text3">
-          <uni-easyinput v-model="form.text3" placeholder="请输入扩展文本3" />
+        <uni-forms-item label="备注" prop="remark">
+          <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
       </uni-forms>
   </view>
@@ -50,7 +41,6 @@ import { ref } from "vue";
 const pointproduct = ref({
         id: null,
         name: null,
-        remark: null,
         productType: null,
         pointsRequired: null,
         stockQuantity: null,
@@ -60,18 +50,19 @@ const pointproduct = ref({
         validDays: null,
         bizStatus: null,
         orderNum: null,
-        createId: null,
-        updateId: null,
-        deleteId: null,
-        createTime: null,
-        updateTime: null,
-        deleteTime: null,
-        delFlag: null,
         text1: null,
         text2: null,
         text3: null,
         jsonData: null,
-        status: null
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

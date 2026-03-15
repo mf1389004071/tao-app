@@ -17,7 +17,6 @@
       <uni-section title="变更前贡献点余额" :sub-title="useractivitylogs.contribBalanceBefore" type="line"></uni-section>
       <uni-section title="变更后贡献点余额" :sub-title="useractivitylogs.contribBalanceAfter" type="line"></uni-section>
       <uni-section title="额外上下文(如停留时长、入口渠道等)" :sub-title="useractivitylogs.extra" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="useractivitylogs.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="useractivitylogs.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -47,8 +46,12 @@ const useractivitylogs = ref({
   contribBalanceBefore: null,
   contribBalanceAfter: null,
   extra: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

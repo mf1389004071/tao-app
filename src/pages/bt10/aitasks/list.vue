@@ -17,7 +17,6 @@
         <uni-th>使用模型</uni-th>
         <uni-th>开始时间</uni-th>
         <uni-th>完成时间</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in aitasksList" :key="index">
@@ -36,7 +35,6 @@
         <uni-td>{{ item.modelUsed }}</uni-td>
         <uni-td>{{ item.startTime }}</uni-td>
         <uni-td>{{ item.completeTime }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -72,7 +70,7 @@ const queryParams = ref({
         modelUsed: null,
         startTime: null,
         completeTime: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

@@ -19,11 +19,6 @@
         <uni-th>退款金额</uni-th>
         <uni-th>退款原因</uni-th>
         <uni-th>退款时间</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展JSON</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in paymentinfoList" :key="index">
@@ -44,11 +39,6 @@
         <uni-td>{{ item.refundAmount }}</uni-td>
         <uni-td>{{ item.refundReason }}</uni-td>
         <uni-td>{{ item.refundedTime }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -86,11 +76,7 @@ const queryParams = ref({
         refundAmount: null,
         refundReason: null,
         refundedTime: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

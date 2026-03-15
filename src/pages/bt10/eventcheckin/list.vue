@@ -9,7 +9,6 @@
         <uni-th>签到方式：二维码/定位/手动</uni-th>
         <uni-th>签到位置</uni-th>
         <uni-th>操作人ID(手动签到时)</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in eventcheckinList" :key="index">
@@ -20,7 +19,6 @@
         <uni-td>{{ item.checkInMethod }}</uni-td>
         <uni-td>{{ item.checkInLocation }}</uni-td>
         <uni-td>{{ item.operatorId }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -48,7 +46,7 @@ const queryParams = ref({
         checkInMethod: null,
         checkInLocation: null,
         operatorId: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

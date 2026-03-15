@@ -9,7 +9,6 @@
         <uni-th>状态：在群/已退出/被移出</uni-th>
         <uni-th>加入时间</uni-th>
         <uni-th>离开时间</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in communitymemberList" :key="index">
@@ -20,7 +19,6 @@
         <uni-td>{{ item.bizStatus }}</uni-td>
         <uni-td>{{ item.joinedTime }}</uni-td>
         <uni-td>{{ item.leftTime }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -48,7 +46,7 @@ const queryParams = ref({
         bizStatus: null,
         joinedTime: null,
         leftTime: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

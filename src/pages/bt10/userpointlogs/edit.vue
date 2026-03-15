@@ -42,10 +42,15 @@ const userpointlogs = ref({
         relatedType: null,
         relatedId: null,
         expiredTime: null,
-        remark: null,
-        delFlag: null,
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
         status: null,
-        createTime: null
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

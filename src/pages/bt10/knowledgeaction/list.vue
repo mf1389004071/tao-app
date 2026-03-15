@@ -6,7 +6,6 @@
         <uni-th>知识内容ID</uni-th>
         <uni-th>类型：点赞/反对/收藏/分享等</uni-th>
         <uni-th>用户ID</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in knowledgeactionList" :key="index">
@@ -14,7 +13,6 @@
         <uni-td>{{ item.contentId }}</uni-td>
         <uni-td>{{ item.actionType }}</uni-td>
         <uni-td>{{ item.userId }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -39,7 +37,7 @@ const queryParams = ref({
         contentId: null,
         actionType: null,
         userId: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

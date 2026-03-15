@@ -18,12 +18,7 @@
       <uni-section title="同步状态：待同步/已同步/失败" :sub-title="xiaoeorders.syncStatus" type="line"></uni-section>
       <uni-section title="最近同步时间" :sub-title="xiaoeorders.lastSyncTime" type="line"></uni-section>
       <uni-section title="本地订单号" :sub-title="xiaoeorders.orderNo" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="xiaoeorders.remark" type="line"></uni-section>
       <uni-section title="处理状态" :sub-title="xiaoeorders.processStatus" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="xiaoeorders.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="xiaoeorders.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="xiaoeorders.text3" type="line"></uni-section>
-      <uni-section title="原始数据" :sub-title="xiaoeorders.jsonData" type="line"></uni-section>
       <uni-section title="状态" :sub-title="xiaoeorders.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -53,17 +48,21 @@ const xiaoeorders = ref({
   invoiceInfo: null,
   syncStatus: null,
   lastSyncTime: null,
-  createTime: null,
-  updateTime: null,
   orderNo: null,
-  remark: null,
   processStatus: null,
-  delFlag: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

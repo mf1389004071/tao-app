@@ -33,11 +33,14 @@ const eventsession = ref({
   summaryText: null,
   meetingUrl: null,
   createId: null,
-  updateId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

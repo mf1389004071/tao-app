@@ -13,7 +13,6 @@
       <uni-section title="利益说明" :sub-title="identities.benefitsText" type="line"></uni-section>
       <uni-section title="晋升说明" :sub-title="identities.upgradeRulesText" type="line"></uni-section>
       <uni-section title="身份付费金额(人民币)" :sub-title="identities.priceAmount" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="identities.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="identities.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -39,11 +38,15 @@ const identities = ref({
   benefitsText: null,
   upgradeRulesText: null,
   priceAmount: null,
+  createId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  remark: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

@@ -27,11 +27,6 @@
       <uni-section title="来源" :sub-title="knowledgecontent.sourceFrom" type="line"></uni-section>
       <uni-section title="难度等级" :sub-title="knowledgecontent.difficultyLevel" type="line"></uni-section>
       <uni-section title="AI生成摘要" :sub-title="knowledgecontent.aiSummary" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="knowledgecontent.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="knowledgecontent.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="knowledgecontent.text3" type="line"></uni-section>
-      <uni-section title="扩展JSON" :sub-title="knowledgecontent.jsonData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="knowledgecontent.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="knowledgecontent.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -71,19 +66,21 @@ const knowledgecontent = ref({
   sourceFrom: null,
   difficultyLevel: null,
   aiSummary: null,
-  createId: null,
-  updateId: null,
-  deleteId: null,
-  createTime: null,
-  updateTime: null,
-  deleteTime: null,
-  delFlag: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  deleteId: null,
+  deleteTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

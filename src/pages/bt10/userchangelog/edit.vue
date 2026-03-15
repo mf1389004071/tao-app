@@ -46,8 +46,7 @@ const userchangelog = ref({
         operatorType: null,
         changedTime: null,
         metadata: null,
-        remark: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

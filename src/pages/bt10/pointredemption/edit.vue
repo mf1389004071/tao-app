@@ -19,15 +19,6 @@
         <uni-forms-item label="过期时间" prop="expiredTime">
           <uni-datetime-picker type="datetime" v-model="form.expiredTime"/>
         </uni-forms-item>
-        <uni-forms-item label="扩展文本1" prop="text1">
-          <uni-easyinput v-model="form.text1" placeholder="请输入扩展文本1" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本2" prop="text2">
-          <uni-easyinput v-model="form.text2" placeholder="请输入扩展文本2" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本3" prop="text3">
-          <uni-easyinput v-model="form.text3" placeholder="请输入扩展文本3" />
-        </uni-forms-item>
         <uni-forms-item label="备注" prop="remark">
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
@@ -50,17 +41,19 @@ const pointredemption = ref({
         redemptionCode: null,
         usedTime: null,
         expiredTime: null,
-        createId: null,
-        updateId: null,
-        createTime: null,
-        updateTime: null,
-        delFlag: null,
         text1: null,
         text2: null,
         text3: null,
         jsonData: null,
-        remark: null,
-        status: null
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

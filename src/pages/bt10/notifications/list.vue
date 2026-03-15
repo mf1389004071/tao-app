@@ -11,7 +11,6 @@
         <uni-th>关联业务ID</uni-th>
         <uni-th>是否已读</uni-th>
         <uni-th>阅读时间</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in notificationsList" :key="index">
@@ -24,7 +23,6 @@
         <uni-td>{{ item.relatedId }}</uni-td>
         <uni-td>{{ item.isRead }}</uni-td>
         <uni-td>{{ item.readTime }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -54,7 +52,7 @@ const queryParams = ref({
         relatedId: null,
         isRead: null,
         readTime: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

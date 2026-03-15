@@ -12,8 +12,6 @@
         <uni-th>操作人类型</uni-th>
         <uni-th>变更时间</uni-th>
         <uni-th>扩展信息</uni-th>
-        <uni-th>备注</uni-th>
-        <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in userchangelogList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
@@ -26,8 +24,6 @@
         <uni-td>{{ item.operatorType }}</uni-td>
         <uni-td>{{ item.changedTime }}</uni-td>
         <uni-td>{{ item.metadata }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
-        <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
   </view>
@@ -57,7 +53,6 @@ const queryParams = ref({
         operatorType: null,
         changedTime: null,
         metadata: null,
-        status: null
       })
 onLoad(()=>{
 })

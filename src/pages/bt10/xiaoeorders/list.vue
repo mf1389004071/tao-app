@@ -19,12 +19,7 @@
         <uni-th>同步状态：待同步/已同步/失败</uni-th>
         <uni-th>最近同步时间</uni-th>
         <uni-th>本地订单号</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>处理状态</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>原始数据</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in xiaoeordersList" :key="index">
@@ -45,12 +40,7 @@
         <uni-td>{{ item.syncStatus }}</uni-td>
         <uni-td>{{ item.lastSyncTime }}</uni-td>
         <uni-td>{{ item.orderNo }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.processStatus }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -89,11 +79,7 @@ const queryParams = ref({
         lastSyncTime: null,
         orderNo: null,
         processStatus: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

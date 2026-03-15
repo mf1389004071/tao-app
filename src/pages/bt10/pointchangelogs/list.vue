@@ -15,7 +15,6 @@
         <uni-th>操作人类型</uni-th>
         <uni-th>变更时间</uni-th>
         <uni-th>扩展信息</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in pointchangelogsList" :key="index">
@@ -32,7 +31,6 @@
         <uni-td>{{ item.operatorType }}</uni-td>
         <uni-td>{{ item.changedTime }}</uni-td>
         <uni-td>{{ item.metadata }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -48,7 +46,7 @@ import { ref } from "vue";
 // 总条数
 const total = ref(0);
 const loading = ref(true)
-// 积分变动审计表格数据
+// 积分商城商品表格数据
 const pointchangelogsList = ref([])
 // 查询参数
 const queryParams = ref({
@@ -66,7 +64,7 @@ const queryParams = ref({
         operatorType: null,
         changedTime: null,
         metadata: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

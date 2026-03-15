@@ -18,11 +18,6 @@
       <uni-section title="退款金额" :sub-title="paymentinfo.refundAmount" type="line"></uni-section>
       <uni-section title="退款原因" :sub-title="paymentinfo.refundReason" type="line"></uni-section>
       <uni-section title="退款时间" :sub-title="paymentinfo.refundedTime" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="paymentinfo.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="paymentinfo.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="paymentinfo.text3" type="line"></uni-section>
-      <uni-section title="扩展JSON" :sub-title="paymentinfo.jsonData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="paymentinfo.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="paymentinfo.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -53,17 +48,19 @@ const paymentinfo = ref({
   refundAmount: null,
   refundReason: null,
   refundedTime: null,
-  createId: null,
-  updateId: null,
-  createTime: null,
-  updateTime: null,
-  delFlag: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

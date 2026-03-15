@@ -18,7 +18,6 @@
         <uni-th>变更前贡献点余额</uni-th>
         <uni-th>变更后贡献点余额</uni-th>
         <uni-th>额外上下文(如停留时长、入口渠道等)</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in useractivitylogsList" :key="index">
@@ -38,7 +37,6 @@
         <uni-td>{{ item.contribBalanceBefore }}</uni-td>
         <uni-td>{{ item.contribBalanceAfter }}</uni-td>
         <uni-td>{{ item.extra }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -75,7 +73,7 @@ const queryParams = ref({
         contribBalanceBefore: null,
         contribBalanceAfter: null,
         extra: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

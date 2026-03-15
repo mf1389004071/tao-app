@@ -15,6 +15,10 @@
         <uni-th>微信开放平台 openid</uni-th>
         <uni-th>小程序 openid</uni-th>
         <uni-th>企业微信用户ID</uni-th>
+        <uni-th>Facebook用户ID</uni-th>
+        <uni-th>Google用户ID</uni-th>
+        <uni-th>Apple用户ID</uni-th>
+        <uni-th>Outlook用户ID</uni-th>
         <uni-th>小鹅通用户ID(同步)</uni-th>
         <uni-th>小鹅通原始数据快照</uni-th>
         <uni-th>邀请人用户ID(sys_user.user_id)</uni-th>
@@ -31,11 +35,6 @@
         <uni-th>可交流时段描述</uni-th>
         <uni-th>可约状态：可约/已约/不约</uni-th>
         <uni-th>额外画像信息(JSON)，如家庭成员/挑战列表等</uni-th>
-        <uni-th>备注</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展JSON</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in userprofilesList" :key="index">
@@ -51,7 +50,11 @@
         <uni-td>{{ item.wechatUnionid }}</uni-td>
         <uni-td>{{ item.wechatOpenid }}</uni-td>
         <uni-td>{{ item.miniappOpenid }}</uni-td>
-        <uni-td>{{ item.workUserid }}</uni-td>
+        <uni-td>{{ item.wxWorkUserid }}</uni-td>
+        <uni-td>{{ item.facebookUserid }}</uni-td>
+        <uni-td>{{ item.googleUserid }}</uni-td>
+        <uni-td>{{ item.appleUserid }}</uni-td>
+        <uni-td>{{ item.outlookUserid }}</uni-td>
         <uni-td>{{ item.xiaoeUserId }}</uni-td>
         <uni-td>{{ item.xiaoeData }}</uni-td>
         <uni-td>{{ item.inviterId }}</uni-td>
@@ -68,11 +71,6 @@
         <uni-td>{{ item.availableTimeSlots }}</uni-td>
         <uni-td>{{ item.appointmentStatus }}</uni-td>
         <uni-td>{{ item.extraProfile }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -105,7 +103,11 @@ const queryParams = ref({
         wechatUnionid: null,
         wechatOpenid: null,
         miniappOpenid: null,
-        workUserid: null,
+        wxWorkUserid: null,
+        facebookUserid: null,
+        googleUserid: null,
+        appleUserid: null,
+        outlookUserid: null,
         xiaoeUserId: null,
         xiaoeData: null,
         inviterId: null,
@@ -122,11 +124,7 @@ const queryParams = ref({
         availableTimeSlots: null,
         appointmentStatus: null,
         extraProfile: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

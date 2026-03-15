@@ -8,7 +8,6 @@
       <uni-section title="签到方式：二维码/定位/手动" :sub-title="eventcheckin.checkInMethod" type="line"></uni-section>
       <uni-section title="签到位置" :sub-title="eventcheckin.checkInLocation" type="line"></uni-section>
       <uni-section title="操作人ID(手动签到时)" :sub-title="eventcheckin.operatorId" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventcheckin.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="eventcheckin.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -29,9 +28,15 @@ const eventcheckin = ref({
   checkInMethod: null,
   checkInLocation: null,
   operatorId: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

@@ -3,7 +3,6 @@
     <uni-card :is-shadow="false" is-full>
       <uni-section title="主键" :sub-title="eventinfo.id" type="line"></uni-section>
       <uni-section title="活动标题" :sub-title="eventinfo.title" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventinfo.remark" type="line"></uni-section>
       <uni-section title="参与方式：线上/线下/混合" :sub-title="eventinfo.joinType" type="line"></uni-section>
       <uni-section title="活动分类" :sub-title="eventinfo.category" type="line"></uni-section>
       <uni-section title="开始时间" :sub-title="eventinfo.startTime" type="line"></uni-section>
@@ -40,10 +39,6 @@
       <uni-section title="主办方" :sub-title="eventinfo.organizer" type="line"></uni-section>
       <uni-section title="联系方式" :sub-title="eventinfo.contact" type="line"></uni-section>
       <uni-section title="负责人ID" :sub-title="eventinfo.pmUserId" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="eventinfo.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="eventinfo.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="eventinfo.text3" type="line"></uni-section>
-      <uni-section title="扩展配置" :sub-title="eventinfo.jsonData" type="line"></uni-section>
       <uni-section title="状态" :sub-title="eventinfo.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -59,7 +54,6 @@ import { ref } from "vue";
 const eventinfo = ref({
   id: null,
   title: null,
-  remark: null,
   joinType: null,
   category: null,
   startTime: null,
@@ -96,18 +90,21 @@ const eventinfo = ref({
   organizer: null,
   contact: null,
   pmUserId: null,
-  createId: null,
-  updateId: null,
-  deleteId: null,
-  createTime: null,
-  updateTime: null,
-  deleteTime: null,
-  delFlag: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  deleteId: null,
+  deleteTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

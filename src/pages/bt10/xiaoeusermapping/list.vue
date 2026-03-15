@@ -8,8 +8,6 @@
         <uni-th>映射方式：自动/手动</uni-th>
         <uni-th>匹配置信度0-1</uni-th>
         <uni-th>建立映射时间</uni-th>
-        <uni-th>最后更新时间</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in xiaoeusermappingList" :key="index">
@@ -19,8 +17,6 @@
         <uni-td>{{ item.mappingType }}</uni-td>
         <uni-td>{{ item.confidenceScore }}</uni-td>
         <uni-td>{{ item.mappedTime }}</uni-td>
-        <uni-td>{{ item.lastUpdateTime }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -47,8 +43,7 @@ const queryParams = ref({
         mappingType: null,
         confidenceScore: null,
         mappedTime: null,
-        lastUpdateTime: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

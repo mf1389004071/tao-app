@@ -14,7 +14,6 @@
       <uni-section title="操作人类型" :sub-title="pointchangelogs.operatorType" type="line"></uni-section>
       <uni-section title="变更时间" :sub-title="pointchangelogs.changedTime" type="line"></uni-section>
       <uni-section title="扩展信息" :sub-title="pointchangelogs.metadata" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="pointchangelogs.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="pointchangelogs.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -41,8 +40,15 @@ const pointchangelogs = ref({
   operatorType: null,
   changedTime: null,
   metadata: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

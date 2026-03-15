@@ -6,7 +6,6 @@
         <uni-th>标签类型：ABILITY/INTEREST/INDUSTRY/RESOURCE/NEED等</uni-th>
         <uni-th>标签编码(同类型内唯一)</uni-th>
         <uni-th>标签名称</uni-th>
-        <uni-th>标签说明</uni-th>
         <uni-th>父标签ID(可选)</uni-th>
         <uni-th>排序</uni-th>
         <uni-th>状态</uni-th>
@@ -16,7 +15,6 @@
         <uni-td>{{ item.tagType }}</uni-td>
         <uni-td>{{ item.code }}</uni-td>
         <uni-td>{{ item.name }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.parentId }}</uni-td>
         <uni-td>{{ item.orderNum }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
@@ -45,7 +43,7 @@ const queryParams = ref({
         name: null,
         parentId: null,
         orderNum: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

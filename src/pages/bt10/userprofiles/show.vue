@@ -13,7 +13,11 @@
       <uni-section title="微信开放平台 unionid" :sub-title="userprofiles.wechatUnionid" type="line"></uni-section>
       <uni-section title="微信开放平台 openid" :sub-title="userprofiles.wechatOpenid" type="line"></uni-section>
       <uni-section title="小程序 openid" :sub-title="userprofiles.miniappOpenid" type="line"></uni-section>
-      <uni-section title="企业微信用户ID" :sub-title="userprofiles.workUserid" type="line"></uni-section>
+      <uni-section title="企业微信用户ID" :sub-title="userprofiles.wxWorkUserid" type="line"></uni-section>
+      <uni-section title="Facebook用户ID" :sub-title="userprofiles.facebookUserid" type="line"></uni-section>
+      <uni-section title="Google用户ID" :sub-title="userprofiles.googleUserid" type="line"></uni-section>
+      <uni-section title="Apple用户ID" :sub-title="userprofiles.appleUserid" type="line"></uni-section>
+      <uni-section title="Outlook用户ID" :sub-title="userprofiles.outlookUserid" type="line"></uni-section>
       <uni-section title="小鹅通用户ID(同步)" :sub-title="userprofiles.xiaoeUserId" type="line"></uni-section>
       <uni-section title="小鹅通原始数据快照" :sub-title="userprofiles.xiaoeData" type="line"></uni-section>
       <uni-section title="邀请人用户ID(sys_user.user_id)" :sub-title="userprofiles.inviterId" type="line"></uni-section>
@@ -30,11 +34,6 @@
       <uni-section title="可交流时段描述" :sub-title="userprofiles.availableTimeSlots" type="line"></uni-section>
       <uni-section title="可约状态：可约/已约/不约" :sub-title="userprofiles.appointmentStatus" type="line"></uni-section>
       <uni-section title="额外画像信息(JSON)，如家庭成员/挑战列表等" :sub-title="userprofiles.extraProfile" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="userprofiles.remark" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="userprofiles.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="userprofiles.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="userprofiles.text3" type="line"></uni-section>
-      <uni-section title="扩展JSON" :sub-title="userprofiles.jsonData" type="line"></uni-section>
       <uni-section title="状态" :sub-title="userprofiles.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -60,7 +59,11 @@ const userprofiles = ref({
   wechatUnionid: null,
   wechatOpenid: null,
   miniappOpenid: null,
-  workUserid: null,
+  wxWorkUserid: null,
+  facebookUserid: null,
+  googleUserid: null,
+  appleUserid: null,
+  outlookUserid: null,
   xiaoeUserId: null,
   xiaoeData: null,
   inviterId: null,
@@ -77,17 +80,19 @@ const userprofiles = ref({
   availableTimeSlots: null,
   appointmentStatus: null,
   extraProfile: null,
-  remark: null,
-  createTime: null,
-  updateTime: null,
-  createId: null,
-  updateId: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

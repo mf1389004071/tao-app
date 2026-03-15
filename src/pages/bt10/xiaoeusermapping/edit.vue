@@ -13,9 +13,6 @@
         <uni-forms-item label="建立映射时间" prop="mappedTime">
           <uni-datetime-picker type="datetime" v-model="form.mappedTime"/>
         </uni-forms-item>
-        <uni-forms-item label="最后更新时间" prop="lastUpdateTime">
-          <uni-datetime-picker type="datetime" v-model="form.lastUpdateTime"/>
-        </uni-forms-item>
         <uni-forms-item label="备注" prop="remark">
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
@@ -36,11 +33,15 @@ const xiaoeusermapping = ref({
         mappingType: null,
         confidenceScore: null,
         mappedTime: null,
-        lastUpdateTime: null,
+        createId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
-        remark: null,
-        status: null
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

@@ -15,7 +15,6 @@
         <uni-th>任职要求</uni-th>
         <uni-th>排序</uni-th>
         <uni-th>状态</uni-th>
-        <uni-th>备注</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in eventroleList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
@@ -31,7 +30,6 @@
         <uni-td>{{ item.requirements }}</uni-td>
         <uni-td>{{ item.orderNum }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
       </uni-tr>
     </uni-table>
   </view>

@@ -58,14 +58,16 @@ const aitasks = ref({
         startTime: null,
         completeTime: null,
         createId: null,
-        updateId: null,
-        deleteId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
+        deleteId: null,
         deleteTime: null,
+        status: null,
         delFlag: null,
-        remark: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

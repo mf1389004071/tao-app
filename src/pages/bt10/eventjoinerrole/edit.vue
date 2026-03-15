@@ -33,6 +33,13 @@ const eventjoinerrole = ref({
         assignedTime: null,
         confirmedTime: null,
         bizStatus: null,
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
         delFlag: null,
         remark: null
       })

@@ -25,9 +25,15 @@ const knowledgeaction = ref({
         contentId: null,
         actionType: null,
         userId: null,
+        createId: null,
+        createBy: null,
         createTime: null,
-        remark: null,
-        status: null
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

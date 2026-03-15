@@ -10,7 +10,6 @@
       <uni-section title="AI摘要" :sub-title="aimeetingtranscripts.summary" type="line"></uni-section>
       <uni-section title="关键点" :sub-title="aimeetingtranscripts.keyPoints" type="line"></uni-section>
       <uni-section title="行动清单" :sub-title="aimeetingtranscripts.actionItems" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="aimeetingtranscripts.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="aimeetingtranscripts.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -34,11 +33,14 @@ const aimeetingtranscripts = ref({
   keyPoints: null,
   actionItems: null,
   createId: null,
-  updateId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  remark: null,
-  status: null
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

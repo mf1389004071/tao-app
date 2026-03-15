@@ -9,7 +9,6 @@
       <uni-section title="点赞数" :sub-title="knowledgecomment.likeCount" type="line"></uni-section>
       <uni-section title="是否置顶" :sub-title="knowledgecomment.isPinned" type="line"></uni-section>
       <uni-section title="状态：已发布/隐藏" :sub-title="knowledgecomment.bizStatus" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="knowledgecomment.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="knowledgecomment.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -32,14 +31,14 @@ const knowledgecomment = ref({
   isPinned: [],
   bizStatus: null,
   createId: null,
-  updateId: null,
-  deleteId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  deleteTime: null,
+  status: null,
   delFlag: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

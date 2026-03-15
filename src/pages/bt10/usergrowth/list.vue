@@ -8,7 +8,6 @@
         <uni-th>新阶段</uni-th>
         <uni-th>触发方式：自动/手动/任务完成等</uni-th>
         <uni-th>触发上下文数据</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in usergrowthList" :key="index">
@@ -18,7 +17,6 @@
         <uni-td>{{ item.stageTo }}</uni-td>
         <uni-td>{{ item.triggerType }}</uni-td>
         <uni-td>{{ item.triggerData }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -45,7 +43,7 @@ const queryParams = ref({
         stageTo: null,
         triggerType: null,
         triggerData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

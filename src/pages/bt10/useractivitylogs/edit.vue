@@ -64,8 +64,12 @@ const useractivitylogs = ref({
         contribBalanceBefore: null,
         contribBalanceAfter: null,
         extra: null,
-        remark: null,
-        status: null
+        createId: null,
+        createBy: null,
+        createTime: null,
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

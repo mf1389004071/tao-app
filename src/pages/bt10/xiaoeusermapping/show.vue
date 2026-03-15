@@ -7,8 +7,6 @@
       <uni-section title="映射方式：自动/手动" :sub-title="xiaoeusermapping.mappingType" type="line"></uni-section>
       <uni-section title="匹配置信度0-1" :sub-title="xiaoeusermapping.confidenceScore" type="line"></uni-section>
       <uni-section title="建立映射时间" :sub-title="xiaoeusermapping.mappedTime" type="line"></uni-section>
-      <uni-section title="最后更新时间" :sub-title="xiaoeusermapping.lastUpdateTime" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="xiaoeusermapping.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="xiaoeusermapping.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -28,11 +26,15 @@ const xiaoeusermapping = ref({
   mappingType: null,
   confidenceScore: null,
   mappedTime: null,
-  lastUpdateTime: null,
+  createId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
-  remark: null,
-  status: null
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

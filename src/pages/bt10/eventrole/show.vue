@@ -14,7 +14,6 @@
       <uni-section title="任职要求" :sub-title="eventrole.requirements" type="line"></uni-section>
       <uni-section title="排序" :sub-title="eventrole.orderNum" type="line"></uni-section>
       <uni-section title="状态" :sub-title="eventrole.status" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventrole.remark" type="line"></uni-section>
     </uni-card>
   </view>
 </template>
@@ -39,11 +38,13 @@ const eventrole = ref({
   responsibilities: null,
   requirements: null,
   orderNum: null,
-  status: null,
   createId: null,
-  updateId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
+  status: null,
   delFlag: null,
   remark: null
 })

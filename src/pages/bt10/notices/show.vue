@@ -7,11 +7,6 @@
       <uni-section title="类型：system等" :sub-title="notices.type" type="line"></uni-section>
       <uni-section title="是否紧急" :sub-title="notices.isUrgent" type="line"></uni-section>
       <uni-section title="发布时间" :sub-title="notices.publishTime" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="notices.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="notices.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="notices.text3" type="line"></uni-section>
-      <uni-section title="扩展JSON" :sub-title="notices.jsonData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="notices.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="notices.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -31,16 +26,19 @@ const notices = ref({
   type: null,
   isUrgent: [],
   publishTime: null,
-  createId: null,
-  updateId: null,
-  createTime: null,
-  updateTime: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

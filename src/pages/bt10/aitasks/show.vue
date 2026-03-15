@@ -16,7 +16,6 @@
       <uni-section title="使用模型" :sub-title="aitasks.modelUsed" type="line"></uni-section>
       <uni-section title="开始时间" :sub-title="aitasks.startTime" type="line"></uni-section>
       <uni-section title="完成时间" :sub-title="aitasks.completeTime" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="aitasks.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="aitasks.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -46,14 +45,16 @@ const aitasks = ref({
   startTime: null,
   completeTime: null,
   createId: null,
-  updateId: null,
-  deleteId: null,
+  createBy: null,
   createTime: null,
+  updateId: null,
+  updateBy: null,
   updateTime: null,
+  deleteId: null,
   deleteTime: null,
+  status: null,
   delFlag: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

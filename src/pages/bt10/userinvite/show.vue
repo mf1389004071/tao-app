@@ -10,7 +10,6 @@
       <uni-section title="邀请人是否已领取奖励" :sub-title="userinvite.rewardClaimed" type="line"></uni-section>
       <uni-section title="邀请奖励积分" :sub-title="userinvite.rewardPoints" type="line"></uni-section>
       <uni-section title="邀请奖励贡献点" :sub-title="userinvite.rewardContrib" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="userinvite.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="userinvite.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -33,9 +32,15 @@ const userinvite = ref({
   rewardClaimed: [],
   rewardPoints: null,
   rewardContrib: null,
-  remark: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
   status: null,
-  delFlag: null
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

@@ -14,7 +14,6 @@
         <uni-th>利益说明</uni-th>
         <uni-th>晋升说明</uni-th>
         <uni-th>身份付费金额(人民币)</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in identitiesList" :key="index">
@@ -30,7 +29,6 @@
         <uni-td>{{ item.benefitsText }}</uni-td>
         <uni-td>{{ item.upgradeRulesText }}</uni-td>
         <uni-td>{{ item.priceAmount }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -63,7 +61,7 @@ const queryParams = ref({
         benefitsText: null,
         upgradeRulesText: null,
         priceAmount: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

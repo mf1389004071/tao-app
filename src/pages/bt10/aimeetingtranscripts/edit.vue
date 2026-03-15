@@ -40,11 +40,14 @@ const aimeetingtranscripts = ref({
         keyPoints: null,
         actionItems: null,
         createId: null,
-        updateId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
-        remark: null,
-        status: null
+        status: null,
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

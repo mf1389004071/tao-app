@@ -8,7 +8,6 @@
       <uni-section title="状态：在群/已退出/被移出" :sub-title="communitymember.bizStatus" type="line"></uni-section>
       <uni-section title="加入时间" :sub-title="communitymember.joinedTime" type="line"></uni-section>
       <uni-section title="离开时间" :sub-title="communitymember.leftTime" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="communitymember.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="communitymember.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -29,9 +28,15 @@ const communitymember = ref({
   bizStatus: null,
   joinedTime: null,
   leftTime: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

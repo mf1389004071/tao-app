@@ -42,9 +42,15 @@ const userinvite = ref({
         rewardClaimed: [],
         rewardPoints: null,
         rewardContrib: null,
-        remark: null,
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
         status: null,
-        delFlag: null
+        delFlag: null,
+        remark: null
       })
 onShow(params=>{
   if(params.id){

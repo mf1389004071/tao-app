@@ -51,10 +51,15 @@ const paymentitems = ref({
         relatedType: null,
         relatedId: null,
         jsonData: null,
+        createId: null,
+        createBy: null,
         createTime: null,
-        remark: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

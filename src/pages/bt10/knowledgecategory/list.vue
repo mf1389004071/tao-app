@@ -5,33 +5,23 @@
         <uni-th>主键</uni-th>
         <uni-th>分类名称</uni-th>
         <uni-th>URL/唯一标识</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>父分类ID</uni-th>
         <uni-th>排序</uni-th>
-        <uni-th>状态</uni-th>
         <uni-th>图标</uni-th>
         <uni-th>主题色</uni-th>
         <uni-th>可见权限等级1-5</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展JSON</uni-th>
+        <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in knowledgecategoryList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
         <uni-td>{{ item.name }}</uni-td>
         <uni-td>{{ item.slug }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.parentId }}</uni-td>
         <uni-td>{{ item.orderNum }}</uni-td>
-        <uni-td>{{ item.status }}</uni-td>
         <uni-td>{{ item.icon }}</uni-td>
         <uni-td>{{ item.color }}</uni-td>
         <uni-td>{{ item.permissionLevel }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
+        <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
   </view>
@@ -56,14 +46,10 @@ const queryParams = ref({
         slug: null,
         parentId: null,
         orderNum: null,
-        status: null,
         icon: null,
         color: null,
         permissionLevel: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null
+        status: null,
       })
 onLoad(()=>{
 })

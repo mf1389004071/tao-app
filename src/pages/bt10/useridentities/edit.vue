@@ -39,11 +39,15 @@ const useridentities = ref({
         expiredTime: null,
         sourceType: null,
         sourceId: null,
+        createId: null,
+        createBy: null,
         createTime: null,
+        updateId: null,
+        updateBy: null,
         updateTime: null,
-        remark: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

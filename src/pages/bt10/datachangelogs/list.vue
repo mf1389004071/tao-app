@@ -16,8 +16,6 @@
         <uni-th>UA</uni-th>
         <uni-th>变更时间</uni-th>
         <uni-th>扩展元数据</uni-th>
-        <uni-th>备注</uni-th>
-        <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in datachangelogsList" :key="index">
         <uni-td>{{ item.id }}</uni-td>
@@ -34,8 +32,6 @@
         <uni-td>{{ item.userAgent }}</uni-td>
         <uni-td>{{ item.changedTime }}</uni-td>
         <uni-td>{{ item.metadata }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
-        <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
   </view>
@@ -69,7 +65,6 @@ const queryParams = ref({
         userAgent: null,
         changedTime: null,
         metadata: null,
-        status: null
       })
 onLoad(()=>{
 })

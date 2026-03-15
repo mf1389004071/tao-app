@@ -7,7 +7,6 @@
       <uni-section title="本次变动金额" :sub-title="usercontriblogs.amount" type="line"></uni-section>
       <uni-section title="变动前贡献点余额" :sub-title="usercontriblogs.balanceBefore" type="line"></uni-section>
       <uni-section title="变动后贡献点余额" :sub-title="usercontriblogs.balanceAfter" type="line"></uni-section>
-      <uni-section title="说明" :sub-title="usercontriblogs.remark" type="line"></uni-section>
       <uni-section title="关联业务类型" :sub-title="usercontriblogs.relatedType" type="line"></uni-section>
       <uni-section title="关联业务ID" :sub-title="usercontriblogs.relatedId" type="line"></uni-section>
       <uni-section title="支付单号" :sub-title="usercontriblogs.paymentNo" type="line"></uni-section>
@@ -30,13 +29,18 @@ const usercontriblogs = ref({
   amount: null,
   balanceBefore: null,
   balanceAfter: null,
-  remark: null,
   relatedType: null,
   relatedId: null,
   paymentNo: null,
-  delFlag: null,
+  createId: null,
+  createBy: null,
   createTime: null,
-  status: null
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

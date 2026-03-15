@@ -34,8 +34,20 @@
         <uni-forms-item label="小程序 openid" prop="miniappOpenid">
           <uni-easyinput v-model="form.miniappOpenid" placeholder="请输入小程序 openid" />
         </uni-forms-item>
-        <uni-forms-item label="企业微信用户ID" prop="workUserid">
-          <uni-easyinput v-model="form.workUserid" placeholder="请输入企业微信用户ID" />
+        <uni-forms-item label="企业微信用户ID" prop="wxWorkUserid">
+          <uni-easyinput v-model="form.wxWorkUserid" placeholder="请输入企业微信用户ID" />
+        </uni-forms-item>
+        <uni-forms-item label="Facebook用户ID" prop="facebookUserid">
+          <uni-easyinput v-model="form.facebookUserid" placeholder="请输入Facebook用户ID" />
+        </uni-forms-item>
+        <uni-forms-item label="Google用户ID" prop="googleUserid">
+          <uni-easyinput v-model="form.googleUserid" placeholder="请输入Google用户ID" />
+        </uni-forms-item>
+        <uni-forms-item label="Apple用户ID" prop="appleUserid">
+          <uni-easyinput v-model="form.appleUserid" placeholder="请输入Apple用户ID" />
+        </uni-forms-item>
+        <uni-forms-item label="Outlook用户ID" prop="outlookUserid">
+          <uni-easyinput v-model="form.outlookUserid" placeholder="请输入Outlook用户ID" />
         </uni-forms-item>
         <uni-forms-item label="小鹅通用户ID(同步)" prop="xiaoeUserId">
           <uni-easyinput v-model="form.xiaoeUserId" placeholder="请输入小鹅通用户ID(同步)" />
@@ -82,15 +94,6 @@
         <uni-forms-item label="备注" prop="remark">
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
-        <uni-forms-item label="扩展文本1" prop="text1">
-          <uni-easyinput v-model="form.text1" placeholder="请输入扩展文本1" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本2" prop="text2">
-          <uni-easyinput v-model="form.text2" placeholder="请输入扩展文本2" />
-        </uni-forms-item>
-        <uni-forms-item label="扩展文本3" prop="text3">
-          <uni-easyinput v-model="form.text3" placeholder="请输入扩展文本3" />
-        </uni-forms-item>
       </uni-forms>
   </view>
 </template>
@@ -114,7 +117,11 @@ const userprofiles = ref({
         wechatUnionid: null,
         wechatOpenid: null,
         miniappOpenid: null,
-        workUserid: null,
+        wxWorkUserid: null,
+        facebookUserid: null,
+        googleUserid: null,
+        appleUserid: null,
+        outlookUserid: null,
         xiaoeUserId: null,
         xiaoeData: null,
         inviterId: null,
@@ -131,17 +138,19 @@ const userprofiles = ref({
         availableTimeSlots: null,
         appointmentStatus: null,
         extraProfile: null,
-        remark: null,
-        createTime: null,
-        updateTime: null,
-        createId: null,
-        updateId: null,
         text1: null,
         text2: null,
         text3: null,
         jsonData: null,
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
         delFlag: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.userId){

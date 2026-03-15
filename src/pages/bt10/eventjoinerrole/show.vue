@@ -7,7 +7,7 @@
       <uni-section title="分配时间" :sub-title="eventjoinerrole.assignedTime" type="line"></uni-section>
       <uni-section title="确认时间" :sub-title="eventjoinerrole.confirmedTime" type="line"></uni-section>
       <uni-section title="状态：已分配/已确认/已拒绝" :sub-title="eventjoinerrole.bizStatus" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventjoinerrole.remark" type="line"></uni-section>
+      <uni-section title="状态" :sub-title="eventjoinerrole.status" type="line"></uni-section>
     </uni-card>
   </view>
 </template>
@@ -26,6 +26,13 @@ const eventjoinerrole = ref({
   assignedTime: null,
   confirmedTime: null,
   bizStatus: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
   delFlag: null,
   remark: null
 })

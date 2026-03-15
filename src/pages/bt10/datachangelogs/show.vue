@@ -15,8 +15,6 @@
       <uni-section title="UA" :sub-title="datachangelogs.userAgent" type="line"></uni-section>
       <uni-section title="变更时间" :sub-title="datachangelogs.changedTime" type="line"></uni-section>
       <uni-section title="扩展元数据" :sub-title="datachangelogs.metadata" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="datachangelogs.remark" type="line"></uni-section>
-      <uni-section title="状态" :sub-title="datachangelogs.status" type="line"></uni-section>
     </uni-card>
   </view>
 </template>
@@ -43,8 +41,7 @@ const datachangelogs = ref({
   userAgent: null,
   changedTime: null,
   metadata: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

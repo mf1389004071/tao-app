@@ -11,7 +11,6 @@
         <uni-th>关联业务类型如EVENT/CONTENT</uni-th>
         <uni-th>关联业务主键</uni-th>
         <uni-th>该笔积分过期时间</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in userpointlogsList" :key="index">
@@ -24,7 +23,6 @@
         <uni-td>{{ item.relatedType }}</uni-td>
         <uni-td>{{ item.relatedId }}</uni-td>
         <uni-td>{{ item.expiredTime }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>

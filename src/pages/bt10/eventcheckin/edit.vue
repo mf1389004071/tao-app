@@ -37,9 +37,15 @@ const eventcheckin = ref({
         checkInMethod: null,
         checkInLocation: null,
         operatorId: null,
+        createId: null,
+        createBy: null,
+        createTime: null,
+        updateId: null,
+        updateBy: null,
+        updateTime: null,
+        status: null,
         delFlag: null,
-        remark: null,
-        status: null
+        remark: null
       })
 onShow(params=>{
   if(params.id){

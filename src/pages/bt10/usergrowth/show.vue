@@ -7,7 +7,6 @@
       <uni-section title="新阶段" :sub-title="usergrowth.stageTo" type="line"></uni-section>
       <uni-section title="触发方式：自动/手动/任务完成等" :sub-title="usergrowth.triggerType" type="line"></uni-section>
       <uni-section title="触发上下文数据" :sub-title="usergrowth.triggerData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="usergrowth.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="usergrowth.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -27,10 +26,15 @@ const usergrowth = ref({
   stageTo: null,
   triggerType: null,
   triggerData: null,
-  delFlag: null,
+  createId: null,
+  createBy: null,
   createTime: null,
-  remark: null,
-  status: null
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

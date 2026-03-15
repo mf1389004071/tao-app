@@ -11,8 +11,6 @@
       <uni-section title="操作人类型" :sub-title="eventchangelogs.operatorType" type="line"></uni-section>
       <uni-section title="变更时间" :sub-title="eventchangelogs.changedTime" type="line"></uni-section>
       <uni-section title="扩展信息" :sub-title="eventchangelogs.metadata" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventchangelogs.remark" type="line"></uni-section>
-      <uni-section title="状态" :sub-title="eventchangelogs.status" type="line"></uni-section>
     </uni-card>
   </view>
 </template>
@@ -35,8 +33,7 @@ const eventchangelogs = ref({
   operatorType: null,
   changedTime: null,
   metadata: null,
-  remark: null,
-  status: null
+  remark: null
 })
 
 onLoad(() => {

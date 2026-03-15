@@ -11,7 +11,6 @@
         <uni-th>到期时间(可为空)</uni-th>
         <uni-th>来源类型：PAYMENT/EVENT/MANUAL等</uni-th>
         <uni-th>来源业务ID(如支付订单ID)</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in useridentitiesList" :key="index">
@@ -24,7 +23,6 @@
         <uni-td>{{ item.expiredTime }}</uni-td>
         <uni-td>{{ item.sourceType }}</uni-td>
         <uni-td>{{ item.sourceId }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>

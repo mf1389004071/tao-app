@@ -10,7 +10,6 @@
       <uni-section title="关联业务类型如EVENT/CONTENT" :sub-title="userpointlogs.relatedType" type="line"></uni-section>
       <uni-section title="关联业务主键" :sub-title="userpointlogs.relatedId" type="line"></uni-section>
       <uni-section title="该笔积分过期时间" :sub-title="userpointlogs.expiredTime" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="userpointlogs.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="userpointlogs.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -33,10 +32,15 @@ const userpointlogs = ref({
   relatedType: null,
   relatedId: null,
   expiredTime: null,
-  remark: null,
-  delFlag: null,
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
   status: null,
-  createTime: null
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {

@@ -8,11 +8,6 @@
         <uni-th>类型：system等</uni-th>
         <uni-th>是否紧急</uni-th>
         <uni-th>发布时间</uni-th>
-        <uni-th>扩展文本1</uni-th>
-        <uni-th>扩展文本2</uni-th>
-        <uni-th>扩展文本3</uni-th>
-        <uni-th>扩展JSON</uni-th>
-        <uni-th>备注</uni-th>
         <uni-th>状态</uni-th>
       </uni-tr>
       <uni-tr v-for="(item,index) in noticesList" :key="index">
@@ -22,11 +17,6 @@
         <uni-td>{{ item.type }}</uni-td>
         <uni-td>{{ item.isUrgent }}</uni-td>
         <uni-td>{{ item.publishTime }}</uni-td>
-        <uni-td>{{ item.text1 }}</uni-td>
-        <uni-td>{{ item.text2 }}</uni-td>
-        <uni-td>{{ item.text3 }}</uni-td>
-        <uni-td>{{ item.jsonData }}</uni-td>
-        <uni-td>{{ item.remark }}</uni-td>
         <uni-td>{{ item.status }}</uni-td>
       </uni-tr>
     </uni-table>
@@ -53,11 +43,7 @@ const queryParams = ref({
         type: null,
         isUrgent: null,
         publishTime: null,
-        text1: null,
-        text2: null,
-        text3: null,
-        jsonData: null,
-        status: null
+        status: null,
       })
 onLoad(()=>{
 })

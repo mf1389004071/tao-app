@@ -17,11 +17,6 @@
       <uni-section title="转化产品ID" :sub-title="eventjoin.conversionProductId" type="line"></uni-section>
       <uni-section title="转化金额" :sub-title="eventjoin.conversionAmount" type="line"></uni-section>
       <uni-section title="转化备注" :sub-title="eventjoin.conversionNotes" type="line"></uni-section>
-      <uni-section title="扩展文本1" :sub-title="eventjoin.text1" type="line"></uni-section>
-      <uni-section title="扩展文本2" :sub-title="eventjoin.text2" type="line"></uni-section>
-      <uni-section title="扩展文本3" :sub-title="eventjoin.text3" type="line"></uni-section>
-      <uni-section title="扩展JSON" :sub-title="eventjoin.jsonData" type="line"></uni-section>
-      <uni-section title="备注" :sub-title="eventjoin.remark" type="line"></uni-section>
       <uni-section title="状态" :sub-title="eventjoin.status" type="line"></uni-section>
     </uni-card>
   </view>
@@ -51,19 +46,19 @@ const eventjoin = ref({
   conversionProductId: null,
   conversionAmount: null,
   conversionNotes: null,
-  createId: null,
-  updateId: null,
-  deleteId: null,
-  createTime: null,
-  updateTime: null,
-  deleteTime: null,
-  delFlag: null,
   text1: null,
   text2: null,
   text3: null,
   jsonData: null,
-  remark: null,
-  status: null
+  createId: null,
+  createBy: null,
+  createTime: null,
+  updateId: null,
+  updateBy: null,
+  updateTime: null,
+  status: null,
+  delFlag: null,
+  remark: null
 })
 
 onLoad(() => {
