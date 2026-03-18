@@ -16,41 +16,25 @@ const coverUrl = computed(() => {
 onMounted(() => {
   const pages = getCurrentPages()
   const page = pages[pages.length - 1] as any
-  id.value = (page.options && page.options.id) || ''
+  id.value = (page.options && page.options.id) ? String(page.options.id) : ''
   if (id.value) {
     getEventinfo(id.value).then((res: any) => {
       if (res && res.data) detail.value = res.data
     }).catch(() => {
-      detail.value = {
-        title: '把自己产品化 · 深圳站',
-        city: '深圳',
-        startTime: '2026-05-20',
-        eventPrice: 2999,
-        coverImageUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800',
-        curriculum: ['产品化思维底层逻辑', '个人商业画布拆解', '流量与信任的转换', '实战方案演练'],
-        learningObjectives: '线下闭门分享、终身校友会、1对1方案诊断'
-      }
+      detail.value = {}
     }).finally(() => { loading.value = false })
   } else {
-    detail.value = {
-      title: '把自己产品化 · 深圳站',
-      city: '深圳',
-      startTime: '2026-05-20',
-      eventPrice: 2999,
-      coverImageUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800',
-      curriculum: ['产品化思维底层逻辑', '个人商业画布拆解', '流量与信任的转换', '实战方案演练'],
-      learningObjectives: '线下闭门分享、终身校友会、1对1方案诊断'
-    }
     loading.value = false
   }
 })
 
-const curriculumList = ref<string[]>([])
-
-function getCurriculum() {
+/** 课程大纲：后端 curriculum 为字符串（换行或逗号分隔），转为数组 */
+function getCurriculum(): string[] {
   const c = detail.value.curriculum
-  if (Array.isArray(c)) return c
-  if (typeof c === 'string') return c.split(',').map((s: string) => s.trim()).filter(Boolean)
+  if (Array.isArray(c)) return c.map((s: string) => String(s).trim()).filter(Boolean)
+  if (typeof c === 'string') {
+    return c.split(/[\n,，、]/).map((s: string) => s.trim()).filter(Boolean)
+  }
   return []
 }
 
@@ -61,6 +45,14 @@ function apply() {
 
 <template>
   <view class="cust-event-detail">
+    <view v-if="loading" class="loading-wrap">
+      <up-loading-icon mode="circle" size="40" />
+      <text class="loading-text">加载中...</text>
+    </view>
+    <view v-else-if="!id || !detail.title" class="empty-wrap">
+      <text class="empty-text">活动不存在或已下架</text>
+    </view>
+    <template v-else>
     <view class="cover-wrap">
       <image v-if="coverUrl" class="cover" :src="coverUrl" mode="aspectFill" lazy-load />
       <view v-else class="cover placeholder" />
@@ -69,7 +61,7 @@ function apply() {
     <view class="body">
       <view class="title-row">
         <text class="title">{{ detail.title }}</text>
-        <text class="price">￥{{ detail.eventPrice || 0 }}</text>
+        <text class="price">￥{{ detail.eventPrice != null ? detail.eventPrice : 0 }}</text>
       </view>
 
       <view class="features">
@@ -92,6 +84,7 @@ function apply() {
       <up-button plain text="线上咨询" customStyle="flex: 1; border-radius: 32rpx;" @click="uni.showToast({ title: '咨询已接通', icon: 'none' })" />
       <up-button type="primary" text="立即报名锁定席位" customStyle="flex: 2.5; border-radius: 32rpx; margin-left: 24rpx;" @click="apply" />
     </view>
+    </template>
   </view>
 </template>
 
@@ -100,6 +93,17 @@ function apply() {
   min-height: 100vh;
   background: #fff;
   padding-bottom: 160rpx;
+}
+.loading-wrap, .empty-wrap {
+  padding: 120rpx 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rpx;
+}
+.loading-text, .empty-text {
+  font-size: 28rpx;
+  color: #94a3b8;
 }
 .cover-wrap {
   width: 100%;

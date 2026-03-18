@@ -6,8 +6,8 @@ const config = {
   // baseUrl: 'http://localhost:8080',
   baseUrl: 'http://192.168.1.7:8080',
   // baseUrl: 'http://192.168.1.7:8081/dev-api', // 与 PC 联调时启用
-  // 是否启用 C 端 bt10 接口的前端 mock（用于演示数据）
-  mock: true,
+  // 是否启用 C 端 bt10 接口的前端 mock（用于演示数据）；对接真实后端时设为 false
+  mock: false,
    //cloud后台网关地址
   //  baseUrl: 'http://192.168.10.3:8080',
    // 应用信息

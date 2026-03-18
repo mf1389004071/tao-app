@@ -12,16 +12,20 @@ function addBaseUrl(url: string) {
   return config.baseUrl + url
 }
 
+/** 活动开始时间展示：后端为 ISO 或日期字符串，取日期部分 */
+function formatEventDate(val: string | undefined): string {
+  if (!val) return ''
+  const s = String(val)
+  return s.length >= 10 ? s.slice(0, 10) : s
+}
+
 onMounted(() => {
   listEventinfo({ pageNum: 1, pageSize: 50, bizStatus: 'OPEN' })
     .then((res: any) => {
       if (res && res.rows) events.value = res.rows
     })
     .catch(() => {
-      events.value = [
-        { id: 1, title: '把自己产品化 · 深圳站', startTime: '2026-05-20', coverImageUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800' },
-        { id: 2, title: '线下工作坊', startTime: '2026-06-01', coverImageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400' }
-      ]
+      events.value = []
     })
     .finally(() => { loading.value = false })
 })
@@ -31,7 +35,8 @@ function goBack() {
 }
 
 function goToDetail(e: any) {
-  uni.navigateTo({ url: `/pages/cust/event-detail?id=${e.id}` })
+  const id = e.id == null ? '' : String(e.id)
+  uni.navigateTo({ url: `/pages/cust/event-detail?id=${id}` })
 }
 </script>
 
@@ -58,7 +63,7 @@ function goToDetail(e: any) {
           <view v-else class="event-image event-image-placeholder" />
           <view class="event-info">
             <text class="event-title">{{ e.title }}</text>
-            <text class="event-time">{{ e.startTime }}</text>
+            <text class="event-time">{{ formatEventDate(e.startTime) }}</text>
             <text v-if="e.city" class="event-desc">{{ e.city }}</text>
           </view>
         </view>

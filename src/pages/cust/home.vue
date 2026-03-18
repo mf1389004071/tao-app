@@ -22,11 +22,18 @@ function addBaseUrl(url: string) {
   return config.baseUrl + url
 }
 
+/** 活动开始时间展示：后端为 ISO 或日期字符串，取日期部分 */
+function formatEventDate(val: string | undefined): string {
+  if (!val) return ''
+  const s = String(val)
+  return s.length >= 10 ? s.slice(0, 10) : s
+}
+
 function loadNotices() {
   listNotices({ pageNum: 1, pageSize: 5 }).then((res: any) => {
     if (res && res.rows) noticeList.value = res.rows
   }).catch(() => {
-    noticeList.value = [{ id: 1, title: '欢迎使用10倍好智慧成长平台', isUrgent: false }]
+    noticeList.value = []
   })
 }
 
@@ -35,15 +42,7 @@ function loadEvents() {
   listEventinfo({ pageNum: 1, pageSize: 10, bizStatus: 'OPEN' }).then((res: any) => {
     if (res && res.rows) eventList.value = res.rows
   }).catch(() => {
-    eventList.value = [{
-      id: 1,
-      title: '把自己产品化 · 深圳站',
-      city: '深圳',
-      startTime: '2026-05-20',
-      eventPrice: 2999,
-      coverImageUrl: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800',
-      bizStatus: 'OPEN'
-    }]
+    eventList.value = []
   }).finally(() => {
     loading.value = false
     refreshing.value = false
@@ -57,11 +56,13 @@ function onRefresh() {
 }
 
 function toNoticeDetail(n: any) {
-  uni.navigateTo({ url: `/pages/cust/notice-detail?id=${n.id}` })
+  const id = n.id == null ? '' : String(n.id)
+  uni.navigateTo({ url: `/pages/cust/notice-detail?id=${id}` })
 }
 
 function toEventDetail(e: any) {
-  uni.navigateTo({ url: `/pages/cust/event-detail?id=${e.id}` })
+  const id = e.id == null ? '' : String(e.id)
+  uni.navigateTo({ url: `/pages/cust/event-detail?id=${id}` })
 }
 
 function toSearch() {
@@ -194,16 +195,16 @@ onMounted(() => {
               <view class="course-overlay" />
               <view class="course-badges">
                 <text class="badge-primary">报名中</text>
-                <text class="badge-secondary">{{ e.city || '线下' }}</text>
+                <text class="badge-secondary">{{ (e.city && String(e.city).trim()) ? e.city : '线下' }}</text>
               </view>
               <view class="course-info">
                 <text class="course-title">{{ e.title }}</text>
                 <view class="course-meta">
                   <up-icon name="calendar" size="12" color="rgba(255,255,255,0.7)" />
-                  <text class="course-date">{{ e.startTime }}</text>
+                  <text class="course-date">{{ formatEventDate(e.startTime) }}</text>
                 </view>
                 <view class="course-footer">
-                  <text class="course-price">￥{{ e.eventPrice || 0 }}</text>
+                  <text class="course-price">￥{{ e.eventPrice != null ? e.eventPrice : 0 }}</text>
                   <view class="course-arrow">
                     <up-icon name="arrow-right" size="20" color="#fff" />
                   </view>
