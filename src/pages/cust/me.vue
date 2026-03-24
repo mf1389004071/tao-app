@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import useUserStore from '@/store/modules/user'
-import { listUserinvite } from '@/api/cust'
+import { getInfo } from '@/api/login'
+import { getUserprofile, listUserinvite } from '@/api/cust'
 
 const userStore = useUserStore()
 
@@ -75,7 +76,7 @@ function toAbout() {
 }
 
 function handleBuilding() {
-  uni.showToast({ title: '模块建设中~', icon: 'none' })
+  uni.navigateTo({ url: '/pages_cust/pages/search' })
 }
 
 const functionList = computed(() => [
@@ -93,11 +94,28 @@ function handleFunction(item: any) {
 
 onMounted(() => {
   avatar.value = userStore.avatar
-  if (userStore.token) {
-    listUserinvite({ pageNum: 1, pageSize: 1 }).then((res: any) => {
+  if (!userStore.token) return
+
+  getInfo()
+    .then((res: any) => {
+      const uid = res?.user?.userId
+      if (uid == null) return
+      return getUserprofile(String(uid))
+    })
+    .then((res: any) => {
+      const p = res?.data
+      if (!p) return
+      if (p.points != null) contribution.value = Number(p.points) || 0
+      if (p.growthStage) growthStage.value = String(p.growthStage)
+      if (p.bizRole) identityLabel.value = String(p.bizRole)
+    })
+    .catch(() => {})
+
+  listUserinvite({ pageNum: 1, pageSize: 1 })
+    .then((res: any) => {
       if (res && res.total != null) inviteCount.value = res.total
-    }).catch(() => {})
-  }
+    })
+    .catch(() => {})
 })
 </script>
 

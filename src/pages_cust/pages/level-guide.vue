@@ -1,22 +1,63 @@
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
+import { getInfo } from '@/api/login'
+import { getUserprofile } from '@/api/cust'
+
+const currentName = ref('成长伙伴')
+const currentStage = ref('BEGINNER')
+const currentPoints = ref(0)
 const steps = [
-  { level: '新人 / Newbie', req: '完成个人模型构建', status: 'Completed' },
-  { level: '学员 / Student', req: '累计贡献 5 份实修 Wiki', status: 'Completed' },
-  { level: '高手 / Master', req: '贡献值达到 1000 点', status: 'Active' },
-  { level: '导师 / Mentor', req: '发起 1 场城市线下实修站', status: 'Locked' }
+  { key: 'BEGINNER', level: '新人 / Newbie', req: '完成个人模型构建' },
+  { key: 'STUDENT', level: '学员 / Student', req: '累计贡献 5 份实修 Wiki' },
+  { key: 'MASTER', level: '高手 / Master', req: '贡献值达到 1000 点' },
+  { key: 'MENTOR', level: '导师 / Mentor', req: '发起 1 场城市线下实修站' }
 ]
+
+const stageIndex = computed(() => {
+  const i = steps.findIndex((s) => s.key === currentStage.value)
+  return i < 0 ? 0 : i
+})
+
+const displaySteps = computed(() =>
+  steps.map((s, i) => ({
+    ...s,
+    status: i < stageIndex.value ? 'Completed' : i === stageIndex.value ? 'Active' : 'Locked'
+  }))
+)
+
+const nextGoal = computed(() => {
+  const i = stageIndex.value
+  if (i >= steps.length - 1) return '已达最高等级'
+  const target = [200, 500, 1000, 1500][Math.min(i + 1, 3)]
+  const need = Math.max(0, target - currentPoints.value)
+  return `距离下一等级还需 ${need} 分`
+})
+
+onMounted(async () => {
+  try {
+    const infoRes: any = await getInfo()
+    currentName.value = infoRes?.user?.nickName || infoRes?.user?.userName || '成长伙伴'
+    const uid = infoRes?.user?.userId
+    if (uid == null) return
+    const profileRes: any = await getUserprofile(String(uid))
+    const p = profileRes?.data
+    if (!p) return
+    currentStage.value = String(p.growthStage || 'BEGINNER')
+    currentPoints.value = Number(p.points || 0)
+  } catch (_) {}
+})
 </script>
 
 <template>
   <view class="cust-level-guide">
     <view class="hero">
-      <text class="hero-title">李慕白的</text>
+      <text class="hero-title">{{ currentName }}的</text>
       <text class="hero-title accent">智慧进化</text>
       <text class="hero-title">路线</text>
     </view>
 
     <view class="timeline">
-      <view v-for="(step, i) in steps" :key="step.level" class="step" :class="{ locked: step.status === 'Locked' }">
+      <view v-for="(step, i) in displaySteps" :key="step.level" class="step" :class="{ locked: step.status === 'Locked' }">
         <view
           class="step-icon"
           :class="{
@@ -40,7 +81,7 @@ const steps = [
 
     <view class="bottom-cta">
       <text class="cta-sub">Next Privilege Unlock</text>
-      <text class="cta-title">距离导师权益还需 450 分</text>
+      <text class="cta-title">{{ nextGoal }}</text>
       <up-button type="primary" text="去打卡获取贡献值" block customStyle="border-radius: 28rpx; margin-top: 24rpx;" @click="uni.navigateBack()" />
     </view>
   </view>

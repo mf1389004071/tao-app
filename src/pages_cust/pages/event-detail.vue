@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { getEventinfo } from '@/api/cust'
+import { getInfo } from '@/api/login'
+import { addEventjoin, getEventinfo, listEventjoin } from '@/api/cust'
 import config from '@/config'
 
 const id = ref('')
 const detail = ref<any>({})
 const loading = ref(true)
+const applying = ref(false)
+const joined = ref(false)
 const showMoreText = ref(false)
 
 const coverUrl = computed(() => {
@@ -52,6 +55,7 @@ const joinDeadlineState = computed(() => {
 })
 
 const canApply = computed(() => {
+  if (joined.value) return false
   const bizStatus = String(detail.value?.bizStatus ?? '')
   if (bizStatus && bizStatus !== 'PUBLISHED') return false
   return joinDeadlineState.value.isOpen
@@ -169,12 +173,45 @@ function onConsultClick() {
   uni.showToast({ title: '咨询已接通', icon: 'none' })
 }
 
-function apply() {
+async function apply() {
   if (!canApply.value) {
-    uni.showToast({ title: joinDeadlineState.value.label, icon: 'none' })
+    uni.showToast({ title: joined.value ? '您已报名该活动' : joinDeadlineState.value.label, icon: 'none' })
     return
   }
-  uni.showToast({ title: '报名申请已提交', icon: 'success' })
+  if (!id.value) return
+  applying.value = true
+  try {
+    const infoRes: any = await getInfo()
+    const uid = infoRes?.user?.userId
+    if (uid == null) {
+      uni.showToast({ title: '请先登录', icon: 'none' })
+      return
+    }
+    const existsRes: any = await listEventjoin({
+      pageNum: 1,
+      pageSize: 1,
+      eventId: String(id.value),
+      userId: String(uid)
+    })
+    if ((existsRes?.total || 0) > 0) {
+      joined.value = true
+      uni.showToast({ title: '您已报名该活动', icon: 'none' })
+      return
+    }
+    await addEventjoin({
+      eventId: String(id.value),
+      userId: String(uid),
+      bizStatus: 'CONFIRMED',
+      paymentStatus: 'PENDING',
+      paymentAmount: detail.value?.eventPrice == null ? 0 : detail.value.eventPrice
+    })
+    joined.value = true
+    uni.showToast({ title: '报名申请已提交', icon: 'success' })
+  } catch (_) {
+    uni.showToast({ title: '报名失败，请检查权限', icon: 'none' })
+  } finally {
+    applying.value = false
+  }
 }
 
 onMounted(() => {
@@ -190,6 +227,21 @@ onMounted(() => {
         detail.value = {}
       })
       .finally(() => { loading.value = false })
+    getInfo()
+      .then((infoRes: any) => {
+        const uid = infoRes?.user?.userId
+        if (uid == null) return null
+        return listEventjoin({
+          pageNum: 1,
+          pageSize: 1,
+          eventId: String(id.value),
+          userId: String(uid)
+        })
+      })
+      .then((joinRes: any) => {
+        if (joinRes && (joinRes.total || 0) > 0) joined.value = true
+      })
+      .catch(() => {})
   } else {
     loading.value = false
   }
@@ -347,8 +399,9 @@ onMounted(() => {
         <up-button plain text="线上咨询" customStyle="flex: 1; border-radius: 32rpx;" @click="onConsultClick" />
         <up-button
           type="primary"
-          :disabled="!canApply"
-          :text="canApply ? '立即报名锁定席位' : joinDeadlineState.label"
+          :disabled="!canApply || applying"
+          :loading="applying"
+          :text="joined ? '已报名' : (canApply ? '立即报名锁定席位' : joinDeadlineState.label)"
           customStyle="flex: 2.5; border-radius: 32rpx; margin-left: 24rpx;"
           @click="apply"
         />

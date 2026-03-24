@@ -1,5 +1,4 @@
 import config from '@/config'
-import { handleBt10Mock } from '@/mock/bt10'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 import { toast, showConfirm, tansParams } from '@/utils/common'
@@ -8,20 +7,8 @@ import useUserStore from '@/store/modules/user'
 
 let timeout = 10000
 const baseUrl = config.baseUrl
-const enableMock = (config as any).mock === true
 
 const request = <T>(config: RequestConfig): Promise<ResponseData<T>> => {
-  // bt10 C 端全局 mock：开启后直接返回演示数据，不走真实后端
-  if (enableMock && config.url.startsWith('/bt10/')) {
-    const mockData = handleBt10Mock(
-      config.url,
-      config.method || 'GET',
-      config.data,
-      config.params
-    ) as ResponseData<T>
-    return Promise.resolve(mockData)
-  }
-
   // 是否需要设置 token
   const isToken = (config.headers || {}).isToken === false
   config.header = config.header || {}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
 import { listNotices, listEventinfo } from '@/api/cust'
 import config from '@/config'
@@ -9,6 +9,7 @@ declare const uni: any
 
 const noticeList = ref<{ id: number; title: string; isUrgent?: boolean }[]>([])
 const eventList = ref<any[]>([])
+const ongoingEvent = computed(() => (eventList.value.length ? eventList.value[0] : null))
 const loading = ref(false)
 const refreshing = ref(false)
 const scrolled = ref(false)
@@ -89,12 +90,17 @@ function toEventsList() {
   uni.navigateTo({ url: '/pages_cust/pages/events-list' })
 }
 
+function toOngoingEvent() {
+  if (!ongoingEvent.value) return
+  toEventDetail(ongoingEvent.value)
+}
+
 function scrollToTop() {
   uni.pageScrollTo({ scrollTop: 0, duration: 300 })
 }
 
 function handleCommunity() {
-  uni.showToast({ title: '社区功能即将开放', icon: 'none' })
+  uni.switchTab({ url: '/pages/cust/msg' })
 }
 
 onMounted(() => {
@@ -229,27 +235,27 @@ onMounted(() => {
       </view>
 
       <!-- 进行中的活动 -->
-      <view class="section">
+      <view class="section" v-if="ongoingEvent">
         <view class="section-header">
           <view class="section-title-group">
             <text class="section-title">进行中的活动</text>
             <text class="section-subtitle">Happening Now</text>
           </view>
         </view>
-        <view class="activity-card" @click="uni.showToast({ title: '进入直播间', icon: 'none' })">
+        <view class="activity-card" @click="toOngoingEvent">
           <view class="activity-time-box">
-            <text class="activity-time">19:30</text>
+            <text class="activity-time">{{ formatEventDate(ongoingEvent.startTime).slice(5) || '--' }}</text>
             <view class="activity-dot" />
           </view>
           <view class="activity-content">
-            <text class="activity-title">《重塑》共读会 - 第三章</text>
+            <text class="activity-title">{{ ongoingEvent.title }}</text>
             <view class="activity-meta">
               <up-icon name="account" size="10" color="#94a3b8" />
-              <text class="activity-count">128 人在线</text>
+              <text class="activity-count">{{ ongoingEvent.registeredCount != null ? ongoingEvent.registeredCount : 0 }} 人已报名</text>
             </view>
           </view>
           <view class="activity-action">
-            <up-button type="primary" size="small" text="立即进入" customStyle="border-radius: 16rpx; font-size: 20rpx; padding: 16rpx 32rpx" />
+            <up-button type="primary" size="small" text="查看详情" customStyle="border-radius: 16rpx; font-size: 20rpx; padding: 16rpx 32rpx" />
           </view>
         </view>
       </view>

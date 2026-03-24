@@ -27,6 +27,16 @@ export function getEventinfo(id) {
   return getAction(P(`/eventinfo/${id}`))
 }
 
+/** 活动报名记录列表 */
+export function listEventjoin(params) {
+  return getAction(P('/eventjoin/list'), params)
+}
+
+/** 新增活动报名记录 */
+export function addEventjoin(data) {
+  return postAction(P('/eventjoin'), data)
+}
+
 /** 知识内容列表 */
 export function listKnowledgecontent(params) {
   return getAction(P('/knowledgecontent/list'), params)
@@ -48,6 +58,22 @@ export function listUserinvite(params) {
 }
 
 /** 用户画像/概况（若后端提供） */
-export function getUserprofile() {
-  return getAction(P('/userprofiles/get'), {})
+export function getUserprofile(userId) {
+  if (userId == null || userId === '') return Promise.resolve({ code: 200, data: null })
+  return getAction(P(`/userprofiles/${String(userId)}`))
+}
+
+/** 站内通知列表 */
+export function listNotifications(params) {
+  return getAction(P('/notifications/list'), params)
+}
+
+/** 站内通知详情 */
+export function getNotification(id) {
+  return getAction(P(`/notifications/${id}`))
+}
+
+/** 发布知识内容（实修/心得） */
+export function addKnowledgecontent(data) {
+  return postAction(P('/knowledgecontent'), data)
 }

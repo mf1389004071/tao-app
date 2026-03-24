@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { listNotices, listNotifications } from '@/api/cust'
 
 type MsgTab = 'system' | 'interaction' | 'subscription'
 
@@ -22,23 +23,77 @@ function toNoticeDetail(item: any) {
   uni.navigateTo({ url: `/pages_cust/pages/notice-detail?id=${item.id}` })
 }
 
-function toTopicDetail() {
-  uni.navigateTo({ url: '/pages_cust/pages/topic-detail?id=1' })
+function toTopicDetail(item?: any) {
+  const id = item?.relatedId ? String(item.relatedId) : '920001'
+  uni.navigateTo({ url: `/pages_cust/pages/topic-detail?id=${id}` })
 }
 
-onMounted(() => {
-  systemList.value = [
-    { id: 1, title: '积分商城正式上线', content: '现在可以使用贡献值兑换权益啦！', time: '10:24', read: false },
-    { id: 2, title: '实修打卡挑战赛开启', content: '累计打卡21天，赢取王老师亲笔签名书。', time: '昨天', read: true }
-  ]
-  interactionList.value = [
-    { id: 1, user: '张帆', action: '赞了你的心得', target: '《关于蛋壳理论的3点思考》', time: '2分钟前', avatar: '' },
-    { id: 2, user: '陈默', action: '回复了你的评论', target: '非常赞同，内生力量才是持久的...', time: '1小时前', avatar: '' }
-  ]
-  topicFeedList.value = [
-    { id: 1, topic: '蛋壳理论', content: '王建硕发布了新的官方指南：如何识别外力的干扰？', time: '10分钟前' },
-    { id: 2, topic: '极致利他', content: '社群内新增 5 份关于《极致利他》的高分实修报告', time: '3小时前' }
-  ]
+function toInteractionDetail(item: any) {
+  const relatedType = String(item?.relatedType || '').toUpperCase()
+  const relatedId = item?.relatedId ? String(item.relatedId) : ''
+  if (relatedType === 'KNOWLEDGE_CONTENT' && relatedId) {
+    uni.navigateTo({ url: `/pages_cust/pages/topic-detail?id=${relatedId}` })
+    return
+  }
+  if (relatedType === 'NOTICE' && relatedId) {
+    uni.navigateTo({ url: `/pages_cust/pages/notice-detail?id=${relatedId}` })
+    return
+  }
+  uni.showToast({ title: '该消息暂无可跳转详情', icon: 'none' })
+}
+
+function formatTime(v: any) {
+  if (!v) return ''
+  const s = String(v)
+  if (s.length >= 16) return s.slice(0, 16).replace('T', ' ')
+  return s
+}
+
+onMounted(async () => {
+  let noticeRows: any[] = []
+  let notifyRows: any[] = []
+  try {
+    const noticeRes: any = await listNotices({ pageNum: 1, pageSize: 20 })
+    noticeRows = Array.isArray(noticeRes?.rows) ? noticeRes.rows : []
+  } catch (_) {}
+  try {
+    const notifyRes: any = await listNotifications({ pageNum: 1, pageSize: 20 })
+    notifyRows = Array.isArray(notifyRes?.rows) ? notifyRes.rows : []
+  } catch (_) {}
+
+  systemList.value = noticeRows.map((n: any) => ({
+    id: String(n.id),
+    title: n.title || '系统通知',
+    content: n.content || '',
+    time: formatTime(n.publishTime || n.createTime),
+    read: true
+  }))
+
+  interactionList.value = notifyRows
+    .filter((n: any) => String(n.notificationType || '').toLowerCase() === 'interaction')
+    .map((n: any) => ({
+      id: String(n.id),
+      user: '系统',
+      action: n.title || '互动消息',
+      target: n.content || '',
+      time: formatTime(n.createTime),
+      avatar: '',
+      relatedType: n.relatedType == null ? '' : String(n.relatedType),
+      relatedId: n.relatedId == null ? '' : String(n.relatedId)
+    }))
+
+  topicFeedList.value = notifyRows
+    .filter((n: any) => {
+      const t = String(n.notificationType || '').toLowerCase()
+      return t === 'subscription' || t === 'topic' || t === 'system'
+    })
+    .map((n: any) => ({
+      id: String(n.id),
+      topic: n.title || '话题更新',
+      content: n.content || '',
+      time: formatTime(n.createTime),
+      relatedId: n.relatedId == null ? '' : String(n.relatedId)
+    }))
 })
 </script>
 
@@ -79,7 +134,7 @@ onMounted(() => {
 
     <!-- 互动回复 -->
     <view v-show="activeTab === 'interaction'" class="list">
-      <view v-for="i in interactionList" :key="i.id" class="msg-row interaction">
+      <view v-for="i in interactionList" :key="i.id" class="msg-row interaction" @click="toInteractionDetail(i)">
         <view class="avatar" />
         <view class="msg-body">
           <view class="msg-head">
@@ -94,12 +149,7 @@ onMounted(() => {
 
     <!-- 话题更新 -->
     <view v-show="activeTab === 'subscription'" class="list">
-      <view
-        v-for="f in topicFeedList"
-        :key="f.id"
-        class="msg-row"
-        @click="toTopicDetail"
-      >
+      <view v-for="f in topicFeedList" :key="f.id" class="msg-row" @click="toTopicDetail(f)">
         <view class="topic-avatar">#</view>
         <view class="msg-body">
           <view class="msg-head">
@@ -110,7 +160,11 @@ onMounted(() => {
         </view>
         <up-icon name="arrow-right" size="16" color="#e2e8f0" />
       </view>
+      <view v-if="!topicFeedList.length" class="empty-row">暂无话题更新</view>
     </view>
+
+    <view v-if="activeTab === 'system' && !systemList.length" class="empty-row">暂无系统通知</view>
+    <view v-if="activeTab === 'interaction' && !interactionList.length" class="empty-row">暂无互动回复</view>
 
     <view class="safe-bottom" />
   </view>
@@ -231,5 +285,12 @@ onMounted(() => {
 }
 .safe-bottom {
   height: 180rpx;
+}
+.empty-row {
+  margin-top: 48rpx;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 24rpx;
+  font-weight: 700;
 }
 </style>

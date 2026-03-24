@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { getInfo } from '@/api/login'
 import { listUserinvite } from '@/api/cust'
 
 const list = ref<any[]>([])
 const loading = ref(true)
 
 onMounted(() => {
-  listUserinvite({ pageNum: 1, pageSize: 50 })
+  getInfo()
+    .then((infoRes: any) => {
+      const uid = infoRes?.user?.userId
+      return listUserinvite({ pageNum: 1, pageSize: 50, userId: uid == null ? undefined : String(uid) })
+    })
     .then(function (res) {
       if (!res) return
       var r = res['rows']
       if (Array.isArray(r)) list.value = r
     })
     .catch(function () {
-      list.value = [
-        { id: 1, name: '联创伙伴_1号', joinTime: '2024-04 加入', contrib: '已贡献 3 份 Wiki', rewardPoints: 100 },
-        { id: 2, name: '联创伙伴_2号', joinTime: '2024-04 加入', contrib: '已贡献 1 份 Wiki', rewardPoints: 100 }
-      ]
+      list.value = []
     })
     .finally(function () {
       loading.value = false

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { getKnowledgecontent } from '@/api/cust'
+import { getKnowledgecontent, listKnowledgecontent } from '@/api/cust'
 
 const id = ref('')
-const detail = ref<any>({ title: '蛋壳理论', tags: '自我认知,方法论', content: '从内打破是生命，从外打破是食物。探讨个体成长的内生动力。' })
+const detail = ref<any>({})
+const relatedTool = ref<any>(null)
 
 onMounted(() => {
   const pages = getCurrentPages()
@@ -14,14 +15,33 @@ onMounted(() => {
       if (res && res.data) detail.value = res.data
     }).catch(() => {})
   }
+  listKnowledgecontent({ pageNum: 1, pageSize: 1, contentType: 'TOOL', bizStatus: 'PUBLISHED' })
+    .then((res: any) => {
+      const rows = Array.isArray(res?.rows) ? res.rows : []
+      relatedTool.value = rows.length ? rows[0] : null
+    })
+    .catch(() => {
+      relatedTool.value = null
+    })
 })
 
 function toToolDetail() {
-  uni.navigateTo({ url: '/pages_cust/pages/tool-detail?id=1' })
+  if (!relatedTool.value?.id) return
+  uni.navigateTo({ url: `/pages_cust/pages/tool-detail?id=${String(relatedTool.value.id)}` })
 }
 
 function toPublish() {
   uni.navigateTo({ url: '/pages/cust/publish' })
+}
+
+function openDoc() {
+  const docUrl = detail.value?.text2 ? String(detail.value.text2) : ''
+  if (!docUrl) {
+    uni.showToast({ title: '暂无资料下载链接', icon: 'none' })
+    return
+  }
+  uni.setClipboardData({ data: docUrl })
+  uni.showToast({ title: '资料链接已复制', icon: 'success' })
 }
 </script>
 
@@ -40,16 +60,16 @@ function toPublish() {
       <view class="wiki-card">
         <text class="wiki-label">Official Wiki</text>
         <text class="wiki-desc">{{ detail.content || detail.promotionalText || '暂无官方解读' }}</text>
-        <view class="doc-link" @click="uni.showToast({ title: '正在拉取 PDF', icon: 'none' })">
+        <view class="doc-link" @click="openDoc">
           <view class="doc-icon">
             <up-icon name="file-text" size="20" color="#4f46e5" />
           </view>
-          <text class="doc-title">实操手册 V3.2</text>
+          <text class="doc-title">{{ detail.text3 || '实操手册' }}</text>
           <up-icon name="arrow-right" size="16" color="#a5b4fc" />
         </view>
       </view>
 
-      <view class="section">
+      <view v-if="relatedTool" class="section">
         <view class="section-head">
           <text class="section-title">关联工具库</text>
         </view>
@@ -58,8 +78,8 @@ function toPublish() {
             <up-icon name="bulb" size="28" color="#f97316" />
           </view>
           <view class="tool-info">
-            <text class="tool-name">七圣境扫描</text>
-            <text class="tool-desc">用于自检当前能量场状态</text>
+            <text class="tool-name">{{ relatedTool.title || '工具箱' }}</text>
+            <text class="tool-desc">{{ relatedTool.subtitle || relatedTool.aiSummary || '点击查看工具详情' }}</text>
           </view>
           <up-icon name="arrow-right" size="18" color="#e2e8f0" />
         </view>
@@ -78,7 +98,7 @@ function toPublish() {
               <text class="case-time">2小时前 · 广东深圳</text>
             </view>
           </view>
-          <text class="case-content">「应用了{{ detail.title }}后，我学会了诚实地面对内心的恐惧。内生动力的释放需要先打破陈旧的认知壁垒...」</text>
+          <text class="case-content">「{{ detail.aiSummary || detail.promotionalText || '欢迎提交你的实修案例，共建知识网络。' }}」</text>
           <view class="case-actions">
             <text class="action-item">❤ 24</text>
             <text class="action-item">💬 8</text>

@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { getNotice } from '@/api/cust'
 
 const id = ref('')
-const detail = ref<any>({ title: '紧急通告', content: '五一期间「把自己产品化」线下站席位变动详情...', publishTime: '刚刚' })
+const detail = ref<any>({})
 const loading = ref(true)
 
 onMounted(() => {
@@ -26,13 +26,7 @@ onMounted(() => {
       <text class="title">{{ detail.title }}</text>
       <text class="meta">发布于 {{ detail.publishTime || detail.createTime }} · 十倍好成长运营中心</text>
       <view class="content">
-        <text class="content-text">{{ detail.content }}</text>
-        <text class="content-text">我们始终致力于为每一位伙伴提供最高质量的实修场域。本次席位调整旨在优化线下互动体验，确保每位参与者都能获得深度的 1 对 1 导师连接。</text>
-        <view class="highlight">
-          <text class="highlight-title">关键节点调整：</text>
-          <text class="highlight-item">· 深圳站：增加 5 个特邀共创席位</text>
-          <text class="highlight-item">· 线上直播：全程同步开启 AI 实验室</text>
-        </view>
+        <text class="content-text">{{ detail.content || '暂无公告内容' }}</text>
       </view>
     </view>
   </view>
@@ -70,26 +64,5 @@ onMounted(() => {
 .content-text {
   display: block;
   margin-bottom: 24rpx;
-}
-.highlight {
-  margin-top: 48rpx;
-  padding: 40rpx;
-  background: #f8fafc;
-  border-radius: 48rpx;
-  border: 1rpx solid #e2e8f0;
-}
-.highlight-title {
-  font-size: 30rpx;
-  font-weight: 800;
-  color: #0f172a;
-  display: block;
-  margin-bottom: 24rpx;
-}
-.highlight-item {
-  display: block;
-  font-size: 28rpx;
-  color: #64748b;
-  font-weight: 600;
-  margin-bottom: 12rpx;
 }
 </style>

@@ -1,18 +1,62 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { getInfo } from '@/api/login'
+import { addKnowledgecontent, listKnowledgecontent } from '@/api/cust'
 
-const topicTag = ref('蛋壳理论')
+const topicTag = ref('')
+const topicOptions = ref<any[]>([])
 const content = ref('')
+const submitting = ref(false)
 
-function submit() {
+onMounted(() => {
+  listKnowledgecontent({ pageNum: 1, pageSize: 20, bizStatus: 'PUBLISHED' })
+    .then((res: any) => {
+      topicOptions.value = Array.isArray(res?.rows) ? res.rows : []
+      if (!topicTag.value && topicOptions.value.length) {
+        topicTag.value = String(topicOptions.value[0].title || '')
+      }
+    })
+    .catch(() => {
+      topicOptions.value = []
+    })
+})
+
+async function submit() {
   if (!content.value.trim()) {
     uni.showToast({ title: '请填写心得内容', icon: 'none' })
     return
   }
-  uni.showToast({ title: '发布成功！贡献值 +10', icon: 'success' })
-  setTimeout(() => {
-    uni.navigateBack()
-  }, 1500)
+  if (!topicTag.value.trim()) {
+    uni.showToast({ title: '请先选择关联话题', icon: 'none' })
+    return
+  }
+  submitting.value = true
+  try {
+    const infoRes: any = await getInfo()
+    const uid = infoRes?.user?.userId
+    if (uid == null) {
+      uni.showToast({ title: '请先登录', icon: 'none' })
+      return
+    }
+    await addKnowledgecontent({
+      title: `${topicTag.value} · 实修心得`,
+      subtitle: '来自小程序发布',
+      content: content.value.trim(),
+      contentType: 'ARTICLE',
+      authorId: String(uid),
+      tags: topicTag.value,
+      bizStatus: 'PUBLISHED',
+      publishTime: new Date().toISOString()
+    })
+    uni.showToast({ title: '发布成功', icon: 'success' })
+    setTimeout(() => {
+      uni.navigateBack()
+    }, 800)
+  } catch (_) {
+    uni.showToast({ title: '发布失败，请检查权限', icon: 'none' })
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
 
@@ -22,8 +66,15 @@ function submit() {
       <view class="field">
         <text class="label">关联当前研究话题</text>
         <view class="tags">
-          <text class="tag active"># {{ topicTag }}</text>
-          <text class="tag add">+ 添加关联话题</text>
+          <text
+            v-for="item in topicOptions.slice(0, 6)"
+            :key="String(item.id)"
+            class="tag"
+            :class="{ active: topicTag === String(item.title || '') }"
+            @click="topicTag = String(item.title || '')"
+          >
+            # {{ String(item.title || '') }}
+          </text>
         </view>
       </view>
 
@@ -55,6 +106,7 @@ function submit() {
         type="primary"
         text="存入 Wiki 知识库并赚分"
         block
+        :loading="submitting"
         customStyle="margin-top: 48rpx; border-radius: 32rpx; height: 96rpx; font-weight: 800;"
         @click="submit"
       />

@@ -1,20 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { getInfo } from '@/api/login'
 import { listUserpointlogs } from '@/api/cust'
 
-const balance = ref(1280)
+const balance = ref(0)
 const list = ref<any[]>([])
 
 onMounted(() => {
-  listUserpointlogs({ pageNum: 1, pageSize: 50 }).then((res: any) => {
-    if (res && res.rows) list.value = res.rows
-  }).catch(() => {
-    list.value = [
-      { id: 1, actionType: '发布优质实修心得', points: 10, createTime: '今天 10:20', type: 'earn' },
-      { id: 2, actionType: '受邀好友完成注册', points: 50, createTime: '昨天', type: 'earn' },
-      { id: 3, actionType: '兑换线下课优惠券', points: -200, createTime: '3天前', type: 'spend' }
-    ]
-  })
+  getInfo()
+    .then((infoRes: any) => {
+      const uid = infoRes?.user?.userId
+      return listUserpointlogs({ pageNum: 1, pageSize: 50, userId: uid == null ? undefined : String(uid) })
+    })
+    .then((res: any) => {
+      if (res && res.rows) {
+        list.value = res.rows
+        if (list.value.length && list.value[0].balanceAfter != null) {
+          balance.value = Number(list.value[0].balanceAfter) || 0
+        }
+      }
+    })
+    .catch(() => {
+      list.value = []
+    })
 })
 
 function pointStr(item: any) {

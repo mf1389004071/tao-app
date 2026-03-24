@@ -3,13 +3,18 @@ import { ref, onMounted } from 'vue'
 import { getKnowledgecontent } from '@/api/cust'
 
 const id = ref('')
-const detail = ref<any>({
-  title: '七圣境扫描',
-  subtitle: 'V2.0',
-  content: '通过身体、情绪、认知、关系、事业、财富、精神七个维度进行生命力自查。',
-  guide: ['静心5分钟', '按1-10分对各维度评分', '连接各点形成雷达图', '分析短板原因'],
-  caseText: '学员小王通过该工具发现事业瓶颈源于关系维度的缺失，调整后产出提升30%。'
-})
+const detail = ref<any>({})
+
+function buildGuide(item: any): string[] {
+  const source = item?.text1 || item?.content || ''
+  const text = String(source)
+  if (!text.trim()) return []
+  return text
+    .split(/[\n。；;]+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 6)
+}
 
 onMounted(() => {
   const pages = getCurrentPages()
@@ -17,10 +22,20 @@ onMounted(() => {
   id.value = (page.options && page.options.id) || ''
   if (id.value) {
     getKnowledgecontent(id.value).then((res: any) => {
-      if (res && res.data) detail.value = { ...detail.value, ...res.data }
+      if (res && res.data) detail.value = { ...res.data }
     }).catch(() => {})
   }
 })
+
+function downloadDoc() {
+  const docUrl = detail.value?.text2 ? String(detail.value.text2) : ''
+  if (!docUrl) {
+    uni.showToast({ title: '暂无可下载资料', icon: 'none' })
+    return
+  }
+  uni.setClipboardData({ data: docUrl })
+  uni.showToast({ title: '下载链接已复制', icon: 'success' })
+}
 </script>
 
 <template>
@@ -38,21 +53,22 @@ onMounted(() => {
 
       <view class="card intro">
         <text class="card-label">工具简介</text>
-        <text class="card-text">{{ detail.content }}</text>
+        <text class="card-text">{{ detail.content || detail.aiSummary || '暂无工具说明' }}</text>
       </view>
 
       <text class="card-label">使用指南</text>
-      <view class="guide-list">
-        <view v-for="(g, i) in (detail.guide || [])" :key="i" class="guide-item">
+      <view class="guide-list" v-if="buildGuide(detail).length">
+        <view v-for="(g, i) in buildGuide(detail)" :key="i" class="guide-item">
           <text class="guide-num">{{ String(i + 1).padStart(2, '0') }}</text>
           <text class="guide-text">{{ g }}</text>
         </view>
       </view>
+      <view v-else class="empty-guide">暂无使用指南</view>
 
       <view class="card case">
         <text class="card-label">实操案例</text>
-        <text class="case-text">「{{ detail.caseText }}」</text>
-        <up-button plain size="small" text="下载高清PDF工作坊" customStyle="margin-top: 24rpx; border-radius: 20rpx;" @click="uni.showToast({ title: '下载中', icon: 'none' })" />
+        <text class="case-text">「{{ detail.promotionalText || detail.aiSummary || '暂未收录案例。' }}」</text>
+        <up-button plain size="small" :text="detail.text3 || '下载高清PDF工作坊'" customStyle="margin-top: 24rpx; border-radius: 20rpx;" @click="downloadDoc" />
       </view>
     </view>
   </view>
@@ -121,6 +137,11 @@ onMounted(() => {
   line-height: 1.7;
 }
 .guide-list {
+  margin-bottom: 40rpx;
+}
+.empty-guide {
+  font-size: 24rpx;
+  color: #94a3b8;
   margin-bottom: 40rpx;
 }
 .guide-item {

@@ -11,10 +11,7 @@ function loadTopics() {
   listKnowledgecontent({ pageNum: 1, pageSize: 20, contentType: 'WIKI', bizStatus: 'PUBLISHED' }).then((res: any) => {
     if (res && res.rows) topicList.value = res.rows
   }).catch(() => {
-    topicList.value = [
-      { id: 1, title: '蛋壳理论', tags: '自我认知,方法论', viewCount: 1200, likeCount: 24 },
-      { id: 2, title: '七圣境', tags: '工具,底层逻辑', viewCount: 800, likeCount: 45 }
-    ]
+    topicList.value = []
   }).finally(() => { loading.value = false })
 }
 
@@ -70,6 +67,7 @@ onShow(() => { loadTopics() })
         </view>
         <up-icon name="arrow-right" size="18" color="#cbd5e1" />
       </view>
+      <view v-if="!loading && !topicList.length" class="topic-empty">暂无已发布话题</view>
     </view>
 
     <!-- 金句库 -->
@@ -197,6 +195,13 @@ onShow(() => { loadTopics() })
   margin-bottom: 24rpx;
   border: 2rpx solid #f1f5f9;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.02);
+}
+.topic-empty {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 24rpx;
+  font-weight: 700;
+  padding: 24rpx 0;
 }
 .topic-icon {
   width: 96rpx;
