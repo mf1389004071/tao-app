@@ -17,7 +17,7 @@ onMounted(() => {
 })
 
 function toToolDetail() {
-  uni.navigateTo({ url: '/pages/cust/tool-detail?id=1' })
+  uni.navigateTo({ url: '/pages_cust/pages/tool-detail?id=1' })
 }
 
 function toPublish() {

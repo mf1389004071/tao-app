@@ -43,60 +43,6 @@
       }
     },
     {
-      "path": "pages/cust/event-detail",
-      "style": {
-        "navigationBarTitleText": "活动详情"
-      }
-    },
-    {
-      "path": "pages/cust/events-list",
-      "style": {
-        "navigationBarTitleText": "活动"
-      }
-    },
-    {
-      "path": "pages/cust/topic-detail",
-      "style": {
-        "navigationBarTitleText": "话题详情"
-      }
-    },
-    {
-      "path": "pages/cust/tool-detail",
-      "style": {
-        "navigationBarTitleText": "工具详情"
-      }
-    },
-    {
-      "path": "pages/cust/notice-detail",
-      "style": {
-        "navigationBarTitleText": "公告详情"
-      }
-    },
-    {
-      "path": "pages/cust/invite",
-      "style": {
-        "navigationBarTitleText": "关系网络"
-      }
-    },
-    {
-      "path": "pages/cust/level-guide",
-      "style": {
-        "navigationBarTitleText": "成长地图"
-      }
-    },
-    {
-      "path": "pages/cust/point-log",
-      "style": {
-        "navigationBarTitleText": "积分明细"
-      }
-    },
-    {
-      "path": "pages/cust/search",
-      "style": {
-        "navigationBarTitleText": "搜索"
-      }
-    },
-    {
       "path": "pages/index",
       "style": {
         "navigationBarTitleText": "若依移动端框架",
@@ -321,6 +267,421 @@
         },
         {
           "path": "pages/upload/index"
+        }
+      ]
+    },
+    {
+      "root": "pages_cust",
+      "pages": [
+        {
+          "path": "event-detail",
+          "style": {
+            "navigationBarTitleText": "活动详情"
+          }
+        },
+        {
+          "path": "events-list",
+          "style": {
+            "navigationBarTitleText": "活动"
+          }
+        },
+        {
+          "path": "topic-detail",
+          "style": {
+            "navigationBarTitleText": "话题详情"
+          }
+        },
+        {
+          "path": "tool-detail",
+          "style": {
+            "navigationBarTitleText": "工具详情"
+          }
+        },
+        {
+          "path": "notice-detail",
+          "style": {
+            "navigationBarTitleText": "公告详情"
+          }
+        },
+        {
+          "path": "invite",
+          "style": {
+            "navigationBarTitleText": "关系网络"
+          }
+        },
+        {
+          "path": "level-guide",
+          "style": {
+            "navigationBarTitleText": "成长地图"
+          }
+        },
+        {
+          "path": "point-log",
+          "style": {
+            "navigationBarTitleText": "积分明细"
+          }
+        },
+        {
+          "path": "search",
+          "style": {
+            "navigationBarTitleText": "搜索"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages_bt10",
+      "pages": [
+        {
+          "path": "pages/aimeetingtranscripts/edit"
+        },
+        {
+          "path": "pages/aimeetingtranscripts/list"
+        },
+        {
+          "path": "pages/aimeetingtranscripts/show"
+        },
+        {
+          "path": "pages/aitasks/edit"
+        },
+        {
+          "path": "pages/aitasks/list"
+        },
+        {
+          "path": "pages/aitasks/show"
+        },
+        {
+          "path": "pages/aivectors/edit"
+        },
+        {
+          "path": "pages/aivectors/list"
+        },
+        {
+          "path": "pages/aivectors/show"
+        },
+        {
+          "path": "pages/communityinfo/edit"
+        },
+        {
+          "path": "pages/communityinfo/list"
+        },
+        {
+          "path": "pages/communityinfo/show"
+        },
+        {
+          "path": "pages/communitymember/edit"
+        },
+        {
+          "path": "pages/communitymember/list"
+        },
+        {
+          "path": "pages/communitymember/show"
+        },
+        {
+          "path": "pages/datachangelogs/edit"
+        },
+        {
+          "path": "pages/datachangelogs/list"
+        },
+        {
+          "path": "pages/datachangelogs/show"
+        },
+        {
+          "path": "pages/eventchangelogs/edit"
+        },
+        {
+          "path": "pages/eventchangelogs/list"
+        },
+        {
+          "path": "pages/eventchangelogs/show"
+        },
+        {
+          "path": "pages/eventcheckin/edit"
+        },
+        {
+          "path": "pages/eventcheckin/list"
+        },
+        {
+          "path": "pages/eventcheckin/show"
+        },
+        {
+          "path": "pages/eventinfo/edit"
+        },
+        {
+          "path": "pages/eventinfo/list"
+        },
+        {
+          "path": "pages/eventinfo/show"
+        },
+        {
+          "path": "pages/eventinfotags/edit"
+        },
+        {
+          "path": "pages/eventinfotags/list"
+        },
+        {
+          "path": "pages/eventinfotags/show"
+        },
+        {
+          "path": "pages/eventjoin/edit"
+        },
+        {
+          "path": "pages/eventjoin/list"
+        },
+        {
+          "path": "pages/eventjoin/show"
+        },
+        {
+          "path": "pages/eventjoinerrole/edit"
+        },
+        {
+          "path": "pages/eventjoinerrole/list"
+        },
+        {
+          "path": "pages/eventjoinerrole/show"
+        },
+        {
+          "path": "pages/eventrole/edit"
+        },
+        {
+          "path": "pages/eventrole/list"
+        },
+        {
+          "path": "pages/eventrole/show"
+        },
+        {
+          "path": "pages/eventsession/edit"
+        },
+        {
+          "path": "pages/eventsession/list"
+        },
+        {
+          "path": "pages/eventsession/show"
+        },
+        {
+          "path": "pages/identities/edit"
+        },
+        {
+          "path": "pages/identities/list"
+        },
+        {
+          "path": "pages/identities/show"
+        },
+        {
+          "path": "pages/knowledgeaction/edit"
+        },
+        {
+          "path": "pages/knowledgeaction/list"
+        },
+        {
+          "path": "pages/knowledgeaction/show"
+        },
+        {
+          "path": "pages/knowledgecategory/edit"
+        },
+        {
+          "path": "pages/knowledgecategory/list"
+        },
+        {
+          "path": "pages/knowledgecategory/show"
+        },
+        {
+          "path": "pages/knowledgecomment/edit"
+        },
+        {
+          "path": "pages/knowledgecomment/list"
+        },
+        {
+          "path": "pages/knowledgecomment/show"
+        },
+        {
+          "path": "pages/knowledgecontent/edit"
+        },
+        {
+          "path": "pages/knowledgecontent/list"
+        },
+        {
+          "path": "pages/knowledgecontent/show"
+        },
+        {
+          "path": "pages/knowledgecontenttags/edit"
+        },
+        {
+          "path": "pages/knowledgecontenttags/list"
+        },
+        {
+          "path": "pages/knowledgecontenttags/show"
+        },
+        {
+          "path": "pages/notices/edit"
+        },
+        {
+          "path": "pages/notices/list"
+        },
+        {
+          "path": "pages/notices/show"
+        },
+        {
+          "path": "pages/notifications/edit"
+        },
+        {
+          "path": "pages/notifications/list"
+        },
+        {
+          "path": "pages/notifications/show"
+        },
+        {
+          "path": "pages/paymentinfo/edit"
+        },
+        {
+          "path": "pages/paymentinfo/list"
+        },
+        {
+          "path": "pages/paymentinfo/show"
+        },
+        {
+          "path": "pages/paymentitems/edit"
+        },
+        {
+          "path": "pages/paymentitems/list"
+        },
+        {
+          "path": "pages/paymentitems/show"
+        },
+        {
+          "path": "pages/pointchangelogs/edit"
+        },
+        {
+          "path": "pages/pointchangelogs/list"
+        },
+        {
+          "path": "pages/pointchangelogs/show"
+        },
+        {
+          "path": "pages/pointproduct/edit"
+        },
+        {
+          "path": "pages/pointproduct/list"
+        },
+        {
+          "path": "pages/pointproduct/show"
+        },
+        {
+          "path": "pages/pointredemption/edit"
+        },
+        {
+          "path": "pages/pointredemption/list"
+        },
+        {
+          "path": "pages/pointredemption/show"
+        },
+        {
+          "path": "pages/tags/edit"
+        },
+        {
+          "path": "pages/tags/list"
+        },
+        {
+          "path": "pages/tags/show"
+        },
+        {
+          "path": "pages/useractivitylogs/edit"
+        },
+        {
+          "path": "pages/useractivitylogs/list"
+        },
+        {
+          "path": "pages/useractivitylogs/show"
+        },
+        {
+          "path": "pages/userchangelog/edit"
+        },
+        {
+          "path": "pages/userchangelog/list"
+        },
+        {
+          "path": "pages/userchangelog/show"
+        },
+        {
+          "path": "pages/usercontriblogs/edit"
+        },
+        {
+          "path": "pages/usercontriblogs/list"
+        },
+        {
+          "path": "pages/usercontriblogs/show"
+        },
+        {
+          "path": "pages/usergrowth/edit"
+        },
+        {
+          "path": "pages/usergrowth/list"
+        },
+        {
+          "path": "pages/usergrowth/show"
+        },
+        {
+          "path": "pages/useridentities/edit"
+        },
+        {
+          "path": "pages/useridentities/list"
+        },
+        {
+          "path": "pages/useridentities/show"
+        },
+        {
+          "path": "pages/userinvite/edit"
+        },
+        {
+          "path": "pages/userinvite/list"
+        },
+        {
+          "path": "pages/userinvite/show"
+        },
+        {
+          "path": "pages/userpointlogs/edit"
+        },
+        {
+          "path": "pages/userpointlogs/list"
+        },
+        {
+          "path": "pages/userpointlogs/show"
+        },
+        {
+          "path": "pages/userprofiles/edit"
+        },
+        {
+          "path": "pages/userprofiles/list"
+        },
+        {
+          "path": "pages/userprofiles/show"
+        },
+        {
+          "path": "pages/usertags/edit"
+        },
+        {
+          "path": "pages/usertags/list"
+        },
+        {
+          "path": "pages/usertags/show"
+        },
+        {
+          "path": "pages/xiaoeorders/edit"
+        },
+        {
+          "path": "pages/xiaoeorders/list"
+        },
+        {
+          "path": "pages/xiaoeorders/show"
+        },
+        {
+          "path": "pages/xiaoeusermapping/edit"
+        },
+        {
+          "path": "pages/xiaoeusermapping/list"
+        },
+        {
+          "path": "pages/xiaoeusermapping/show"
         }
       ]
     }

@@ -125,7 +125,7 @@ function loadMore() {
 
 function goToDetail(e: any) {
   const id = e.id == null ? '' : String(e.id)
-  uni.navigateTo({ url: `/pages/cust/event-detail?id=${id}` })
+  uni.navigateTo({ url: `/pages_cust/pages/event-detail?id=${id}` })
 }
 
 function onRefresh() {

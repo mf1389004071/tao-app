@@ -69,16 +69,16 @@ function onRefresh() {
 
 function toNoticeDetail(n: any) {
   const id = n.id == null ? '' : String(n.id)
-  uni.navigateTo({ url: `/pages/cust/notice-detail?id=${id}` })
+  uni.navigateTo({ url: `/pages_cust/pages/notice-detail?id=${id}` })
 }
 
 function toEventDetail(e: any) {
   const id = e.id == null ? '' : String(e.id)
-  uni.navigateTo({ url: `/pages/cust/event-detail?id=${id}` })
+  uni.navigateTo({ url: `/pages_cust/pages/event-detail?id=${id}` })
 }
 
 function toSearch() {
-  uni.navigateTo({ url: '/pages/cust/search' })
+  uni.navigateTo({ url: '/pages_cust/pages/search' })
 }
 
 function toGrowth() {
@@ -86,7 +86,7 @@ function toGrowth() {
 }
 
 function toEventsList() {
-  uni.navigateTo({ url: '/pages/cust/events-list' })
+  uni.navigateTo({ url: '/pages_cust/pages/events-list' })
 }
 
 function scrollToTop() {

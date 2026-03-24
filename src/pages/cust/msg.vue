@@ -19,11 +19,11 @@ function setTab(id: MsgTab) {
 }
 
 function toNoticeDetail(item: any) {
-  uni.navigateTo({ url: `/pages/cust/notice-detail?id=${item.id}` })
+  uni.navigateTo({ url: `/pages_cust/pages/notice-detail?id=${item.id}` })
 }
 
 function toTopicDetail() {
-  uni.navigateTo({ url: '/pages/cust/topic-detail?id=1' })
+  uni.navigateTo({ url: '/pages_cust/pages/topic-detail?id=1' })
 }
 
 onMounted(() => {

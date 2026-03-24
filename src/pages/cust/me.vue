@@ -23,15 +23,15 @@ uni.$on('refresh', () => {
 })
 
 function toLevelGuide() {
-  uni.navigateTo({ url: '/pages/cust/level-guide' })
+  uni.navigateTo({ url: '/pages_cust/pages/level-guide' })
 }
 
 function toPointLog() {
-  uni.navigateTo({ url: '/pages/cust/point-log' })
+  uni.navigateTo({ url: '/pages_cust/pages/point-log' })
 }
 
 function toInvite() {
-  uni.navigateTo({ url: '/pages/cust/invite' })
+  uni.navigateTo({ url: '/pages_cust/pages/invite' })
 }
 
 function toLogin() {
@@ -80,10 +80,10 @@ function handleBuilding() {
 
 const functionList = computed(() => [
   { id: 1, label: '编辑资料', icon: 'edit-pen', color: '#6366f1', url: '', action: toEditInfo },
-  { id: 2, label: '关系网络 (邀请有礼)', icon: 'account', color: '#6366f1', extra: `${inviteCount.value}位新伙伴`, url: '/pages/cust/invite', action: toInvite },
+  { id: 2, label: '关系网络 (邀请有礼)', icon: 'account', color: '#6366f1', extra: `${inviteCount.value}位新伙伴`, url: '/pages_cust/pages/invite', action: toInvite },
   { id: 3, label: '我的收藏与实修足迹', icon: 'star', color: '#6366f1', action: handleBuilding },
   { id: 4, label: '贡献值商城', icon: 'integral', color: '#6366f1', action: handleBuilding },
-  { id: 5, label: '积分明细', icon: 'list', color: '#6366f1', url: '/pages/cust/point-log', action: toPointLog },
+  { id: 5, label: '积分明细', icon: 'list', color: '#6366f1', url: '/pages_cust/pages/point-log', action: toPointLog },
   { id: 6, label: '应用设置', icon: 'setting', color: '#94a3b8', action: toSetting }
 ])
 

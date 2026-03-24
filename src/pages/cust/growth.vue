@@ -19,7 +19,7 @@ function loadTopics() {
 }
 
 function toTopicDetail(t: any) {
-  uni.navigateTo({ url: `/pages/cust/topic-detail?id=${t.id}` })
+  uni.navigateTo({ url: `/pages_cust/pages/topic-detail?id=${t.id}` })
 }
 
 function toPublish() {

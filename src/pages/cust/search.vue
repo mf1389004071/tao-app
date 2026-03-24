@@ -118,9 +118,9 @@ function goBack() {
 function goToDetail(item: any) {
   const id = item.id
   if (item.contentType === 'TOOL' || item.contentType === 'TOOLBOX') {
-    uni.navigateTo({ url: `/pages/cust/tool-detail?id=${id}` })
+    uni.navigateTo({ url: `/pages_cust/pages/tool-detail?id=${id}` })
   } else {
-    uni.navigateTo({ url: `/pages/cust/topic-detail?id=${id}` })
+    uni.navigateTo({ url: `/pages_cust/pages/topic-detail?id=${id}` })
   }
 }
 
