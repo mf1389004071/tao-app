@@ -33,7 +33,8 @@ async function handleLoginByWx() {
   if (res.token == null || res.token == undefined || res.token == "") return
   setToken(res.token);
   await userStore.getInfo();
-  uni.switchTab({ url: '/pages/index' });
+  // 登录成功后跳转到 tabBar 首页
+  uni.switchTab({ url: '/pages/cust/home' });
 }
 
 async function handleCheck(data) {
@@ -43,7 +44,8 @@ async function handleCheck(data) {
     await userStore.login(loginForm.value)
     modal.closeLoading()
     await userStore.getInfo()
-    uni.switchTab({ url: '/pages/index' });
+    // 登录成功后跳转到 tabBar 首页
+    uni.switchTab({ url: '/pages/cust/home' });
   } catch {
     getCode();
     modal.closeLoading()

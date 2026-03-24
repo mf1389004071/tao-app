@@ -38,7 +38,7 @@
           <uni-easyinput v-model="form.address" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
         <uni-forms-item label="城市" prop="city">
-          <uni-easyinput v-model="form.city" placeholder="请输入城市" />
+          <uni-easyinput v-model="cityText" placeholder="请选择省/市/区" disabled @click="openCitySelect" />
         </uni-forms-item>
         <uni-forms-item label="封面图" prop="coverImageUrl">
           <uni-easyinput v-model="form.coverImageUrl" type="textarea" placeholder="请输入内容" />
@@ -95,6 +95,11 @@
           <uni-easyinput v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </uni-forms-item>
       </uni-forms>
+      <city-select
+        v-model="citySelectVisible"
+        :areaCode="parseCityCode(form.city)"
+        @city-change="handleCityChange"
+      />
   </view>
 </template>
 
@@ -102,6 +107,7 @@
 import { getEventinfo, delEventinfo, addEventinfo, updateEventinfo } from "@/api/bt10/eventinfo";
 import {onLoad,onShow} from "@dcloudio/uni-app";
 import { ref } from "vue";
+import citySelect from "@/pages_template/components/u-city-select/u-city-select.vue";
 
 // 表单参数
 const eventinfo = ref({
@@ -159,10 +165,40 @@ const eventinfo = ref({
         delFlag: null,
         remark: null
       })
+const form = eventinfo;
+const rules = ref({});
+const citySelectVisible = ref(false);
+const cityText = ref("");
+
+function parseCityCode(city) {
+  const parts = String(city || "").split(",").map(s => String(s).trim()).filter(Boolean);
+  return parts.length === 3 ? parts : [];
+}
+
+function formatCityTextByCode(codes) {
+  if (!Array.isArray(codes) || codes.length !== 3) return "";
+  return `${codes[0]}-${codes[1]}-${codes[2]}`;
+}
+
+function openCitySelect() {
+  citySelectVisible.value = true;
+}
+
+function handleCityChange(e) {
+  const provinceCode = e?.province?.value ? String(e.province.value) : "";
+  const cityCode = e?.city?.value ? String(e.city.value) : "";
+  const areaCode = e?.area?.value ? String(e.area.value) : "";
+  const codeList = [provinceCode, cityCode, areaCode].filter(Boolean);
+  eventinfo.value.city = codeList.length ? codeList.join(",") : null;
+  cityText.value = codeList.length ? `${e.province.label}-${e.city.label}-${e.area.label}` : "";
+}
+
 onShow(params=>{
   if(params.id){
       getEventinfo(params.id).then(res=>{
         eventinfo.value = res.data
+        const cityCodes = parseCityCode(eventinfo.value.city);
+        cityText.value = formatCityTextByCode(cityCodes);
       })
     }
 })

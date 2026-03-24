@@ -4,7 +4,6 @@ import useUserStore from '@/store/modules/user'
 import { listUserinvite } from '@/api/cust'
 
 const userStore = useUserStore()
-const showLogoutPopup = ref(false)
 
 const isLoggedIn = computed(() => !!userStore.name || !!userStore.token)
 const nickname = computed(() => userStore.name || '访客')
@@ -73,17 +72,6 @@ function toHelp() {
 
 function toAbout() {
   uni.navigateTo({ url: '/pages_mine/pages/about/index' })
-}
-
-function handleLogout() {
-  showLogoutPopup.value = true
-}
-
-function dialogConfirm() {
-  showLogoutPopup.value = false
-  userStore.logOut().then(() => {
-    uni.reLaunch({ url: '/pages_mine/pages/login/index' })
-  })
 }
 
 function handleBuilding() {
@@ -202,23 +190,6 @@ onMounted(() => {
         </template>
       </view>
     </view>
-
-    <!-- 退出登录 -->
-    <view v-if="isLoggedIn" class="logout-wrap">
-      <view class="logout-btn" @click="handleLogout">
-        <text class="logout-text">退出登录</text>
-      </view>
-    </view>
-
-    <up-popup v-model="showLogoutPopup" mode="center" :round="16">
-      <view class="logout-dialog">
-        <text class="logout-title">确认退出登录？</text>
-        <view class="logout-actions">
-          <up-button plain text="取消" @click="showLogoutPopup = false" />
-          <up-button type="error" text="确认退出" customStyle="margin-left: 24rpx;" @click="dialogConfirm" />
-        </view>
-      </view>
-    </up-popup>
 
     <view class="safe-bottom" />
   </view>
@@ -495,47 +466,6 @@ onMounted(() => {
       letter-spacing: 0.05em;
     }
   }
-}
-
-.logout-wrap {
-  padding: 0 48rpx;
-  margin-top: 16rpx;
-}
-
-.logout-btn {
-  padding: 32rpx;
-  background: #fff;
-  border-radius: 64rpx;
-  border: 2rpx solid #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logout-text {
-  font-size: 28rpx;
-  font-weight: 700;
-  color: #64748b;
-}
-
-.logout-dialog {
-  padding: 48rpx 40rpx;
-  min-width: 520rpx;
-}
-
-.logout-title {
-  font-size: 32rpx;
-  font-weight: 700;
-  color: #1e293b;
-  display: block;
-  text-align: center;
-  margin-bottom: 32rpx;
-}
-
-.logout-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .safe-bottom {

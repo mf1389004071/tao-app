@@ -4,6 +4,9 @@ import { onPageScroll } from '@dcloudio/uni-app'
 import { listNotices, listEventinfo } from '@/api/cust'
 import config from '@/config'
 
+// uni-app 在运行时提供全局变量；这里只为消除 TS 类型提示，不改运行时取值
+declare const uni: any
+
 const noticeList = ref<{ id: number; title: string; isUrgent?: boolean }[]>([])
 const eventList = ref<any[]>([])
 const loading = ref(false)
@@ -39,8 +42,17 @@ function loadNotices() {
 
 function loadEvents() {
   loading.value = true
-  listEventinfo({ pageNum: 1, pageSize: 10, bizStatus: 'OPEN' }).then((res: any) => {
-    if (res && res.rows) eventList.value = res.rows
+  listEventinfo({ pageNum: 1, pageSize: 5, bizStatus: 'PUBLISHED' }).then((res: any) => {
+    if (res && res.rows) {
+      const rows = Array.isArray(res.rows) ? res.rows : []
+      // 兜底：即使后端未排序，也按更新时间倒序展示
+      rows.sort((a: any, b: any) => {
+        const ta = Date.parse(a?.updateTime || a?.createTime || '') || 0
+        const tb = Date.parse(b?.updateTime || b?.createTime || '') || 0
+        return tb - ta
+      })
+      eventList.value = rows
+    }
   }).catch(() => {
     eventList.value = []
   }).finally(() => {
@@ -163,14 +175,14 @@ onMounted(() => {
         </view>
       </view>
 
-      <!-- 线下重磅 -->
+      <!-- 近期热门 -->
       <view class="section">
         <view class="section-header">
           <view class="section-title-group">
-            <text class="section-title">线下重磅</text>
-            <text class="section-subtitle">Offline Prime</text>
+            <text class="section-title">近期热门</text>
+            <text class="section-subtitle">Trending</text>
           </view>
-          <text class="section-action" @click="toEventsList">所有课程</text>
+          <text class="section-action" @click="toEventsList">更多</text>
         </view>
         <view v-if="loading && !eventList.length" class="loading-wrap">
           <up-loading-icon mode="circle" size="40" />
