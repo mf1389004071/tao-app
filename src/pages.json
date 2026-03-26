@@ -274,55 +274,55 @@
       "root": "pages_cust",
       "pages": [
         {
-          "path": "event-detail",
+          "path": "pages/event-detail",
           "style": {
             "navigationBarTitleText": "活动详情"
           }
         },
         {
-          "path": "events-list",
+          "path": "pages/events-list",
           "style": {
             "navigationBarTitleText": "活动"
           }
         },
         {
-          "path": "topic-detail",
+          "path": "pages/topic-detail",
           "style": {
             "navigationBarTitleText": "话题详情"
           }
         },
         {
-          "path": "tool-detail",
+          "path": "pages/tool-detail",
           "style": {
             "navigationBarTitleText": "工具详情"
           }
         },
         {
-          "path": "notice-detail",
+          "path": "pages/notice-detail",
           "style": {
             "navigationBarTitleText": "公告详情"
           }
         },
         {
-          "path": "invite",
+          "path": "pages/invite",
           "style": {
             "navigationBarTitleText": "关系网络"
           }
         },
         {
-          "path": "level-guide",
+          "path": "pages/level-guide",
           "style": {
             "navigationBarTitleText": "成长地图"
           }
         },
         {
-          "path": "point-log",
+          "path": "pages/point-log",
           "style": {
             "navigationBarTitleText": "积分明细"
           }
         },
         {
-          "path": "search",
+          "path": "pages/search",
           "style": {
             "navigationBarTitleText": "搜索"
           }
