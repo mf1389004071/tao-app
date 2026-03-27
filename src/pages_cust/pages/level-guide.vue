@@ -7,10 +7,10 @@ const currentName = ref('成长伙伴')
 const currentStage = ref('BEGINNER')
 const currentPoints = ref(0)
 const steps = [
-  { key: 'BEGINNER', level: '新人 / Newbie', req: '完成个人模型构建' },
-  { key: 'STUDENT', level: '学员 / Student', req: '累计贡献 5 份实修 Wiki' },
-  { key: 'MASTER', level: '高手 / Master', req: '贡献值达到 1000 点' },
-  { key: 'MENTOR', level: '导师 / Mentor', req: '发起 1 场城市线下实修站' }
+  { key: 'BEGINNER', level: '新人', req: '完成个人模型构建' },
+  { key: 'STUDENT', level: '学员', req: '累计贡献 5 份实修内容' },
+  { key: 'MASTER', level: '高手', req: '贡献值达到 1000 点' },
+  { key: 'MENTOR', level: '导师', req: '发起 1 场城市线下实修站' }
 ]
 
 const stageIndex = computed(() => {
@@ -21,7 +21,7 @@ const stageIndex = computed(() => {
 const displaySteps = computed(() =>
   steps.map((s, i) => ({
     ...s,
-    status: i < stageIndex.value ? 'Completed' : i === stageIndex.value ? 'Active' : 'Locked'
+    status: i < stageIndex.value ? 'completed' : i === stageIndex.value ? 'active' : 'locked'
   }))
 )
 
@@ -57,22 +57,22 @@ onMounted(async () => {
     </view>
 
     <view class="timeline">
-      <view v-for="(step, i) in displaySteps" :key="step.level" class="step" :class="{ locked: step.status === 'Locked' }">
+      <view v-for="(step, i) in displaySteps" :key="step.level" class="step" :class="{ locked: step.status === 'locked' }">
         <view
           class="step-icon"
           :class="{
-            completed: step.status === 'Completed',
-            active: step.status === 'Active',
-            locked: step.status === 'Locked'
+            completed: step.status === 'completed',
+            active: step.status === 'active',
+            locked: step.status === 'locked'
           }"
         >
-          <up-icon v-if="step.status === 'Completed'" name="checkmark" size="28" color="#fff" />
+          <up-icon v-if="step.status === 'completed'" name="checkmark" size="28" color="#fff" />
           <text v-else class="step-num">{{ i + 1 }}</text>
         </view>
         <view class="step-body">
           <view class="step-head">
             <text class="step-level">{{ step.level }}</text>
-            <text v-if="step.status === 'Active'" class="step-badge">Current Stage</text>
+            <text v-if="step.status === 'active'" class="step-badge">当前阶段</text>
           </view>
           <text class="step-req">{{ step.req }}</text>
         </view>
@@ -80,7 +80,7 @@ onMounted(async () => {
     </view>
 
     <view class="bottom-cta">
-      <text class="cta-sub">Next Privilege Unlock</text>
+      <text class="cta-sub">下一阶段目标</text>
       <text class="cta-title">{{ nextGoal }}</text>
       <up-button type="primary" text="去打卡获取贡献值" block customStyle="border-radius: 28rpx; margin-top: 24rpx;" @click="uni.navigateBack()" />
     </view>

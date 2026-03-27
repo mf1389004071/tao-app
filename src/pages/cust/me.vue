@@ -489,4 +489,51 @@ onMounted(() => {
 .safe-bottom {
   height: 180rpx;
 }
+
+/* 移动端 UI 规范覆盖：层级、圆角、字号和点击区一致 */
+.profile-page {
+  --c-text: #0f172a;
+  --c-muted: #64748b;
+  --c-subtle: #94a3b8;
+  --c-border: #e2e8f0;
+  --c-card: #ffffff;
+  background: #f8fafc;
+}
+.profile-header .header-content {
+  padding: 28rpx 28rpx 36rpx;
+}
+.growth-card {
+  margin: -16rpx 24rpx 20rpx;
+  padding: 28rpx 24rpx;
+  border-radius: 24rpx;
+}
+.growth-card .card-header {
+  margin-bottom: 28rpx;
+}
+.growth-card .card-header .card-title-group .card-title {
+  font-size: 32rpx;
+}
+.growth-card .card-header .card-title-group .card-subtitle {
+  font-size: 22rpx;
+}
+.function-list {
+  padding: 8rpx 20rpx 0;
+}
+.function-item {
+  margin-bottom: 14rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid var(--c-border);
+  gap: 20rpx;
+}
+.function-item .function-label {
+  font-size: 28rpx;
+  color: var(--c-text);
+}
+.function-item .function-extra .extra-text {
+  font-size: 22rpx;
+  color: var(--c-muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
 </style>

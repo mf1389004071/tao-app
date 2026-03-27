@@ -22,7 +22,17 @@ export function parseTime(time, pattern) {
 		if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
 			time = parseInt(time)
 		} else if (typeof time === 'string') {
-			time = time.replace(new RegExp(/-/gm), '/').replace('T', ' ').replace(new RegExp(/\.[\d]{3}/gm),'');
+			const raw = time.trim()
+			// ISO-8601（含 Z、任意位小数秒）：整串交给 Date，禁止只去掉 3 位小数（会破坏 6 位微秒，导致 Invalid Date）
+			if (/^\d{4}-\d{2}-\d{2}T/.test(raw) || /^\d{4}-\d{2}-\d{2} /.test(raw)) {
+				time = new Date(raw)
+			} else {
+				time = raw
+					.replace(new RegExp(/-/gm), '/')
+					.replace('T', ' ')
+					.replace(/\.\d+(?=[Zz]|$|[+-]\d{2}:?\d{2}$)/, '')
+					.replace(/[Zz]$/, '')
+			}
 		}
 		if ((typeof time === 'number') && (time.toString().length === 10)) {
 			time = time * 1000

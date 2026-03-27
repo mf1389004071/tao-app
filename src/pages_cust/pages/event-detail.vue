@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { getInfo } from '@/api/login'
-import { addEventjoin, getEventinfo, listEventjoin } from '@/api/cust'
+import { addEventjoin, ensureMessageThread, getEventinfo, getUserPublic, listCustTags, listEventjoin } from '@/api/cust'
 import config from '@/config'
+import { formatDateTimeDisplay } from '@/utils/datetime'
 
 const id = ref('')
 const detail = ref<any>({})
@@ -10,6 +11,7 @@ const loading = ref(true)
 const applying = ref(false)
 const joined = ref(false)
 const showMoreText = ref(false)
+const pmUserName = ref('')
 
 const coverUrl = computed(() => {
   const url = detail.value.coverImageUrl
@@ -18,9 +20,15 @@ const coverUrl = computed(() => {
 })
 
 function formatDate(val: string | undefined): string {
-  if (!val) return ''
-  const s = String(val)
-  return s.length >= 10 ? s.slice(0, 10) : s
+  return formatDateTimeDisplay(val, '{y}-{m}-{d} {h}:{i}:{s}')
+}
+
+function openKnowledgeSearchByTag(name: string) {
+  const t = (name || '').trim()
+  if (!t) return
+  uni.navigateTo({
+    url: `/pages_cust/pages/knowledge-list?tag=${encodeURIComponent(t)}`
+  })
 }
 
 function formatMoney(val: any): string {
@@ -70,6 +78,32 @@ function splitCommaIds(v: any): string[] {
 
 const tagIds = computed(() => splitCommaIds(detail.value?.eventTags))
 const targetAudienceId = computed(() => (detail.value?.targetAudience == null ? '' : String(detail.value.targetAudience)))
+
+const tagNameMap = ref<Record<string, string>>({})
+async function loadTagNames(ids: string[]) {
+  const uniq = Array.from(new Set(ids.map((x) => String(x).trim()).filter(Boolean)))
+  if (!uniq.length) return
+  try {
+    // MVP：直接拉取一定数量的 tags，再在前端映射。后续可优化为后端按 ids 批量查询接口。
+    const res: any = await listCustTags({ pageNum: 1, pageSize: 2000 })
+    const rows = Array.isArray(res?.rows) ? res.rows : Array.isArray(res?.data?.rows) ? res.data.rows : []
+    const next: Record<string, string> = {}
+    for (const r of rows) {
+      const id = r?.id == null ? '' : String(r.id)
+      const name = r?.name == null ? '' : String(r.name).trim()
+      if (id && name) next[id] = name
+    }
+    tagNameMap.value = next
+  } catch (_) {}
+}
+
+const targetAudienceName = computed(() => {
+  const id = targetAudienceId.value
+  if (!id) return ''
+  return tagNameMap.value[id] || id
+})
+
+const eventTagNames = computed(() => tagIds.value.map((id) => tagNameMap.value[id] || id))
 
 function coverOrEmpty(url: any): string {
   const u = url == null ? '' : String(url)
@@ -163,14 +197,35 @@ function getPriceText() {
   return `￥${formatMoney(p)}`
 }
 
-function onConsultClick() {
+async function onConsultClick() {
   const url = detail.value?.meetingUrl
   const meeting = url == null ? '' : String(url).trim()
   if (meeting) {
     uni.showModal({ title: '会议链接', content: meeting, showCancel: false })
     return
   }
-  uni.showToast({ title: '咨询已接通', icon: 'none' })
+  const pm = detail.value?.pmUserId
+  if (pm == null || pm === '') {
+    uni.showToast({ title: '暂无活动负责人，无法私信', icon: 'none' })
+    return
+  }
+  try {
+    const infoRes: any = await getInfo()
+    if (infoRes?.user?.userId == null) {
+      uni.showToast({ title: '请先登录', icon: 'none' })
+      return
+    }
+    const res: any = await ensureMessageThread({ targetUserId: String(pm) })
+    const tid = res?.data?.threadId
+    if (!tid) {
+      uni.showToast({ title: '创建会话失败', icon: 'none' })
+      return
+    }
+    const titleEnc = encodeURIComponent('活动咨询')
+    uni.navigateTo({ url: `/pages_cust/pages/dm-chat?threadId=${tid}&title=${titleEnc}` })
+  } catch (_) {
+    uni.showToast({ title: '请登录后重试', icon: 'none' })
+  }
 }
 
 async function apply() {
@@ -222,6 +277,22 @@ onMounted(() => {
     getEventinfo(id.value)
       .then((res: any) => {
         if (res && res.data) detail.value = res.data
+        const ids: string[] = []
+        const ta = res?.data?.targetAudience
+        if (ta != null && String(ta).trim()) ids.push(String(ta))
+        const et = res?.data?.eventTags
+        ids.push(...splitCommaIds(et))
+        loadTagNames(ids)
+        const pm = res?.data?.pmUserId
+        pmUserName.value = ''
+        if (pm != null && String(pm).trim()) {
+          getUserPublic(String(pm))
+            .then((pr: any) => {
+              const p = pr?.data
+              if (p && p.nickName) pmUserName.value = String(p.nickName)
+            })
+            .catch(() => {})
+        }
       })
       .catch(() => {
         detail.value = {}
@@ -279,9 +350,10 @@ onMounted(() => {
         <view class="meta-grid">
           <view class="meta-item">
             <text class="meta-label">时间</text>
-            <text class="meta-value">
-              {{ formatDate(detail.startTime) }}{{ formatDate(detail.endTime) ? ' - ' + formatDate(detail.endTime) : '' }}
-            </text>
+            <view class="meta-value-lines">
+              <text class="meta-value">{{ formatDate(detail.startTime) || '—' }}</text>
+              <text v-if="formatDate(detail.endTime)" class="meta-value">{{ formatDate(detail.endTime) }}</text>
+            </view>
           </view>
           <view class="meta-item">
             <text class="meta-label">地点</text>
@@ -345,12 +417,16 @@ onMounted(() => {
           <view class="tag-grid">
             <view v-if="targetAudienceId" class="tag-item">
               <text class="tag-k">目标学员画像</text>
-              <text class="tag-v">#{{ targetAudienceId }}</text>
+              <view class="tag-v tap" @click="openKnowledgeSearchByTag(targetAudienceName)">
+                <text>#{{ targetAudienceName }}</text>
+              </view>
             </view>
             <view v-if="tagIds.length" class="tag-item">
               <text class="tag-k">活动标签</text>
               <view class="tag-list">
-                <view v-for="t in tagIds" :key="t" class="tag">#{{ t }}</view>
+                <view v-for="t in eventTagNames" :key="t" class="tag tap" @click="openKnowledgeSearchByTag(t)">
+                  <text>#{{ t }}</text>
+                </view>
               </view>
             </view>
           </view>
@@ -378,7 +454,7 @@ onMounted(() => {
           </view>
         </view>
 
-        <view v-if="detail.contact || detail.organizer" class="section">
+        <view v-if="detail.contact || detail.organizer || detail.pmUserId" class="section">
           <view class="section-head">
             <text class="section-title">主办与联系</text>
           </view>
@@ -386,6 +462,10 @@ onMounted(() => {
             <view v-if="detail.organizer" class="info-card">
               <text class="info-label">主办方</text>
               <text class="info-value">{{ detail.organizer }}</text>
+            </view>
+            <view v-if="detail.pmUserId" class="info-card">
+              <text class="info-label">活动负责人</text>
+              <text class="info-value">{{ pmUserName || ('用户 ' + String(detail.pmUserId).slice(-4)) }}</text>
             </view>
             <view v-if="detail.contact" class="info-card">
               <text class="info-label">联系方式</text>
@@ -514,6 +594,11 @@ onMounted(() => {
   font-weight: 900;
   color: #0f172a;
 }
+.meta-value-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
 
 .section {
   margin-bottom: 40rpx;
@@ -621,10 +706,18 @@ onMounted(() => {
   margin-bottom: 10rpx;
 }
 .tag-v {
-  display: block;
-  font-size: 28rpx;
+  display: inline-flex;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
   font-weight: 900;
-  color: #0f172a;
+  color: #4f46e5;
+  background: rgba(99, 102, 241, 0.1);
+  border: 2rpx solid rgba(99, 102, 241, 0.2);
+}
+.tag-v.tap:active,
+.tag.tap:active {
+  opacity: 0.85;
 }
 .tag-list {
   display: flex;

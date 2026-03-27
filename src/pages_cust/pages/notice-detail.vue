@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { getNotice } from '@/api/cust'
+import { formatDateTimeDisplay } from '@/utils/datetime'
 
 const id = ref('')
 const detail = ref<any>({})
 const loading = ref(true)
+
+function formatDateTime(v: any): string {
+  return formatDateTimeDisplay(v, '{y}-{m}-{d} {h}:{i}:{s}')
+}
 
 onMounted(() => {
   const pages = getCurrentPages()
@@ -24,7 +29,7 @@ onMounted(() => {
   <view class="cust-notice-detail">
     <view class="body">
       <text class="title">{{ detail.title }}</text>
-      <text class="meta">发布于 {{ detail.publishTime || detail.createTime }} · 十倍好成长运营中心</text>
+      <text class="meta">发布于 {{ formatDateTime(detail.publishTime || detail.createTime) }} · 十倍好成长运营中心</text>
       <view class="content">
         <text class="content-text">{{ detail.content || '暂无公告内容' }}</text>
       </view>

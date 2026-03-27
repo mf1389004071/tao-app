@@ -304,6 +304,30 @@
           }
         },
         {
+          "path": "pages/notice-list",
+          "style": {
+            "navigationBarTitleText": "通知公告"
+          }
+        },
+        {
+          "path": "pages/knowledge-list",
+          "style": {
+            "navigationBarTitleText": "知识内容"
+          }
+        },
+        {
+          "path": "pages/user-public",
+          "style": {
+            "navigationBarTitleText": "学员主页"
+          }
+        },
+        {
+          "path": "pages/dm-chat",
+          "style": {
+            "navigationBarTitleText": "私信"
+          }
+        },
+        {
           "path": "pages/invite",
           "style": {
             "navigationBarTitleText": "关系网络"
@@ -325,6 +349,12 @@
           "path": "pages/search",
           "style": {
             "navigationBarTitleText": "搜索"
+          }
+        },
+        {
+          "path": "pages/knowledge-interaction-reply",
+          "style": {
+            "navigationBarTitleText": "回复评论"
           }
         }
       ]
@@ -708,7 +738,7 @@
         "pagePath": "pages/cust/publish",
         "iconPath": "/static/images/tabbar/connect.png",
         "selectedIconPath": "/static/images/tabbar/connect_.png",
-        "text": "连接"
+        "text": "发布"
       },
       {
         "pagePath": "pages/cust/msg",

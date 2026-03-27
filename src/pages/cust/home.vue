@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
 import { listNotices, listEventinfo } from '@/api/cust'
 import config from '@/config'
+import { formatDateTimeDisplay } from '@/utils/datetime'
 
 // uni-app 在运行时提供全局变量；这里只为消除 TS 类型提示，不改运行时取值
 declare const uni: any
@@ -26,16 +27,22 @@ function addBaseUrl(url: string) {
   return config.baseUrl + url
 }
 
-/** 活动开始时间展示：后端为 ISO 或日期字符串，取日期部分 */
+/** 活动开始时间：展示到秒 */
 function formatEventDate(val: string | undefined): string {
-  if (!val) return ''
-  const s = String(val)
-  return s.length >= 10 ? s.slice(0, 10) : s
+  return formatDateTimeDisplay(val, '{y}-{m}-{d} {h}:{i}:{s}')
 }
 
 function loadNotices() {
-  listNotices({ pageNum: 1, pageSize: 5 }).then((res: any) => {
-    if (res && res.rows) noticeList.value = res.rows
+  listNotices({ pageNum: 1, pageSize: 20 }).then((res: any) => {
+    if (res && res.rows) {
+      const rows = Array.isArray(res.rows) ? res.rows : []
+      rows.sort((a: any, b: any) => {
+        const ta = Date.parse(String(a?.publishTime || a?.createTime || '')) || 0
+        const tb = Date.parse(String(b?.publishTime || b?.createTime || '')) || 0
+        return tb - ta
+      })
+      noticeList.value = rows
+    }
   }).catch(() => {
     noticeList.value = []
   })
@@ -71,6 +78,10 @@ function onRefresh() {
 function toNoticeDetail(n: any) {
   const id = n.id == null ? '' : String(n.id)
   uni.navigateTo({ url: `/pages_cust/pages/notice-detail?id=${id}` })
+}
+
+function toNoticeList() {
+  uni.navigateTo({ url: '/pages_cust/pages/notice-list' })
 }
 
 function toEventDetail(e: any) {
@@ -150,13 +161,33 @@ onMounted(() => {
       :refresher-triggered="refreshing"
       @refresherrefresh="onRefresh"
     >
-      <!-- 公告：横向滚动最小样式 -->
-      <view v-if="noticeList.length" class="notice-bar" @click="toNoticeDetail(noticeList[0])">
+      <!-- 公告：多条时轮播；右侧箭头进入全部列表 -->
+      <view v-if="noticeList.length" class="notice-bar">
         <up-icon name="volume-fill" color="#ea580c" size="12" />
-        <scroll-view scroll-x class="notice-scroll" :show-scrollbar="false">
+        <swiper
+          v-if="noticeList.length > 1"
+          class="notice-swiper"
+          vertical
+          circular
+          autoplay
+          :interval="4500"
+          :duration="500"
+        >
+          <swiper-item
+            v-for="n in noticeList"
+            :key="String(n.id)"
+            class="notice-swiper-item"
+            @click="toNoticeDetail(n)"
+          >
+            <text class="notice-text">{{ n.title }}</text>
+          </swiper-item>
+        </swiper>
+        <view v-else class="notice-single" @click="toNoticeDetail(noticeList[0])">
           <text class="notice-text">{{ noticeList[0].title }}</text>
-        </scroll-view>
-        <up-icon name="arrow-right" size="12" color="#fb923c" />
+        </view>
+        <view class="notice-more" @click.stop="toNoticeList">
+          <up-icon name="arrow-right" size="12" color="#fb923c" />
+        </view>
       </view>
 
       <!-- 快速入口 -->
@@ -186,7 +217,7 @@ onMounted(() => {
         <view class="section-header">
           <view class="section-title-group">
             <text class="section-title">近期热门</text>
-            <text class="section-subtitle">Trending</text>
+            <text class="section-subtitle">精选推荐</text>
           </view>
           <text class="section-action" @click="toEventsList">更多</text>
         </view>
@@ -239,7 +270,7 @@ onMounted(() => {
         <view class="section-header">
           <view class="section-title-group">
             <text class="section-title">进行中的活动</text>
-            <text class="section-subtitle">Happening Now</text>
+            <text class="section-subtitle">正在进行</text>
           </view>
         </view>
         <view class="activity-card" @click="toOngoingEvent">
@@ -381,18 +412,35 @@ onMounted(() => {
   min-height: 56rpx;
 }
 
-.notice-scroll {
+.notice-swiper {
   flex: 1;
-  white-space: nowrap;
-  max-width: 100%;
+  height: 56rpx;
+  min-width: 0;
+}
+.notice-swiper-item {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.notice-single {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.notice-more {
+  flex-shrink: 0;
+  padding: 4rpx 8rpx;
 }
 
 .notice-bar .notice-text {
   font-size: 22rpx;
   font-weight: 600;
   color: #9a3412;
-  display: inline-block;
-  padding-right: 24rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .quick-actions {
@@ -756,5 +804,42 @@ onMounted(() => {
 
 .safe-bottom {
   height: 180rpx;
+}
+
+/* 移动端 UI 规范覆盖：信息密度、字号和卡片边框统一 */
+.cust-home {
+  --c-text: #0f172a;
+  --c-muted: #64748b;
+  --c-subtle: #94a3b8;
+  --c-border: #e2e8f0;
+  --c-card: #ffffff;
+}
+.section-title {
+  font-size: 34rpx !important;
+  line-height: 1.25;
+  color: var(--c-text) !important;
+}
+.section-subtitle {
+  font-size: 22rpx !important;
+  color: var(--c-subtle) !important;
+}
+.section-action {
+  font-size: 24rpx !important;
+}
+.notice-bar,
+.activity-card,
+.course-card,
+.knowledge-banner {
+  border: 1rpx solid var(--c-border);
+  border-radius: 24rpx;
+}
+.notice-text,
+.activity-content .activity-title,
+.course-title {
+  color: var(--c-text);
+}
+.activity-content .activity-meta .activity-count,
+.course-date {
+  color: var(--c-muted);
 }
 </style>

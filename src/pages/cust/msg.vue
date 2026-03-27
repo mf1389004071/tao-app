@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { listNotices, listNotifications } from '@/api/cust'
 
-type MsgTab = 'system' | 'interaction' | 'subscription'
+declare const uni: any
+import { listMessageThreads, listNotices, listNotifications } from '@/api/cust'
+import { formatDateTimeDisplay } from '@/utils/datetime'
+
+type MsgTab = 'system' | 'dm' | 'interaction' | 'subscription'
 
 const activeTab = ref<MsgTab>('system')
 const systemList = ref<any[]>([])
+const dmList = ref<any[]>([])
 const interactionList = ref<any[]>([])
 const topicFeedList = ref<any[]>([])
 
 const tabs = [
-  { id: 'system' as MsgTab, label: '系统通知' },
+  { id: 'system' as MsgTab, label: '通知公告' },
+  { id: 'dm' as MsgTab, label: '私信' },
   { id: 'interaction' as MsgTab, label: '互动回复' },
   { id: 'subscription' as MsgTab, label: '话题更新' }
 ]
@@ -31,6 +36,10 @@ function toTopicDetail(item?: any) {
 function toInteractionDetail(item: any) {
   const relatedType = String(item?.relatedType || '').toUpperCase()
   const relatedId = item?.relatedId ? String(item.relatedId) : ''
+  if (relatedType === 'KNOWLEDGE_COMMENT' && relatedId) {
+    uni.navigateTo({ url: `/pages_cust/pages/knowledge-interaction-reply?commentId=${encodeURIComponent(relatedId)}` })
+    return
+  }
   if (relatedType === 'KNOWLEDGE_CONTENT' && relatedId) {
     uni.navigateTo({ url: `/pages_cust/pages/topic-detail?id=${relatedId}` })
     return
@@ -43,10 +52,22 @@ function toInteractionDetail(item: any) {
 }
 
 function formatTime(v: any) {
-  if (!v) return ''
-  const s = String(v)
-  if (s.length >= 16) return s.slice(0, 16).replace('T', ' ')
-  return s
+  return formatDateTimeDisplay(v, '{y}-{m}-{d} {h}:{i}:{s}')
+}
+
+function toDmChat(row: any) {
+  const tid = row.threadId
+  const name = encodeURIComponent(row.targetUserName || '私信')
+  uni.navigateTo({ url: `/pages_cust/pages/dm-chat?threadId=${tid}&title=${name}` })
+}
+
+async function loadDmThreads() {
+  try {
+    const res: any = await listMessageThreads({ pageNum: 1, pageSize: 50 })
+    dmList.value = Array.isArray(res?.rows) ? res.rows : []
+  } catch (_) {
+    dmList.value = []
+  }
 }
 
 onMounted(async () => {
@@ -63,7 +84,7 @@ onMounted(async () => {
 
   systemList.value = noticeRows.map((n: any) => ({
     id: String(n.id),
-    title: n.title || '系统通知',
+    title: n.title || '通知公告',
     content: n.content || '',
     time: formatTime(n.publishTime || n.createTime),
     read: true
@@ -94,6 +115,8 @@ onMounted(async () => {
       time: formatTime(n.createTime),
       relatedId: n.relatedId == null ? '' : String(n.relatedId)
     }))
+
+  await loadDmThreads()
 })
 </script>
 
@@ -105,14 +128,14 @@ onMounted(async () => {
         :key="tab.id"
         class="tab-item"
         :class="{ active: activeTab === tab.id }"
-        @click="setTab(tab.id)"
+        @click="setTab(tab.id); if (tab.id === 'dm') loadDmThreads()"
       >
         <text class="tab-label">{{ tab.label }}</text>
         <view v-if="activeTab === tab.id" class="tab-line" />
       </view>
     </view>
 
-    <!-- 系统通知 -->
+    <!-- 通知公告 -->
     <view v-show="activeTab === 'system'" class="list">
       <view
         v-for="m in systemList"
@@ -130,6 +153,23 @@ onMounted(async () => {
         </view>
         <up-icon name="arrow-right" size="16" color="#e2e8f0" />
       </view>
+    </view>
+
+    <!-- 私信会话 -->
+    <view v-show="activeTab === 'dm'" class="list">
+      <view v-for="d in dmList" :key="String(d.threadId)" class="msg-row" @click="toDmChat(d)">
+        <view class="topic-avatar">💬</view>
+        <view class="msg-body">
+          <view class="msg-head">
+            <text class="msg-title">{{ d.targetUserName || '私信' }}</text>
+            <text class="msg-time">{{ formatTime(d.lastMessageTime) }}</text>
+          </view>
+          <text class="msg-content">{{ d.lastMessagePreview || '暂无消息' }}</text>
+        </view>
+        <view v-if="(d.unreadCount || 0) > 0" class="dm-unread">{{ d.unreadCount }}</view>
+        <up-icon name="arrow-right" size="16" color="#e2e8f0" />
+      </view>
+      <view v-if="!dmList.length" class="empty-row">暂无私信，可在活动详情「线上咨询」或学员主页发起</view>
     </view>
 
     <!-- 互动回复 -->
@@ -163,7 +203,7 @@ onMounted(async () => {
       <view v-if="!topicFeedList.length" class="empty-row">暂无话题更新</view>
     </view>
 
-    <view v-if="activeTab === 'system' && !systemList.length" class="empty-row">暂无系统通知</view>
+    <view v-if="activeTab === 'system' && !systemList.length" class="empty-row">暂无通知公告</view>
     <view v-if="activeTab === 'interaction' && !interactionList.length" class="empty-row">暂无互动回复</view>
 
     <view class="safe-bottom" />
@@ -292,5 +332,62 @@ onMounted(async () => {
   color: #94a3b8;
   font-size: 24rpx;
   font-weight: 700;
+}
+.dm-unread {
+  min-width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  padding: 0 10rpx;
+  border-radius: 999rpx;
+  background: #ef4444;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 900;
+  text-align: center;
+  margin-right: 8rpx;
+  flex-shrink: 0;
+}
+
+/* 移动端 UI 规范覆盖：标签栏与消息卡片密度统一 */
+.cust-msg {
+  --c-text: #0f172a;
+  --c-muted: #64748b;
+  --c-subtle: #94a3b8;
+  --c-border: #e2e8f0;
+  --c-card: #ffffff;
+  padding: 24rpx 24rpx;
+  padding-top: calc(24rpx + env(safe-area-inset-top));
+}
+.tabs {
+  gap: 28rpx;
+  margin-bottom: 24rpx;
+  border-bottom: 1rpx solid var(--c-border);
+}
+.tab-label {
+  font-size: 26rpx;
+  color: var(--c-subtle);
+}
+.list {
+  padding-top: 8rpx;
+}
+.msg-row {
+  padding: 24rpx;
+  border-radius: 22rpx;
+  margin-bottom: 16rpx;
+  border: 1rpx solid var(--c-border);
+  box-shadow: none;
+}
+.msg-title {
+  font-size: 28rpx;
+  color: var(--c-text);
+}
+.msg-time {
+  font-size: 22rpx;
+  color: var(--c-subtle);
+}
+.msg-content,
+.empty-row {
+  font-size: 24rpx;
+  color: var(--c-muted);
 }
 </style>

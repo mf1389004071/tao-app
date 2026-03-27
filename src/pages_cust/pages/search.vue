@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { listKnowledgecontent } from '@/api/cust'
+import { formatDateTimeDisplay } from '@/utils/datetime'
 
 const keyword = ref('')
 const isSearching = ref(false)
@@ -116,7 +117,8 @@ function goBack() {
 }
 
 function goToDetail(item: any) {
-  const id = item.id
+  const id = item.id == null ? '' : String(item.id)
+  if (!id) return
   if (item.contentType === 'TOOL' || item.contentType === 'TOOLBOX') {
     uni.navigateTo({ url: `/pages_cust/pages/tool-detail?id=${id}` })
   } else {
@@ -125,13 +127,7 @@ function goToDetail(item: any) {
 }
 
 function formatTime(timeStr: string) {
-  if (!timeStr) return ''
-  const date = new Date(timeStr)
-  const now = new Date()
-  const diff = now.getTime() - date.getTime()
-  if (diff < 3600000) return `${Math.floor(diff / 60000)}分钟前`
-  if (diff < 86400000) return `${Math.floor(diff / 3600000)}小时前`
-  return date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })
+  return formatDateTimeDisplay(timeStr, '{y}-{m}-{d} {h}:{i}:{s}')
 }
 
 onMounted(() => {

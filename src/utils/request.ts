@@ -7,6 +7,8 @@ import useUserStore from '@/store/modules/user'
 
 let timeout = 10000
 const baseUrl = config.baseUrl
+const requestLocks = new Map<string, Promise<any>>()
+const requestThrottleTs = new Map<string, number>()
 
 const request = <T>(config: RequestConfig): Promise<ResponseData<T>> => {
   // 是否需要设置 token
@@ -74,8 +76,54 @@ const request = <T>(config: RequestConfig): Promise<ResponseData<T>> => {
   })
 }
 
+function withRequestLock<T>(lockKey: string, action: () => Promise<T>): Promise<T> {
+  const key = String(lockKey || '').trim()
+  if (!key) {
+    return action()
+  }
+  const running = requestLocks.get(key) as Promise<T> | undefined
+  if (running) {
+    return running
+  }
+  const p = action().finally(() => {
+    requestLocks.delete(key)
+  })
+  requestLocks.set(key, p)
+  return p
+}
+
+type RequestGuardMode = 'inflight' | 'throttle'
+interface RequestGuardOptions {
+  lockKey?: string
+  mode?: RequestGuardMode
+  throttleMs?: number
+}
+
+function withRequestGuard<T>(options: RequestGuardOptions, action: () => Promise<T>): Promise<T> {
+  const key = String(options?.lockKey || '').trim()
+  if (!key) return action()
+  const mode = options?.mode || 'inflight'
+  if (mode === 'throttle') {
+    const now = Date.now()
+    const waitMs = Number(options?.throttleMs || 800)
+    const lastTs = requestThrottleTs.get(key) || 0
+    if (now - lastTs < waitMs) {
+      return Promise.reject(new Error('REQUEST_THROTTLED'))
+    }
+    requestThrottleTs.set(key, now)
+    return action()
+  }
+  return withRequestLock(key, action)
+}
+
 export function postAction(url: string, data?: any, isToken: boolean = true) {
   return request({ data, url, method: 'POST', headers: { isToken }, })
+}
+export function postActionLocked(url: string, data: any, lockKey: string, isToken: boolean = true) {
+  return withRequestLock(lockKey, () => request({ data, url, method: 'POST', headers: { isToken }, }))
+}
+export function postActionGuarded(url: string, data: any, options: RequestGuardOptions, isToken: boolean = true) {
+  return withRequestGuard(options, () => request({ data, url, method: 'POST', headers: { isToken }, }))
 }
 export function getAction(url: string, params?: any, isToken: boolean = true) {
   return request({ params, url, method: 'GET', headers: { isToken }, })
