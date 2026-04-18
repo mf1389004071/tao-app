@@ -30,7 +30,7 @@ function genPoster() {
 }
 
 function copyLink() {
-  uni.setClipboardData({ data: 'https://10x.example.com/invite/xxx' })
+  uni.setClipboardData({ data: 'https://www.10beihao.com/' })
   uni.showToast({ title: '链接已复制', icon: 'success' })
 }
 </script>

@@ -20,19 +20,19 @@
 	
 	const list =ref([{
             icon: 'iconfont icon-github',
-            title: '若依问题',
+            title: '10倍好成长',
             childList: [{
-              title: '若依开源吗？',
-              content: '开源'
+              title: '10倍好会员能做什么？',
+              content: '可报名活动与课程、查看在学看板与积分、使用知识库与消息，持续记录个人成长轨迹。'
             }, {
-              title: '若依可以商用吗？',
-              content: '可以'
+              title: '官网与更多介绍在哪里？',
+              content: 'https://www.10beihao.com/'
             }, {
-              title: '若依官网地址多少？',
-              content: 'http://ruoyi.vip'
+              title: '如何联系运营或导师？',
+              content: '请通过微信搜索添加：aiwuqiming'
             }, {
-              title: '若依文档地址多少？',
-              content: 'http://doc.ruoyi.vip'
+              title: '邀请与积分规则在哪看？',
+              content: '请在「成长」「我的」等相关入口查看活动说明；若有疑问可联系微信 aiwuqiming。'
             }]
           },
           {

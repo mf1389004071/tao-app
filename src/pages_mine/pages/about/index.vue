@@ -3,7 +3,7 @@
     <view class="header-section text-center">
       <image style="width: 150rpx;height: 150rpx;" src="/static/logo.png" mode="widthFix">
       </image>
-      <uni-title type="h2" title="若依移动端"></uni-title>
+      <uni-title type="h2" title="10倍好成长"></uni-title>
     </view>
 
     <view class="content-section">
@@ -16,14 +16,14 @@
         </view>
         <view class="list-cell list-cell-arrow">
           <view class="menu-item-box">
-            <view>官方邮箱</view>
-            <view class="text-right">ruoyi@xx.com</view>
+            <view>联系微信</view>
+            <view class="text-right">aiwuqiming</view>
           </view>
         </view>
         <view class="list-cell list-cell-arrow">
           <view class="menu-item-box">
-            <view>服务热线</view>
-            <view class="text-right">400-999-9999</view>
+            <view>更多咨询</view>
+            <view class="text-right">aiwuqiming</view>
           </view>
         </view>
         <view class="list-cell list-cell-arrow">
@@ -38,7 +38,7 @@
     </view>
 
     <view class="copyright">
-      <view>Copyright &copy; 2022 ruoyi.vip All Rights Reserved.</view>
+      <view>Copyright &copy; 2026 10倍好 保留所有权利</view>
     </view>
   </view>
 </template>
