@@ -107,7 +107,7 @@
 import { getEventinfo, delEventinfo, addEventinfo, updateEventinfo } from "@/api/bt10/eventinfo";
 import {onLoad,onShow} from "@dcloudio/uni-app";
 import { ref } from "vue";
-import citySelect from "@/pages_template/components/u-city-select/u-city-select.vue";
+import citySelect from "@/components/u-city-select/u-city-select.vue";
 
 // 表单参数
 const eventinfo = ref({

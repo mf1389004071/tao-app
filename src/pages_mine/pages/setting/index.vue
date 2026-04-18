@@ -7,12 +7,6 @@
           <view>修改密码</view>
         </view>
       </view>
-      <view class="list-cell list-cell-arrow" @click="handleToOldHome">
-        <view class="menu-item-box">
-          <view class="iconfont icon-home menu-icon"></view>
-          <view>UI模板示例</view>
-        </view>
-      </view>
       <view class="list-cell list-cell-arrow" @click="handleToHelp">
         <view class="menu-item-box">
           <view class="iconfont icon-refresh menu-icon"></view>
@@ -78,12 +72,6 @@ function handleToHelp() {
 function handleToAbout() {
   uni.navigateTo({
     url: '/pages_mine/pages/about/index'
-  });
-}
-
-function handleToOldHome() {
-  uni.navigateTo({
-    url: '/pages_template/pages/template'
   });
 }
 
