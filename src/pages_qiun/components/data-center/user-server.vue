@@ -93,7 +93,7 @@
 	import ServiceComment from '../../static/json/user-server/4.json';
 	import RankData from '../../static/json/user-server/5.json';
 
-	import Config from '../../static/js/config'
+	import Config from '../../utils/config'
 	export default {
 		name:"user-server",
 		props:{

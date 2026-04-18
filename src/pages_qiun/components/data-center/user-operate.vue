@@ -119,7 +119,7 @@ import xProductDropPrecent from '../../static/json/user-operate/7.json';
 import wProductDropPrecent from '../../static/json/user-operate/9.json';
 import illnessDropPrecent from '../../static/json/user-operate/8.json';
 
-import Config from "../../static/js/config";
+import Config from "../../utils/config";
 
 export default {
 	name: 'user-operate',

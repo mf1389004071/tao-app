@@ -54,8 +54,8 @@ import RankData from '../../static/json/school/1.json';
 import ProductRateData from '../../static/json/school/2.json';
 import RadarModel from '../../static/json/school/3.json';
 import friendTrand from '../../static/json/school/4.json';
-import Config from '../../static/js/config'
-import Common from '../../static/js/common'
+import Config from '../../utils/config'
+import Common from '../../utils/common'
 
 export default {
 	components: {

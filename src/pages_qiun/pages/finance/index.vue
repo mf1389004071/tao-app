@@ -4,8 +4,8 @@ import ProgressBar from "../../components/progress-bar/progress-bar.vue"
 import dataOne from '../../static/json/finance/1.json';
 import expendDetail from '../../static/json/finance/2.json';
 
-import Config from '../../static/js/config'
-import Common from '../../static/js/common'
+import Config from '../../utils/config'
+import Common from '../../utils/common'
 
 let _now = new Date();
 let now_time = {};

@@ -143,8 +143,8 @@ import heartRateData from "../../static/json/sport/1.json"
 import heartRateRangeData from "../../static/json/sport/2.json"
 import speedRankData from "../../static/json/sport/3.json"
 import speedAndRateData from "../../static/json/sport/4.json"
-import Config from '../../static/js/config'
-import Common from '../../static/js/common'
+import Config from '../../utils/config'
+import Common from '../../utils/common'
 
 export default {
 	components: {

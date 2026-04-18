@@ -62,7 +62,7 @@
 	import teamTrand from '../../static/json/wechat/5.json';
 	import dataTable from "../../static/json/wechat/6.json"
 
-	import Config from '../../static/js/config'
+	import Config from '../../utils/config'
 	
 	export default {
 		name:'wechat',

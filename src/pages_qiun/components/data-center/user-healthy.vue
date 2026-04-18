@@ -72,7 +72,7 @@
 	import miniActive from '../../static/json/user-healthy/6.json';
 	import miniActivePrecent from '../../static/json/user-healthy/7.json';
 
-	import Config from '../../static/js/config'
+	import Config from '../../utils/config'
 	
 	var _self;
 	export default {

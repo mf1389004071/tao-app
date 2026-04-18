@@ -60,8 +60,8 @@ import WucTab from '../../components/wuc-tab/wuc-tab.vue'
 import DropDown from '../../components/drop-down/drop-down.vue'
 import UniCalendar from '../../components/uni-calendar/uni-calendar.vue'
 
-import Config from '../../static/js/config'
-import Common from "../../static/js/common"
+import Config from '../../utils/config'
+import Common from "../../utils/common"
 
 export default {
 	components: {

@@ -194,8 +194,8 @@
 </template>
 
 <script>
-import Pinyin from '../../static/table/characterToPinyin.js'
-import isEqual from '../../static/table/objEqual.js'
+import Pinyin from '../../utils/table/characterToPinyin.js'
+import isEqual from '../../utils/table/objEqual.js'
 export default {
 	data() {
 		return {

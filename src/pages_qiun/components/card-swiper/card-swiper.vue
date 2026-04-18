@@ -24,7 +24,7 @@
 </template>
 
 <script>
-	import Common from '../../static/js/common'
+	import Common from '../../utils/common'
 	export default {
 		props: {
 			card_menu: {
