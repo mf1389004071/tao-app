@@ -2,8 +2,9 @@
 // 对接后端时 baseUrl 需与 PC 一致，如：http://192.168.1.7:8081/dev-api（C 端接口为 /bt10/xxx）
 const config = {
   //  baseUrl: 'https://vue.ruoyi.vip/prod-api',
+  baseUrl: 'https://hao.10beihao.com/prod-api',
   // baseUrl: 'http://localhost/prod-api',
-  baseUrl: 'http://localhost:8080',
+  // baseUrl: 'http://localhost:8080',
   // baseUrl: 'http://192.168.1.7:8080',
   // baseUrl: 'http://192.168.1.7:8081/dev-api', // 与 PC 联调时启用
    //cloud后台网关地址
